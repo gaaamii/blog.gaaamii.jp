@@ -64,10 +64,3 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     revalidate: 1,
   }
 }
-
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: true,
-  }
-}
