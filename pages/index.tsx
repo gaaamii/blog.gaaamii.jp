@@ -1,65 +1,73 @@
+import { GetStaticPropsContext } from 'next'
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Header from '../components/Header/index';
+import Main from '../components/Main/index';
+import PageLink from '../components/PageLink/index';
 
-export default function Home() {
+type Content = {
+  name: string;
+}
+type Props = {
+  contents?: Content[];
+}
+
+export default function Home(props: Props) {
   return (
-    <div className={styles.container}>
+    <>
       <Head>
-        <title>Create Next App</title>
+        <title>gaaamiiのブログ</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta name="description" content="間違ったことを書いている時があります。コメントやTwitter、ブコメなどでご指摘ください" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+      <Header />
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
+      <Main>
+        <Contents {...props} />
+      </Main>
+    </>
   )
+}
+
+const Contents = (props: Props) => {
+  if (!props.contents) {
+    return (
+      <div>読み込み中...</div>
+    )
+  }
+
+  return (
+    <ul>
+      {props.contents.map(content => <PageLink href={content.name} title={content.name} />)}
+    </ul>
+  )
+}
+
+const API_HOST = `https://api.github.com/repos/gaaamii/blog/contents/contents`
+
+export async function getStaticProps(context: GetStaticPropsContext) {
+  let contents = []
+
+  const res = await fetch(API_HOST)
+
+
+  if (res.ok) {
+    const json = await res.json()
+
+    contents = json.map(content => ({ name: content.name }))
+  }
+
+  return {
+    props: {
+      contents,
+    },
+    revalidate: 1,
+  }
+}
+
+export async function getStaticPaths() {
+  return {
+    paths: [],
+    fallback: true,
+  }
 }
