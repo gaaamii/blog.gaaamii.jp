@@ -3,12 +3,13 @@ import Head from 'next/head'
 import Header from '../components/Header/index';
 import Main from '../components/Main/index';
 import PageLink from '../components/PageLink/index';
+import { Post } from '../models/post';
 
 type Content = {
   name: string;
 }
 type Props = {
-  contents?: Content[];
+  contents?: Post[];
 }
 
 export default function Home(props: Props) {
@@ -23,13 +24,13 @@ export default function Home(props: Props) {
       <Header />
 
       <Main>
-        <Contents {...props} />
+        <Posts {...props} />
       </Main>
     </>
   )
 }
 
-const Contents = (props: Props) => {
+const Posts = (props: Props) => {
   if (!props.contents) {
     return (
       <div>読み込み中...</div>
@@ -46,7 +47,7 @@ const Contents = (props: Props) => {
 const API_HOST = `https://api.github.com/repos/gaaamii/blog/contents/contents`
 
 export async function getStaticProps(context: GetStaticPropsContext) {
-  let contents = []
+  let posts = []
 
   const res = await fetch(API_HOST)
 
@@ -54,12 +55,12 @@ export async function getStaticProps(context: GetStaticPropsContext) {
   if (res.ok) {
     const json = await res.json()
 
-    contents = json.map(content => ({ name: content.name }))
+    posts = json.map(post => ({ name: post.name }))
   }
 
   return {
     props: {
-      contents,
+      posts,
     },
     revalidate: 1,
   }
