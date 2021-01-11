@@ -4,12 +4,10 @@ import Header from '../components/Header/index';
 import Main from '../components/Main/index';
 import PageLink from '../components/PageLink/index';
 import { Post } from '../models/post';
+import { API_URL } from '../utils/settings';
 
-type Content = {
-  name: string;
-}
 type Props = {
-  contents?: Post[];
+  posts?: Post[];
 }
 
 export default function Home(props: Props) {
@@ -31,7 +29,7 @@ export default function Home(props: Props) {
 }
 
 const Posts = (props: Props) => {
-  if (!props.contents) {
+  if (!props.posts) {
     return (
       <div>読み込み中...</div>
     )
@@ -39,18 +37,15 @@ const Posts = (props: Props) => {
 
   return (
     <ul>
-      {props.contents.map(content => <PageLink href={content.name} title={content.name} />)}
+      {props.posts.map(content => <PageLink href={`/posts/${content.name}`} title={content.name} />)}
     </ul>
   )
 }
 
-const API_HOST = `https://api.github.com/repos/gaaamii/blog/contents/contents`
-
 export async function getStaticProps(context: GetStaticPropsContext) {
   let posts = []
 
-  const res = await fetch(API_HOST)
-
+  const res = await fetch(`${API_URL}/contents`)
 
   if (res.ok) {
     const json = await res.json()
