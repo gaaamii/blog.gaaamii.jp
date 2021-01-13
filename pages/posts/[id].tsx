@@ -20,7 +20,7 @@ export default function PostPage(props: Props) {
   return (
     <>
       <Head>
-        <title> - gaaamiiのブログ</title>
+        <title>{props.post.name} - gaaamiiのブログ</title>
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content="間違ったことを書いている時があります。コメントやTwitter、ブコメなどでご指摘ください" />
       </Head>
