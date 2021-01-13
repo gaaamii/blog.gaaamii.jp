@@ -50,7 +50,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
   if (res.ok) {
     const json = await res.json()
 
-    posts = json.map(post => ({ name: post.name }))
+    posts = json.map(post => ({ name: post.name })).reverse()
   }
 
   return {
