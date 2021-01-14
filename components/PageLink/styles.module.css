@@ -1,4 +1,20 @@
 .root {
   list-style-type: none;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 2px solid #000;
+}
+
+@media only screen and (max-width: 480px) {
+  .root {
+    border-bottom: 1px solid #000;
+  }
+  .link {
+    display: block;
+    width: 100%;
+    padding: 24px 16px;
+  }
+  .title {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+  }
 }

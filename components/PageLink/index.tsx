@@ -7,8 +7,8 @@ type Props = {
 }
 const PageLink = (props: Props) => (
   <li className={styles.root}>
-    <h2>
-      <Link href={props.href}>{props.title}</Link>
+    <h2 className={styles.title}>
+      <Link href={props.href}><a className={styles.link}>{props.title}</a></Link>
     </h2>
   </li>
 )

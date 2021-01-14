@@ -11,6 +11,24 @@ a {
   text-decoration: none;
 }
 
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+pre {
+  white-space: pre-wrap;
+  background: #333;
+  color: #ccc;
+  padding: 8px;
+}
+
+h1 {
+  font-size: 32px;
+}
+h2 {
+  font-size: 24px;
+}
 * {
   box-sizing: border-box;
 }

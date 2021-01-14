@@ -1,11 +1,10 @@
-import { decode } from 'js-base64';
 import { GetStaticPropsContext } from 'next'
 import Head from 'next/head'
 import Main from '../../components/Main/index';
 import { Post } from '../../models/post';
 import { API_URL } from '../../utils/settings';
 import Header from '../../components/Header/index';
-import ReactMarkdown from 'react-markdown';
+import { Article } from '../../components/Article/index';
 
 type Props = {
   post?: Post;
@@ -30,21 +29,6 @@ export default function PostPage(props: Props) {
         <Article post={props.post} />
       </Main>
     </>
-  )
-}
-
-const Article = ({ post }: { post: Post }) => {
-  const decodedContent = decode(post.content)
-
-  return (
-    <article>
-      <h1>{post.name}</h1>
-      <div>
-        <ReactMarkdown>
-          {decodedContent}
-        </ReactMarkdown>
-      </div>
-    </article >
   )
 }
 
