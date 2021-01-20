@@ -9,7 +9,7 @@ export default function NewPage() {
   const [isAuthorized, setIsAuthorized] = useState<boolean>(false)
 
   const fetchUserSession = useCallback(() => {
-    get("/ping").then(res => {
+    get("/user_sessions/ping").then(res => {
       if (res.ok) {
         setIsAuthorized(true)
       }
