@@ -6,7 +6,7 @@ import { get, post } from '../../utils/api';
 import { Form, Value } from '../../components/Form/index';
 
 export default function NewPage() {
-  const [isAuthorized, setIsAuthorized] = useState<boolean>(true)
+  const [isAuthorized, setIsAuthorized] = useState<boolean>(false)
 
   const fetchUserSession = useCallback(() => {
     get("/user_sessions/ping").then(res => {
