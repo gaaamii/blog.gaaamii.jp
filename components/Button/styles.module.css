@@ -1,0 +1,18 @@
+.root {
+  padding: 12px 48px;
+  background: #333;
+  color: #fff;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.1s;
+}
+
+.root:hover {
+  background: #000;
+  color: #fff;
+}
+
+.root:disabled {
+  background: #aaa;
+}

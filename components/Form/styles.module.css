@@ -1,0 +1,19 @@
+.root {
+}
+
+.label {
+  display: block;
+}
+.timeField {
+  margin-left: 8px;
+}
+.titleField,
+.bodyField {
+  padding: 8px;
+  width: 100%;
+}
+.titleField {
+}
+.bodyField {
+  width: 100%;
+}
