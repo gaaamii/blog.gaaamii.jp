@@ -121,9 +121,9 @@ const getDateString = (date: Date) => {
 }
 // HH::mm
 const getTimeString = (date: Date) => {
-  return DateTime.fromJSDate(date).toLocaleString(DateTime.TIME_SIMPLE)
+  return DateTime.fromJSDate(date).toFormat('HH:mm')
 }
 // HH::mm::ss
 const getFullTimeString = (date: Date) => {
-  return DateTime.fromJSDate(date).toLocaleString(DateTime.TIME_WITH_SECONDS)
+  return DateTime.fromJSDate(date).toFormat('HH:mm:ss')
 }
