@@ -1,4 +1,4 @@
-const API_HOST = process.env.API_HOST;
+const API_HOST = "https://api.gaaamii.jp";
 
 const requestInitBase: RequestInit = {
   mode: "cors",
