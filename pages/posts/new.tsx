@@ -18,8 +18,16 @@ export default function NewPage() {
 
   useEffect(fetchUserSession, [])
 
+  const toParams = useCallback((value: Value) => ({
+    post: {
+      title: value.title,
+      body: value.body,
+      published_at: value.publishedAt.toISOString()
+    }
+  }), [])
+
   const handleSubmit = useCallback(async (value: Value) => {
-    const res = await post("/posts", value)
+    const res = await post("/posts", toParams(value))
     return {
       isSuccess: res.ok,
     }
