@@ -1,4 +1,3 @@
-import { JSXElementConstructor } from 'react'
 import styles from './styles.module.css'
 
 const Main = ({ children }: { children: React.ReactElement }) => (
