@@ -3,6 +3,9 @@ const API_HOST = "https://api.gaaamii.jp";
 const requestInitBase: RequestInit = {
   mode: "cors",
   credentials: "include",
+  headers: {
+    "Content-Type": "application/json; charset=utf-8",
+  },
 };
 
 export async function get(path: string): Promise<Response> {
