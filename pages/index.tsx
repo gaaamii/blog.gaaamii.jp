@@ -4,7 +4,7 @@ import Header from '../components/Header/index';
 import Main from '../components/Main/index';
 import PageLink from '../components/PageLink/index';
 import { Post } from '../models/post';
-import { API_URL } from '../utils/settings';
+import { get } from '../utils/api';
 
 type Props = {
   posts?: Post[];
@@ -20,7 +20,6 @@ export default function Home(props: Props) {
       </Head>
 
       <Header />
-
       <Main>
         <Posts {...props} />
       </Main>
@@ -37,21 +36,14 @@ const Posts = (props: Props) => {
 
   return (
     <ul>
-      {props.posts.map(content => <PageLink href={`/posts/${content.name}`} title={content.name} />)}
+      {props.posts.map(post => <PageLink href={`/posts/${post.id}`} title={post.title} />)}
     </ul>
   )
 }
 
 export async function getStaticProps(context: GetStaticPropsContext) {
-  let posts = []
-
-  const res = await fetch(`${API_URL}/contents`)
-
-  if (res.ok) {
-    const json = await res.json()
-
-    posts = json.map(post => ({ name: post.title })).reverse()
-  }
+  const res = await get(`/posts`)
+  const posts = res.ok ? await res.json() : []
 
   return {
     props: {
