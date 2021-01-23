@@ -36,7 +36,9 @@ const Posts = (props: Props) => {
 
   return (
     <ul>
-      {props.posts.map(post => <PageLink href={`/posts/${post.id}`} title={post.title} />)}
+      {props.posts.map(post => (
+        <PageLink href={`/posts/${post.id}`} title={post.title} key={post.id} />
+      ))}
     </ul>
   )
 }
