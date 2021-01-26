@@ -20,13 +20,18 @@ export default function PostPage(props: Props) {
   if (props.post === null) {
     return "404 NotFound"
   }
+  const pageTitle = `${props.post.title} - gaaamiiのブログ`
 
   return (
     <>
       <Head>
-        <title>{props.post.title} - gaaamiiのブログ</title>
+        <title>{pageTitle}</title>
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content="間違ったことを書いている時があります。コメントやTwitter、ブコメなどでご指摘ください" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@gaaamii" />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={`${props.post.body.slice(0, 30)}...`} />
       </Head>
 
       <Header />
