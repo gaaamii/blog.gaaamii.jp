@@ -2,7 +2,7 @@ import { useState, useCallback, InputHTMLAttributes, TextareaHTMLAttributes } fr
 import { Block } from '../Block';
 import styles from './styles.module.css'
 import { Button } from '../Button/index';
-import { DateTime } from 'luxon';
+import { getDateString, getFullTimeString, getTimeString } from '../../utils/datetime';
 
 export type Value = {
   title: string;
@@ -113,17 +113,4 @@ const Textarea = (props: TextareaHTMLAttributes<HTMLTextAreaElement>) => {
   return (
     <textarea {...props} />
   )
-}
-
-// YYYY-MM-DD
-const getDateString = (date: Date) => {
-  return DateTime.fromJSDate(date).toISODate()
-}
-// HH::mm
-const getTimeString = (date: Date) => {
-  return DateTime.fromJSDate(date).toFormat('HH:mm')
-}
-// HH::mm::ss
-const getFullTimeString = (date: Date) => {
-  return DateTime.fromJSDate(date).toFormat('HH:mm:ss')
 }
