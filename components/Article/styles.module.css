@@ -3,22 +3,38 @@
   font-size: 16px;
 }
 .root a {
-  color: #0099ff;
-}
-.root a:hover {
   text-decoration: underline;
+}
+.root > a:hover {
+  color: #000;
 }
 .root ul {
   margin: 0 8px;
+  padding: 0 8px;
+}
+.root li {
+  margin-top: 8px;
 }
 .title {
   font-size: 24px;
 }
 .root h2 {
+  font-size: 20px;
   margin-top: 40px;
 }
 
 @media only screen and (max-width: 480px) {
+  .root > time {
+    display: block;
+    margin-top: 16px;
+  }
+  .title {
+    font-size: 20px;
+  }
+  .root h2 {
+    font-size: 16px;
+    margin-top: 40px;
+  }
   .root pre {
     font-size: 12px;
     width: 100vw;
