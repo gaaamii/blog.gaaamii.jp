@@ -36,6 +36,9 @@ h1 {
 h2 {
   font-size: 24px;
 }
+p {
+  color: #404040;
+}
 * {
   box-sizing: border-box;
 }

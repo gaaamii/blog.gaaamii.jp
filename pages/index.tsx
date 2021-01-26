@@ -37,7 +37,7 @@ const Posts = (props: Props) => {
   return (
     <ul>
       {props.posts.map(post => (
-        <PageLink href={`/posts/${post.id}`} title={post.title} key={post.id} />
+        <PageLink href={`/posts/${post.id}`} published_at={post.published_at} title={post.title} key={post.id} />
       ))}
     </ul>
   )
