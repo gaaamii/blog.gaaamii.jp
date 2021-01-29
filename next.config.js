@@ -1,5 +1,5 @@
 module.exports = {
-  async redirects() {
+  async rewrites() {
     return [
       {
         source: "/feed",
