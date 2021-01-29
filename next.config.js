@@ -4,7 +4,6 @@ module.exports = {
       {
         source: "/feed",
         destination: "/api/feed",
-        permanent: true,
       },
     ];
   },
