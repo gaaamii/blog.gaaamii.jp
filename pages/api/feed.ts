@@ -7,7 +7,7 @@ export default async (req, res) => {
   res.statusCode = 200;
   const posts = await fetchPosts();
   const feed = await generateFeed(posts);
-  res.setHeader("Content-Type", "application/rss+xml");
+  res.setHeader("Content-Type", "application/rss+xml;charset=utf-8");
   res.write(feed.xml());
   res.end();
 };
