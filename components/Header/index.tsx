@@ -1,14 +1,15 @@
 import Link from 'next/link'
 import styles from './styles.module.css'
+import { SITE_INFO } from '../../config/settings';
 
 const Header = () => {
   return (
     <header className={styles.root}>
       <h1 className={styles.title}>
-        <Link href="/">gaaamiiのブログ</Link>
+        <Link href="/">{SITE_INFO.title}</Link>
       </h1>
       <p className={styles.description}>
-        間違ったことを書いている時があります。コメントやTwitter、ブコメなどでご指摘ください
+        {SITE_INFO.description}
       </p>
     </header>
   )
