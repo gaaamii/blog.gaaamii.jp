@@ -1,4 +1,4 @@
-「gaaamiiのブログ」のソースコード。
+https://blog.gaaamii.jp のソースコード。
 
 ## Development
 
