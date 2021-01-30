@@ -24,7 +24,7 @@ const addItemToFeed = (feed: any, post: Post) => {
   feed.item({
     title: post.title,
     description: post.body,
-    url: `${SITE_INFO.rootUrl}/${post.id}`,
+    url: `${SITE_INFO.rootUrl}/posts/${post.id}`,
     author: SITE_INFO.author,
     date: post.published_at,
   });
