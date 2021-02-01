@@ -87,12 +87,12 @@ export const Form = (props: Props) => {
 
       <Block>
         <label htmlFor="title" className={styles.label}>タイトル</label>
-        <Input id="title" onChange={handleTitleChange} className={styles.titleField} />
+        <Input id="title" onChange={handleTitleChange} className={styles.titleField} value={title} />
       </Block>
 
       <Block>
         <label htmlFor="body" className={styles.label}>本文</label>
-        <Textarea id="body" onChange={handleBodyChange} className={styles.bodyField} rows={20} />
+        <Textarea id="body" onChange={handleBodyChange} className={styles.bodyField} rows={20} value={body} />
       </Block>
 
       <Block align="right">
