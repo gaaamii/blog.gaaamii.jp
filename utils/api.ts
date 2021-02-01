@@ -23,3 +23,15 @@ export async function post(
     body: JSON.stringify(body),
   });
 }
+
+export async function put(
+  path: string,
+  body: Record<string, unknown>
+): Promise<Response> {
+  const url = `${API_HOST}${path}`;
+  return fetch(url, {
+    ...requestInitBase,
+    method: "PUT",
+    body: JSON.stringify(body),
+  });
+}

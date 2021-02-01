@@ -3,7 +3,7 @@ import Head from 'next/head'
 import Main from '../../../components/Main/index';
 import { Post } from '../../../models/post';
 import Header from '../../../components/Header/index';
-import { get, post } from '../../../utils/api';
+import { get, put } from '../../../utils/api';
 import { useCallback, useState, useEffect } from 'react';
 import { Value, Form } from '../../../components/Form/index';
 
@@ -39,7 +39,7 @@ export default function EditPage(props: Props) {
   }), [])
 
   const handleSubmit = useCallback(async (value: Value) => {
-    const res = await post("/posts", toParams(value))
+    const res = await put("/posts", toParams(value))
     return {
       isSuccess: res.ok,
     }
