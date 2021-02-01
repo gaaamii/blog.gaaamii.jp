@@ -39,7 +39,7 @@ export default function EditPage(props: Props) {
   }), [])
 
   const handleSubmit = useCallback(async (value: Value) => {
-    const res = await put("/posts", toParams(value))
+    const res = await put(`/posts/${props.post.id}`, toParams(value))
     return {
       isSuccess: res.ok,
     }
