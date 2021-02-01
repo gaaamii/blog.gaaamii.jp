@@ -19,9 +19,9 @@ type Props = {
 }
 
 export const Form = (props: Props) => {
-  const [title, setTitle] = useState<string>(props.value.title || "")
-  const [body, setBody] = useState<string>(props.value.body || "")
-  const [publishedAt, setPublishedAt] = useState<Date>(props.value.publishedAt || new Date())
+  const [title, setTitle] = useState<string>(props.value?.title || "")
+  const [body, setBody] = useState<string>(props.value?.body || "")
+  const [publishedAt, setPublishedAt] = useState<Date>(props.value?.publishedAt || new Date())
   const [isSubmitting, setSubmitting] = useState<boolean>(false)
 
   const handlePublishedAtDateChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
