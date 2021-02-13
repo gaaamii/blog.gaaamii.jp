@@ -1,12 +1,13 @@
 import { DateTime } from "luxon";
 
-// YYYY-MM-DD
+// YYYY年MM月DD日
 export const getDateString = (date: Date | string) => {
-  if (typeof date === "object") {
-    return DateTime.fromJSDate(date).toISODate();
-  } else {
-    return DateTime.fromISO(date).toFormat("DD");
-  }
+  const datetime =
+    typeof date === "object"
+      ? DateTime.fromJSDate(date)
+      : DateTime.fromISO(date);
+
+  return datetime.setLocale("ja").toFormat("DD");
 };
 // HH:mm
 export const getTimeString = (date: Date | string) => {
@@ -20,9 +21,10 @@ export const getFullTimeString = (date: Date | string) => {
 };
 
 const formatTimeString = (date: Date | string, format: string) => {
-  if (typeof date === "object") {
-    return DateTime.fromJSDate(date).toFormat(format);
-  } else {
-    return DateTime.fromISO(date).toFormat(format);
-  }
+  const datetime =
+    typeof date === "object"
+      ? DateTime.fromJSDate(date)
+      : DateTime.fromISO(date);
+
+  return datetime.setLocale("ja").toFormat(format);
 };
