@@ -1,4 +1,4 @@
-import { GetStaticPropsContext } from 'next'
+import { GetServerSidePropsContext } from 'next'
 import Head from 'next/head'
 import Main from '../../../components/Main/index';
 import { Post } from '../../../models/post';
@@ -67,7 +67,7 @@ export default function EditPage(props: Props) {
 type Query = {
   id: string;
 }
-export async function getStaticProps(context: GetStaticPropsContext<Query>) {
+export async function getServerSideProps(context: GetServerSidePropsContext<Query>) {
   const res = await get(`/posts/${context.params.id}`)
   const post = res.ok ? await res.json() : null
 
@@ -75,12 +75,5 @@ export async function getStaticProps(context: GetStaticPropsContext<Query>) {
     props: {
       post,
     },
-  }
-}
-
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: true,
   }
 }
