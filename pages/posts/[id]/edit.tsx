@@ -6,6 +6,7 @@ import Header from '../../../components/Header/index';
 import { get, put } from '../../../utils/api';
 import { useCallback, useState, useEffect } from 'react';
 import { Value, Form } from '../../../components/Form/index';
+import { Favicons } from '../../../components/Favicons';
 
 type Props = {
   post?: Post | null;
@@ -53,7 +54,7 @@ export default function EditPage(props: Props) {
     <>
       <Head>
         <title>記事を編集する - gaaamiiのブログ</title>
-        <link rel="icon" href="/favicon.ico" />
+        <Favicons />
       </Head>
 
       <Header />
