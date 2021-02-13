@@ -1,7 +1,17 @@
 import { DateTime } from "luxon";
 
+// YYYY-MM-DD
+export const getISODateString = (date: Date | string) => {
+  const datetime =
+    typeof date === "object"
+      ? DateTime.fromJSDate(date)
+      : DateTime.fromISO(date);
+
+  return datetime.toISODate();
+};
+
 // YYYY年MM月DD日
-export const getDateString = (date: Date | string) => {
+export const getLocalizedDateString = (date: Date | string) => {
   const datetime =
     typeof date === "object"
       ? DateTime.fromJSDate(date)

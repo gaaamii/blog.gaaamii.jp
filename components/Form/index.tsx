@@ -2,7 +2,7 @@ import { useState, useCallback, InputHTMLAttributes, TextareaHTMLAttributes } fr
 import { Block } from '../Block';
 import styles from './styles.module.css'
 import { Button } from '../Button/index';
-import { getDateString, getFullTimeString, getTimeString } from '../../utils/datetime';
+import { getISODateString, getFullTimeString, getTimeString } from '../../utils/datetime';
 
 export type Value = {
   title: string;
@@ -32,7 +32,7 @@ export const Form = (props: Props) => {
 
   const handlePublishedAtTimeChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const newTimeString = e.target.value
-    const newDate = new Date(`${getDateString(publishedAt)} ${newTimeString}:00`)
+    const newDate = new Date(`${getISODateString(publishedAt)} ${newTimeString}:00`)
     setPublishedAt(newDate)
   }, [publishedAt])
 
@@ -69,7 +69,7 @@ export const Form = (props: Props) => {
         <label htmlFor="publishedAt" className={styles.label}>公開日時</label>
         <Input
           id="publishedAtDate"
-          value={getDateString(publishedAt)}
+          value={getISODateString(publishedAt)}
           className={styles.dateField}
           onChange={handlePublishedAtDateChange}
           type="date"
