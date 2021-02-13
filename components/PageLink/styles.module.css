@@ -31,6 +31,9 @@
     margin: 0;
     padding: 32px 16px 16px 16px;
   }
+  .link:hover {
+    text-decoration: none;
+  }
   .title {
     margin: 0;
     padding: 0;
