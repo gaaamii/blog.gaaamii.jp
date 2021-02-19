@@ -1,10 +1,17 @@
 .root {
-  margin-top: 24px;
+  margin-top: 16px;
   list-style-type: none;
+}
+.time {
+  display: inline-block;
+  width: 100px;
+  font-size: 14px;
 }
 .title {
   font-size: 20px;
   margin-top: 8px;
+  display: inline-block;
+  margin-left: 16px;
 }
 .link:hover {
   text-decoration: underline;
