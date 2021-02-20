@@ -4,7 +4,6 @@ import Header from '../../components/Header/index';
 import { useCallback, useEffect, useState } from 'react';
 import { get, post } from '../../utils/api';
 import { Form, Value } from '../../components/Form/index';
-import { Favicons } from '../../components/Favicons';
 
 export default function NewPage() {
   const [isAuthorized, setIsAuthorized] = useState<boolean>(false)
@@ -38,7 +37,6 @@ export default function NewPage() {
     <>
       <Head>
         <title>記事を作成する - gaaamiiのブログ</title>
-        <Favicons />
       </Head>
 
       <Header />

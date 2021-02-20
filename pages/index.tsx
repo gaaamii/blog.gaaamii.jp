@@ -1,6 +1,5 @@
 import { GetStaticPropsContext } from 'next'
 import Head from 'next/head'
-import { Favicons } from '../components/Favicons';
 import Header from '../components/Header/index';
 import Main from '../components/Main/index';
 import PageLink from '../components/PageLink/index';
@@ -17,7 +16,6 @@ export default function Home(props: Props) {
       <Head>
         <title>gaaamiiのブログ</title>
         <meta name="description" content="間違ったことを書いている時があります。コメントやTwitter、ブコメなどでご指摘ください" />
-        <Favicons />
       </Head>
 
       <Header />

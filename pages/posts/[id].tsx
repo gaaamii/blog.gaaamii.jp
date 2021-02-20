@@ -5,7 +5,6 @@ import { Post } from '../../models/post';
 import Header from '../../components/Header/index';
 import { Article } from '../../components/Article/index';
 import { get } from '../../utils/api';
-import { Favicons } from '../../components/Favicons';
 
 type Props = {
   post?: Post | null;
@@ -27,7 +26,6 @@ export default function PostPage(props: Props) {
     <>
       <Head>
         <title>{pageTitle}</title>
-        <Favicons />
         <meta name="description" content="間違ったことを書いている時があります。コメントやTwitter、ブコメなどでご指摘ください" />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:site" content="@gaaamii" />
