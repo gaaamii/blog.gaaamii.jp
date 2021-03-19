@@ -1,4 +1,4 @@
-import { useState, useCallback, InputHTMLAttributes, TextareaHTMLAttributes } from 'react';
+import { useState, useCallback, InputHTMLAttributes, TextareaHTMLAttributes, useEffect } from 'react';
 import { Block } from '../Block';
 import styles from './styles.module.css'
 import { Button } from '../Button/index';
@@ -62,6 +62,14 @@ export const Form = (props: Props) => {
     setSubmitting(false)
     resetForm()
   }, [props.onSubmit, title, body, publishedAt])
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setPublishedAt(new Date())
+    }, 30000)
+
+    return clearInterval(intervalId)
+  }, [])
 
   return (
     <form onSubmit={handleSubmit} className={styles.root}>
