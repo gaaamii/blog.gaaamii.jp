@@ -68,7 +68,7 @@ export const Form = (props: Props) => {
       setPublishedAt(new Date())
     }, 30000)
 
-    return clearInterval(intervalId)
+    return () => { clearInterval(intervalId) }
   }, [])
 
   return (
