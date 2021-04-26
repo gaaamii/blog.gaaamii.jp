@@ -117,10 +117,10 @@
   dependencies:
     "@types/unist" "*"
 
-"@types/luxon@^1.25.1":
-  version "1.25.1"
-  resolved "https://registry.yarnpkg.com/@types/luxon/-/luxon-1.25.1.tgz#9f33aead0c7fdb86434059410c7a712517d97cd8"
-  integrity sha512-enkMO4WJcbdkhK1eZrItF616buau02wtrSN+DDt9Qj9U23boSAXNJm0fMlgwpTDaRHq3S0D/SPIRbxy4YxBjiA==
+"@types/luxon@^1.26.4":
+  version "1.26.4"
+  resolved "https://registry.yarnpkg.com/@types/luxon/-/luxon-1.26.4.tgz#77bbd5a1aa74ca31edff2aee4f8313ea0d93ca5c"
+  integrity sha512-OIvbVLZQUjyZofqSFpre2VsgvKy0V0JQdRgN0k3H1DTGRdxHiaQjT16+H2gyuhAS9r8B2PQEwrSiqP6/Zka3pQ==
 
 "@types/mdast@^3.0.0":
   version "3.0.3"
