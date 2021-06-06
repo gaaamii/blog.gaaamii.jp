@@ -4,6 +4,7 @@ import Header from '../../components/Header/index';
 import { useCallback, useEffect, useState } from 'react';
 import { get, post } from '../../utils/api';
 import { Form, Value } from '../../components/Form/index';
+import { useBlockNavigation } from '../../hooks/useBlockNavigation';
 
 export default function NewPage() {
   const [isAuthorized, setIsAuthorized] = useState<boolean>(false)
@@ -32,6 +33,8 @@ export default function NewPage() {
       isSuccess: res.ok,
     }
   }, [])
+
+  useBlockNavigation()
 
   return (
     <>
