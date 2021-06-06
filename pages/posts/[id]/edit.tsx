@@ -49,6 +49,19 @@ export default function EditPage(props: Props) {
     return null
   }
 
+  const blockNavigation = (e: BeforeUnloadEvent) => {
+    e.preventDefault();
+    e.returnValue = "";
+  };
+
+  useEffect(() => {
+    window.addEventListener("beforeunload", blockNavigation);
+
+    return () => {
+      window.removeEventListener("beforeunload", blockNavigation);
+    };
+  }, []);
+
   return (
     <>
       <Head>
