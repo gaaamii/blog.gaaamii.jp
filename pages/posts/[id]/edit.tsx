@@ -6,6 +6,7 @@ import Header from '../../../components/Header/index';
 import { get, put } from '../../../utils/api';
 import { useCallback, useState, useEffect } from 'react';
 import { Value, Form } from '../../../components/Form/index';
+import { useBlockNavigation } from '../../../hooks/useBlockNavigation';
 
 type Props = {
   post?: Post | null;
@@ -49,18 +50,7 @@ export default function EditPage(props: Props) {
     return null
   }
 
-  const blockNavigation = (e: BeforeUnloadEvent) => {
-    e.preventDefault();
-    e.returnValue = "";
-  };
-
-  useEffect(() => {
-    window.addEventListener("beforeunload", blockNavigation);
-
-    return () => {
-      window.removeEventListener("beforeunload", blockNavigation);
-    };
-  }, []);
+  useBlockNavigation()
 
   return (
     <>
