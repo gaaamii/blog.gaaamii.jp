@@ -1,10 +1,10 @@
 import { GetStaticPropsContext } from 'next'
 import Head from 'next/head'
-import Header from '../components/Header/index';
 import Main from '../components/Main/index';
 import PageLink from '../components/PageLink/index';
 import { Post } from '../models/post';
 import { get } from '../utils/api';
+import { NavigationHeader } from '../components/NavigationHeader/index';
 
 type Props = {
   posts?: Post[];
@@ -18,7 +18,7 @@ export default function Home(props: Props) {
         <meta name="description" content="間違ったことを書いている時があります。コメントやTwitter、ブコメなどでご指摘ください" />
       </Head>
 
-      <Header />
+      <NavigationHeader />
       <Main>
         <Posts {...props} />
       </Main>

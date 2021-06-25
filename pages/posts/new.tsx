@@ -1,10 +1,10 @@
 import Head from 'next/head'
 import Main from '../../components/Main/index';
-import Header from '../../components/Header/index';
 import { useCallback, useEffect, useState } from 'react';
 import { get, post } from '../../utils/api';
 import { Form, Value } from '../../components/Form/index';
 import { useBlockNavigation } from '../../hooks/useBlockNavigation';
+import { NavigationHeader } from '../../components/NavigationHeader/index';
 
 export default function NewPage() {
   const [isAuthorized, setIsAuthorized] = useState<boolean>(false)
@@ -42,7 +42,7 @@ export default function NewPage() {
         <title>記事を作成する - gaaamiiのブログ</title>
       </Head>
 
-      <Header />
+      <NavigationHeader />
       <Main>
         {isAuthorized ? <Form onSubmit={handleSubmit} /> : null}
       </Main>
