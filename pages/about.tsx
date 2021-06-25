@@ -20,7 +20,10 @@ export default function Home(props: Props) {
 
       <NavigationHeader />
       <Main>
-        <Posts {...props} />
+        <h1>このブログについて</h1>
+        <p>
+          @gaaamiiが書いているブログです。個人的な日記やウェブ開発周りの雑記を、気が向いたときに書いています。
+        </p>
       </Main>
     </>
   )

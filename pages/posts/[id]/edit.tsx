@@ -2,11 +2,11 @@ import { GetServerSidePropsContext } from 'next'
 import Head from 'next/head'
 import Main from '../../../components/Main/index';
 import { Post } from '../../../models/post';
-import Header from '../../../components/Header/index';
 import { get, put } from '../../../utils/api';
 import { useCallback, useState, useEffect } from 'react';
 import { Value, Form } from '../../../components/Form/index';
 import { useBlockNavigation } from '../../../hooks/useBlockNavigation';
+import { NavigationHeader } from '../../../components/NavigationHeader/index';
 
 type Props = {
   post?: Post | null;
@@ -58,7 +58,7 @@ export default function EditPage(props: Props) {
         <title>記事を編集する - gaaamiiのブログ</title>
       </Head>
 
-      <Header />
+      <NavigationHeader />
       <Main>
         {isAuthorized ? <Form onSubmit={handleSubmit} value={toValues(props.post)} /> : null}
       </Main>

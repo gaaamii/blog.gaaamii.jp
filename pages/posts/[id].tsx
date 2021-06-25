@@ -2,9 +2,9 @@ import { GetStaticPropsContext } from 'next'
 import Head from 'next/head'
 import Main from '../../components/Main/index';
 import { Post } from '../../models/post';
-import Header from '../../components/Header/index';
 import { Article } from '../../components/Article/index';
 import { get } from '../../utils/api';
+import { NavigationHeader } from '../../components/NavigationHeader/index';
 
 type Props = {
   post?: Post | null;
@@ -33,7 +33,7 @@ export default function PostPage(props: Props) {
         <meta name="twitter:description" content={`${props.post.body.slice(0, 30)}...`} />
       </Head>
 
-      <Header />
+      <NavigationHeader />
       <Main>
         <Article post={props.post} />
       </Main>
