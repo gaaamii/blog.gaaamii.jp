@@ -49,6 +49,7 @@
     margin-left: -16px;
   }
   .root img {
-    max-width: 100%;
+    max-width: 100vw;
+    margin-left: -16px;
   }
 }
