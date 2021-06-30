@@ -2,12 +2,17 @@ import Link, { LinkProps } from 'next/link'
 import styles from './styles.module.css'
 import React, { AnchorHTMLAttributes } from 'react';
 import classNames from 'classnames';
+import Image from 'next/image'
+import logoImage from '../../public/logo.png';
 
 
 export const NavigationHeader = () => (
   <header>  <nav className={styles.navigation}>
     <ul className={styles.navigationList}>
-      <NavigationListItem isPrimary prefetch={false} href="/">gaaamiiのブログ</NavigationListItem>
+      <NavigationListItem isPrimary prefetch={false} href="/">
+        <Image src={logoImage} width={40} height={40} className={styles.logo} quality={100} />
+        gaaamiiのブログ
+      </NavigationListItem>
       <NavigationListItem prefetch={false} href="/about">
         このブログについて
       </NavigationListItem>

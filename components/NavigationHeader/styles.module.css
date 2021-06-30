@@ -25,9 +25,15 @@
 }
 .navigationListItem--isPrimary > a {
   text-decoration: underline;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 .navigationListItem--isPrimary > a:hover {
   text-decoration: underline;
+}
+.logo {
+  border-radius: 50%;
 }
 
 @media only screen and (max-width: 480px) {
