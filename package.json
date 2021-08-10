@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@types/classnames": "^2.3.1",
-    "@types/luxon": "^1.27.0",
+    "@types/luxon": "^2.0.0",
     "@types/react-syntax-highlighter": "^13.5.0",
     "classnames": "^2.2.6",
     "luxon": "^1.27.0",
