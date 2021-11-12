@@ -1,6 +1,8 @@
 .root {
-  padding: 0 16px;
   font-size: 18px;
+  background: #fff;
+  padding: 32px;
+  border-radius: 8px;
 }
 .root a {
   text-decoration: underline;
@@ -21,6 +23,12 @@
 .root h2 {
   font-size: 20px;
   margin-top: 40px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #ddd;
+}
+.root h3 {
+  font-size: 20px;
+  margin-top: 32px;
 }
 .root blockquote {
   margin-top: 18px;
@@ -32,6 +40,10 @@
 }
 
 @media only screen and (max-width: 480px) {
+  .root {
+    padding: 16px 16px 48px 16px;
+    border-radius: 8px;
+  }
   .root > time {
     display: block;
     margin-top: 16px;

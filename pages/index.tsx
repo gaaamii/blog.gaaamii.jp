@@ -5,6 +5,7 @@ import PageLink from '../components/PageLink/index';
 import { Post } from '../models/post';
 import { get } from '../utils/api';
 import { NavigationHeader } from '../components/NavigationHeader/index';
+import styles from './styles.module.css';
 
 type Props = {
   posts?: Post[];
@@ -34,11 +35,13 @@ const Posts = (props: Props) => {
   }
 
   return (
-    <ul>
-      {props.posts.map(post => (
-        <PageLink href={`/posts/${post.id}`} published_at={post.published_at} title={post.title} key={post.id} />
-      ))}
-    </ul>
+    <section className={styles.pageList}>
+      <ul>
+        {props.posts.map(post => (
+          <PageLink href={`/posts/${post.id}`} published_at={post.published_at} title={post.title} key={post.id} />
+        ))}
+      </ul>
+    </section>
   )
 }
 
