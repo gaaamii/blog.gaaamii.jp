@@ -1,0 +1,12 @@
+.pageList {
+  background: #fff;
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+@media only screen and (max-width: 480px) {
+  .pageList {
+    padding: 0;
+    border-radius: 8px;
+  }
+}
