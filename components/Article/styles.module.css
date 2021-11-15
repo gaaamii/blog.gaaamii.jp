@@ -7,8 +7,8 @@
 .root a {
   text-decoration: underline;
 }
-.root > a:hover {
-  color: #000;
+.root a:hover {
+  color: #0065ff;
 }
 .root ul {
   margin: 0 8px;
@@ -37,6 +37,7 @@
 }
 .root img {
   max-width: 100%;
+  border-radius: 8px;
 }
 
 @media only screen and (max-width: 480px) {

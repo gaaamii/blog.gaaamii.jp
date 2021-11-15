@@ -34,6 +34,7 @@
 }
 .logo {
   border-radius: 50%;
+  background: #ecebe4;
 }
 
 @media only screen and (max-width: 480px) {

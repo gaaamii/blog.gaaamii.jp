@@ -17,6 +17,15 @@
   text-decoration: underline;
 }
 
+@media only screen and (max-width: 1000px) {
+  .time {
+    display: block;
+  }
+  .title {
+    display: block;
+    margin-left: 0;
+  }
+}
 @media only screen and (max-width: 480px) {
   .root {
     border-bottom: 1px solid #000;
