@@ -1,6 +1,8 @@
 .root {
   margin-top: 16px;
   list-style-type: none;
+  display: flex;
+  align-items: center;
 }
 .time {
   display: inline-block;
@@ -9,21 +11,36 @@
 }
 .title {
   font-size: 18px;
-  margin-top: 8px;
+  margin: 0;
   display: inline-block;
-  margin-left: 16px;
+  margin-left: 8px;
+  flex-grow: 1;
 }
-.link:hover {
-  text-decoration: underline;
+.link {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+}
+.link:hover,
+.link:active {
+  background: #f2f2f2;
+  color: #000;
 }
 
 @media only screen and (max-width: 1000px) {
+  .root {
+    display: block;
+  }
   .time {
     display: block;
   }
   .title {
     display: block;
-    margin-left: 0;
+    margin-left: -8px;
+  }
+  .link {
+    padding: 8px;
   }
 }
 @media only screen and (max-width: 480px) {
