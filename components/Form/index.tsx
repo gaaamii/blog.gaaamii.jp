@@ -103,12 +103,18 @@ export const Form = (props: Props) => {
         <Textarea id="body" onChange={handleBodyChange} className={styles.bodyField} rows={20} value={body} />
       </Block>
 
-      <Block align="right">
+      <div className="flex justify-items-end gap-2">
+        <Button type="button" disabled={isSubmitting}>
+          下書き保存
+        </Button>
         <Button type="submit" disabled={isSubmitting}>
           公開する
         </Button>
-      </Block>
-    </form>
+        <p className="text-3xl font-bold underline">
+          tailwindだよ
+        </p>
+      </div>
+    </form >
   )
 }
 

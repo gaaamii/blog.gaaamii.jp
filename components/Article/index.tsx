@@ -7,8 +7,10 @@ export const Article = ({ post }: { post: Post }) => {
   return (
     <article className={styles.root}>
       <time>{getLocalizedDateString(post.published_at)}</time>
-      <h1 className={styles.title}>{post.title}</h1>
-      <Markdown>{post.body}</Markdown>
+      <h1 className="mt-2 text-2xl">{post.title}</h1>
+      <div className="mt-8">
+        <Markdown>{post.body}</Markdown>
+      </div>
     </article >
   )
 }
