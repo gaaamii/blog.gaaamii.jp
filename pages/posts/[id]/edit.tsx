@@ -29,7 +29,8 @@ export default function EditPage(props: Props) {
     post: {
       title: value.title,
       body: value.body,
-      published_at: value.publishedAt.toISOString()
+      published_at: value.publishedAt.toISOString(),
+      status: value.status,
     }
   }), [])
 
