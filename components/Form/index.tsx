@@ -1,6 +1,5 @@
 import { useState, useCallback, InputHTMLAttributes, TextareaHTMLAttributes, useEffect } from 'react';
 import { Block } from '../Block';
-import styles from './styles.module.css'
 import { Button } from '../Button/index';
 import { getISODateString, getFullTimeString, getTimeString } from '../../utils/datetime';
 
@@ -72,13 +71,13 @@ export const Form = (props: Props) => {
   }, [])
 
   return (
-    <form onSubmit={handleSubmit} className={styles.root}>
+    <form onSubmit={handleSubmit}>
       <Block>
-        <label htmlFor="publishedAt" className={styles.label}>公開日時</label>
+        <label htmlFor="publishedAt" className="block">公開日時</label>
         <Input
           id="publishedAtDate"
           value={getISODateString(publishedAt)}
-          className={styles.dateField}
+          className="border p-1 rounded-md mt-1"
           onChange={handlePublishedAtDateChange}
           type="date"
           aria-label="公開日"
@@ -86,7 +85,7 @@ export const Form = (props: Props) => {
         <Input
           id="publishedAtTime"
           value={getTimeString(publishedAt)}
-          className={styles.timeField}
+          className="ml-2 border p-1 rounded-md"
           onChange={handlePublishedAtTimeChange}
           type="time"
           aria-label="公開時刻"
@@ -94,25 +93,22 @@ export const Form = (props: Props) => {
       </Block>
 
       <Block>
-        <label htmlFor="title" className={styles.label}>タイトル</label>
-        <Input id="title" onChange={handleTitleChange} className={styles.titleField} value={title} />
+        <label htmlFor="title" className="block">タイトル</label>
+        <Input id="title" onChange={handleTitleChange} className="p-2 w-full border rounded-sm mt-1" value={title} />
       </Block>
 
       <Block>
-        <label htmlFor="body" className={styles.label}>本文</label>
-        <Textarea id="body" onChange={handleBodyChange} className={styles.bodyField} rows={20} value={body} />
+        <label htmlFor="body" className="block">本文</label>
+        <Textarea id="body" onChange={handleBodyChange} className="p-2 w-full border rounded-sm mt-1" rows={20} value={body} />
       </Block>
 
-      <div className="flex justify-items-end gap-2">
+      <div className="flex justify-end gap-2 w-full">
         <Button type="button" disabled={isSubmitting}>
           下書き保存
         </Button>
-        <Button type="submit" disabled={isSubmitting}>
+        <Button type="submit" disabled={isSubmitting} theme="primary">
           公開する
         </Button>
-        <p className="text-3xl font-bold underline">
-          tailwindだよ
-        </p>
       </div>
     </form >
   )
