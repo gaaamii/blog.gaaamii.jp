@@ -36,7 +36,8 @@ export default function EditPage(props: Props) {
   const toValues = useCallback((post: Post) => ({
     title: props.post.title,
     body: props.post.body,
-    publishedAt: new Date(props.post.published_at)
+    publishedAt: props.post.published_at ? new Date(props.post.published_at) : null,
+    status: post.status,
   }), [])
 
   const handleSubmit = useCallback(async (value: Value) => {
