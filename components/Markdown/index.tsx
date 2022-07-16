@@ -1,5 +1,6 @@
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import rehypeRaw from 'rehype-raw';
 import styles from './styles.module.css'
 
 type Props = {
@@ -7,7 +8,7 @@ type Props = {
 }
 
 export const Markdown = ({ children }: Props) => (
-  <ReactMarkdown components={{ code: codeComponent }} children={children} />
+  <ReactMarkdown components={{ code: codeComponent }} children={children} rehypePlugins={[rehypeRaw]} />
 )
 
 const codeComponent = ({ node, inline, className, children, ...props }) => {
