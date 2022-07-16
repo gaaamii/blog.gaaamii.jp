@@ -1,6 +1,5 @@
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { CodeComponent } from 'react-markdown/src/ast-to-react';
 import styles from './styles.module.css'
 
 type Props = {
@@ -11,7 +10,7 @@ export const Markdown = ({ children }: Props) => (
   <ReactMarkdown components={{ code: codeComponent }} children={children} />
 )
 
-const codeComponent: CodeComponent = ({ node, inline, className, children, ...props }) => {
+const codeComponent = ({ node, inline, className, children, ...props }) => {
   // NOTE: CodeComponent's className is typed as unknown
   const classNameString = className as string
 
