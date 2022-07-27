@@ -1,3 +1,4 @@
+import Script from 'next/script';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import rehypeRaw from 'rehype-raw';
@@ -8,8 +9,11 @@ type Props = {
 }
 
 export const Markdown = ({ children }: Props) => (
-  <ReactMarkdown components={{ code: codeComponent }} children={children} rehypePlugins={[rehypeRaw]} />
+  <ReactMarkdown components={{ code: codeComponent, script: scriptComponent }} children={children} rehypePlugins={[rehypeRaw]} />
 )
+
+const scriptComponent = props => <Script {...props} />
+
 
 const codeComponent = ({ node, inline, className, children, ...props }) => {
   // NOTE: CodeComponent's className is typed as unknown
