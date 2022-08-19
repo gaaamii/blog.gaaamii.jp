@@ -11,7 +11,7 @@
     "@types/classnames": "^2.3.1",
     "@types/luxon": "^3.0.0",
     "@types/react-syntax-highlighter": "^15.5.2",
-    "autoprefixer": "^10.4.7",
+    "autoprefixer": "^10.4.8",
     "classnames": "^2.2.6",
     "luxon": "^3.0.1",
     "next": "12.2.5",
