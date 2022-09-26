@@ -12,11 +12,14 @@
   color: #0065ff;
 }
 .root ul {
-  margin: 0 8px;
+  margin: 24px 8px 0 8px;
   padding: 0 8px;
 }
 .root li {
-  margin-top: 8px;
+  margin-top: 10px;
+}
+.root li:first-child {
+  margin-top: 0;
 }
 .root h2 {
   font-size: 20px;
