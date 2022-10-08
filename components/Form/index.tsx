@@ -1,8 +1,12 @@
-import { useState, useCallback, InputHTMLAttributes, TextareaHTMLAttributes, useEffect } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { Block } from '../Block';
 import { Button } from '../Button/index';
 import { getISODateString, getFullTimeString, getTimeString } from '../../utils/datetime';
 import { PostStatus } from '../../models/post';
+import { PostStatusSelect } from './PostStatusSelect';
+import { Input } from './Input';
+import { Textarea } from './Textarea';
+import { ImageForm } from './ImageForm';
 
 export type Value = {
   title: string;
@@ -24,7 +28,9 @@ export const Form = (props: Props) => {
 
   return (
     <form onSubmit={form.onSubmit}>
-      <PostStatusSelect status={form.values.status} />
+      <div className="absolute left-8 top-20">
+        <PostStatusSelect status={form.values.status} />
+      </div>
       <Block>
         <label htmlFor="publishedAt" className="block">公開日時</label>
         <Input
@@ -52,11 +58,13 @@ export const Form = (props: Props) => {
 
       <Block>
         <label htmlFor="body" className="block">本文</label>
-        <Textarea id="body" onChange={form.handleBodyChange} className="p-2 w-full border rounded-sm mt-1" rows={20} value={form.values.body} />
+        <Textarea id="body" onChange={form.handleBodyChange} className="p-2 w-full border rounded-sm mt-1" rows={10} value={form.values.body} />
       </Block>
 
-      <div className="flex justify-end gap-2 w-full">
-        <Button type="button" disabled={form.isSubmitting} onClick={form.handleDraftSave}>
+      <ImageForm />
+
+      <div className="flex justify-end gap-2 w-full mt-6">
+        <Button type="button" theme="secondary" disabled={form.isSubmitting} onClick={form.handleDraftSave}>
           下書き保存
         </Button>
         <Button type="submit" disabled={form.isSubmitting} theme="primary">
@@ -64,32 +72,6 @@ export const Form = (props: Props) => {
         </Button>
       </div>
     </form >
-  )
-}
-
-const Input = (props: InputHTMLAttributes<HTMLInputElement>) => {
-  return (
-    <input {...props} />
-  )
-}
-
-const Textarea = (props: TextareaHTMLAttributes<HTMLTextAreaElement>) => {
-  return (
-    <textarea {...props} />
-  )
-}
-
-const PostStatusSelect = ({ status }: { status: PostStatus }) => {
-  return (
-    <select disabled className="appearance-none border border-slate-500 px-4 text-sm rounded-sm">
-      {
-        status === "draft"
-          ?
-          <option>下書き</option>
-          :
-          <option>公開済み</option>
-      }
-    </select>
   )
 }
 

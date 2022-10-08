@@ -7,7 +7,7 @@ type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
 
 
 export const Button = (props: Props) => (
-  <button {...props} className={getClassNames(props.theme)}>
+  <button {...props} className={getClassNames(props.theme || "primary")}>
     {props.children}
   </button>
 )
@@ -19,18 +19,22 @@ const getClassNames = (theme: Props["theme"]) => {
     "rounded-md",
     "cursor-pointer",
     "transition-colors",
-    "disabled:bg-slate-700"
   ]
 
   const primaryClassNames = [
-    "bg-indigo-600",
+    "bg-sky-600",
     "text-white",
-    "hover:bg-indigo-800",
+    "hover:bg-sky-800",
+    "disabled:bg-sky-900",
+    "disabled:text-white"
   ]
+
   const secondaryClassNames = [
     "bg-slate-200",
     "text-black",
     "hover:bg-slate-300",
+    "disabled:bg-slate-400",
+    "disabled:text-white"
   ]
 
   const themeClassNames = theme === "primary" ? primaryClassNames : secondaryClassNames
