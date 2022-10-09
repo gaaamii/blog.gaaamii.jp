@@ -47,7 +47,7 @@ const useFileUploader = () => {
     if(response.ok) {
       const json = await response.json() as CloudinaryResponseJson
 
-      setUrl(json.url)
+      setUrl(json.secure_url)
     }
   }
 
