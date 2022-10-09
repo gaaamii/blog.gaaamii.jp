@@ -2,6 +2,7 @@ import { get } from "./api";
 
 type SignData = {
   signature: string;
+  timestamp: string;
   api_key: string;
 }
 
@@ -51,6 +52,7 @@ export const postImageToCloudinary = async (file: File): Promise<Response> => {
   formData.append("file", file);
   formData.append("signature", signData.signature);
   formData.append("api_key", signData.api_key);
+  formData.append("timestamp", signData.timestamp);
 
   return fetch(
     CLOUDINARY_URL,
