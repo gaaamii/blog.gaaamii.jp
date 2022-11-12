@@ -25,10 +25,6 @@ li {
   list-style-type: disc;
 }
 
-p {
-  line-height: 1.8;
-  margin-top: 24px;
-}
 * {
   box-sizing: border-box;
 }

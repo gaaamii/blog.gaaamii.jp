@@ -4,13 +4,6 @@
   padding: 32px;
   border-radius: 8px;
 }
-
-.root a {
-  text-decoration: underline;
-}
-.root a:hover {
-  color: #0065ff;
-}
 .root ul {
   margin: 24px 8px 0 8px;
   padding: 0 8px;
@@ -20,16 +13,6 @@
 }
 .root li:first-child {
   margin-top: 0;
-}
-.root h2 {
-  font-size: 20px;
-  margin-top: 40px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid #ddd;
-}
-.root h3 {
-  font-size: 20px;
-  margin-top: 32px;
 }
 .root blockquote {
   margin-top: 18px;
@@ -65,13 +48,6 @@
   .root > time {
     display: block;
     margin-top: 16px;
-  }
-  .title {
-    font-size: 18px;
-  }
-  .root h2 {
-    font-size: 16px;
-    margin-top: 40px;
   }
   .root pre {
     font-size: 12px;
