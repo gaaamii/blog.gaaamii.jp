@@ -3,27 +3,18 @@ import Head from 'next/head'
 import Main from '../../../components/Main/index';
 import { Post } from '../../../models/post';
 import { get, put } from '../../../utils/api';
-import { useCallback, useState, useEffect } from 'react';
+import { useCallback } from 'react';
 import { Value, Form } from '../../../components/Form/index';
 import { useBlockNavigation } from '../../../hooks/useBlockNavigation';
 import { NavigationHeader } from '../../../components/NavigationHeader/index';
+import { useAuthorization } from '../../../hooks/useAuthorization';
 
 type Props = {
   post?: Post | null;
 }
 
 export default function EditPage(props: Props) {
-  const [isAuthorized, setIsAuthorized] = useState<boolean>(false)
-
-  const fetchUserSession = useCallback(() => {
-    get("/user_sessions/ping").then(res => {
-      if (res.ok) {
-        setIsAuthorized(true)
-      }
-    })
-  }, [])
-
-  useEffect(fetchUserSession, [])
+  const { isAuthorized } = useAuthorization()
 
   const toParams = useCallback((value: Value) => ({
     post: {
