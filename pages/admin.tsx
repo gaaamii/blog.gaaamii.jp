@@ -30,17 +30,14 @@ export default function Admin(props: Props) {
 }
 
 const PostSection = () => {
-  const [postStatus, setPostStatus] = useState<PostStatus | null>(null);
-  const handleChangeStatus = (e: any) => {
-    setPostStatus(e.target.value)
-  }
+  const { postStatus, onChangeStatus } = usePostSelect()
 
   return (
     <section className='mt-8'>
       <h2 className="font-bold">記事一覧</h2>
       <div className='flex gap-4 mt-4 items-center'>
         <div>公開状態</div>
-        <PostSelect onChange={handleChangeStatus} />
+        <PostSelect value={postStatus} onChange={onChangeStatus} />
       </div>
       <div className="mt-4">
         <PostList postStatus={postStatus} />
@@ -49,12 +46,27 @@ const PostSection = () => {
   )
 }
 
-const PostSelect = ({ onChange }: { onChange: any }) => {
+const usePostSelect = () => {
+  const [postStatus, setPostStatus] = useState<PostStatus | null>("draft");
+  const onChangeStatus = (e: any) => {
+    if (e.target.value === "published" || e.target.value === "draft") {
+      setPostStatus(e.target.value)
+    } else {
+      setPostStatus(null)
+    }
+  }
+
+  return {
+    postStatus,
+    onChangeStatus
+  }
+}
+const PostSelect = ({ onChange, value }: { onChange: any, value: PostStatus | null }) => {
   return (
     <select className="border border-slate-500 h-8 w-40 rounded" onChange={onChange}>
-      <option value="all">すべて</option>
-      <option value="draft">下書き</option>
-      <option value="published">公開済み</option>
+      <option selected={value === null} value="all">すべて</option>
+      <option selected={value === "draft"} value="draft">下書き</option>
+      <option selected={value === "published"} value="published">公開済み</option>
     </select>
   )
 }
