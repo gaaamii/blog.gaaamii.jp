@@ -1,15 +1,8 @@
-import { GetStaticPropsContext } from 'next'
 import Head from 'next/head'
 import Main from '../components/Main/index';
-import { Post } from '../models/post';
 import { NavigationHeader } from '../components/NavigationHeader/index';
-import Link from 'next/link';
 
-type Props = {
-  posts?: Post[];
-}
-
-export default function Home(props: Props) {
+export default function About() {
   return (
     <>
       <Head>
@@ -72,10 +65,4 @@ const SectionCard = ({ heading, children }: { heading: string; children: React.R
       {children}
     </section>
   )
-}
-
-export async function getStaticProps(context: GetStaticPropsContext) {
-  return {
-    props: {},
-  }
 }
