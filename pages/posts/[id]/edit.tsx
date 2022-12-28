@@ -1,18 +1,19 @@
 import Head from 'next/head'
 import Main from '../../../components/Main/index';
 import { Post } from '../../../models/post';
-import { get, put } from '../../../utils/api';
-import { useCallback, useState } from 'react';
+import { put } from '../../../utils/api';
+import { useCallback } from 'react';
 import { Value, Form } from '../../../components/Form/index';
 import { useBlockNavigation } from '../../../hooks/useBlockNavigation';
 import { NavigationHeader } from '../../../components/NavigationHeader/index';
 import { useAuthorization } from '../../../hooks/useAuthorization';
 import { useRouter } from 'next/router';
+import { useFetchPostAsAdmin } from '../../../hooks/useFetchPostAsAdmin';
 
 export default function EditPage() {
   const { isAuthorized } = useAuthorization()
   const { id } = useRouter().query as { id?: string; }
-  const { post, isLoading } = useFetchPost({ postId: id });
+  const { post, isLoading } = useFetchPostAsAdmin({ postId: id });
   const { initialValues, onSubmit } = useEditForm({ post })
 
   useBlockNavigation()
@@ -67,24 +68,3 @@ const toParams = (value: Value) => ({
     status: value.status,
   }
 })
-
-const useFetchPost = ({ postId }: { postId?: string; }) => {
-  const [post, setPost] = useState<Post | null>(null)
-  const [isLoading, setIsLoading] = useState<boolean>(true)
-  const isFetched = post !== null
-
-  if (!isFetched && postId) {
-    get(`/admin/posts/${postId}`).then(res => {
-      if (res.ok) {
-        res.json().then((json: Post) => {
-          setPost(json)
-          setIsLoading(false)
-        })
-      } else {
-        setIsLoading(false)
-      }
-    })
-  }
-
-  return { isLoading, post }
-}
