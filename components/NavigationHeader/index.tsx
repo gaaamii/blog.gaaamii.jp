@@ -37,10 +37,8 @@ const NavigationListItem = (props: NavigationListItemProps) => {
     <li className={classNames(styles.navigationListItem, {
       [styles["navigationListItem--isPrimary"]]: !!isPrimary
     })}>
-      <Link {...linkProps}>
-        <a target={target} rel={anchorRelAttribute}>
-          {children}
-        </a>
+      <Link {...linkProps} target={target} rel={anchorRelAttribute}>
+        {children}
       </Link>
     </li>
   )
