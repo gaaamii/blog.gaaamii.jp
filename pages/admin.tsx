@@ -80,7 +80,7 @@ const PostList = ({ postStatus }: { postStatus: PostStatus | null }) => {
     <div>
       {
         posts.map(post => (
-          <PostLink {...post} editable />
+          <PostLink {...post} editable key={post.id} />
         ))
       }
     </div>
