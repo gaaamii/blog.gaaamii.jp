@@ -4,6 +4,8 @@ import Main from '../components/Main/index';
 import { NavigationHeader } from '../components/NavigationHeader/index';
 import { PostStatus } from '../models/post';
 import { useAuthorization } from '../hooks/useAuthorization';
+import { useFetchPosts } from '../hooks/useFetchPosts';
+import PostLink from '../components/PostLink/index';
 
 type Props = {}
 
@@ -19,7 +21,7 @@ export default function Admin(props: Props) {
       <NavigationHeader />
       <Main>
         <section>
-          <h1 className='font-bold bg-slate-300 text-center rounded-sm p-2'>管理者ページ</h1>
+          <h1 className='font-bold bg-slate-700 text-center rounded-sm p-2 text-white'>管理者ページ</h1>
         </section>
         <PostSection />
       </Main>
@@ -58,7 +60,19 @@ const PostSelect = ({ onChange }: { onChange: any }) => {
 }
 
 const PostList = ({ postStatus }: { postStatus: PostStatus | null }) => {
-  return (
-    <div>TODO: fetch {postStatus} status posts</div>
+  const { isLoading, posts } = useFetchPosts(postStatus)
+
+  if (isLoading) {
+    return <p className="text-center bg-slate-200 py-2">読込中...</p>
+  }
+
+  return posts && (
+    <div>
+      {
+        posts.map(post => (
+          <PostLink {...post} editable />
+        ))
+      }
+    </div>
   )
 }

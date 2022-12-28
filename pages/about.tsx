@@ -1,9 +1,7 @@
 import { GetStaticPropsContext } from 'next'
 import Head from 'next/head'
 import Main from '../components/Main/index';
-import PageLink from '../components/PageLink/index';
 import { Post } from '../models/post';
-import { get } from '../utils/api';
 import { NavigationHeader } from '../components/NavigationHeader/index';
 import Link from 'next/link';
 
@@ -21,45 +19,63 @@ export default function Home(props: Props) {
 
       <NavigationHeader />
       <Main>
-        <h1 className='mt-16 font-bold'>このブログについて</h1>
-        <p>
-          東京都在住のソフトウェアエンジニアが書いているブログです。個人的な日記やソフトウェア開発周りの雑記を、気が向いたときに書いています。
-          <br />
-        </p>
-        <p className="text-right">
-          <Link href="https://gaaamii.jp">
-            <a className="underline font-bold text-sky-700">著者詳細はこちら</a>
-          </Link>
-        </p>
+        <div className="flex flex-col gap-4">
+        <SectionCard heading="このブログについて">
+          <p className="mt-4">
+            東京都在住のソフトウェアエンジニアが書いているブログです。個人的な日記やソフトウェア開発周りの雑記を、気が向いたときに書いています。
+            <br />
+          </p>
+          <p className="text-right">
+            <ExternalLink href="https://gaaamii.jp">著者詳細はこちら</ExternalLink>
+          </p>
+        </SectionCard>
+
+        <SectionCard heading="ご感想・ご指摘等">
+           <p className="mt-2">
+            スパムが来ると困るのでコメントフォームは設置していません。
+            <br />ご感想やご指摘をお寄せいだたく際は、お手数ですが記事のリンクと一緒にTwitterでメンションをください。
+            <p className="mt-2 text-right">
+              <ExternalLink href="https://twitter.com/gaaamii">@gaaamii</ExternalLink>
+            </p>
+          </p>
+        </SectionCard>
+
+        <SectionCard heading="ソースコード">
+           <p className="mt-2">ソースコードはこちらです。ブログ画面の実装に興味がある方はご覧ください。</p>
+           <p className="mt-2 text-right">
+             <ExternalLink href="https://github.com/gaaamii/blog.gaaamii.jp">
+               gaaamii/blog.gaaamii.jp
+             </ExternalLink>
+           </p>
+        </SectionCard>
+        </div>
       </Main>
     </>
   )
 }
 
-const Posts = (props: Props) => {
-  if (!props.posts) {
-    return (
-      <div>読み込み中...</div>
-    )
-  }
-
+const ExternalLink = ({ href, children }: { href: string; children: React.ReactNode }) => {
   return (
-    <ul>
-      {props.posts.map(post => (
-        <PageLink href={`/posts/${post.id}`} published_at={post.published_at} title={post.title} key={post.id} />
-      ))}
-    </ul>
+    <a
+      href={href} target="_blank"
+      className="underline font-bold hover:text-sky-700"
+    >
+      {children}
+    </a>
+  )
+}
+
+const SectionCard = ({ heading, children }: { heading: string; children: React.ReactNode }) => {
+  return (
+    <section className="md:border-2 py-4 px-8 rounded-lg">
+      <h2 className='font-bold'>{heading}</h2>
+      {children}
+    </section>
   )
 }
 
 export async function getStaticProps(context: GetStaticPropsContext) {
-  const res = await get(`/posts`)
-  const posts = res.ok ? await res.json() : []
-
   return {
-    props: {
-      posts,
-    },
-    revalidate: 3600,
+    props: {},
   }
 }

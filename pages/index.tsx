@@ -1,7 +1,7 @@
 import { GetStaticPropsContext } from 'next'
 import Head from 'next/head'
 import Main from '../components/Main/index';
-import PageLink from '../components/PageLink/index';
+import PostLink from '../components/PostLink/index';
 import { Post } from '../models/post';
 import { get } from '../utils/api';
 import { NavigationHeader } from '../components/NavigationHeader/index';
@@ -38,7 +38,7 @@ const Posts = (props: Props) => {
     <section className={styles.pageList}>
       <ul>
         {props.posts.map(post => (
-          <PageLink href={`/posts/${post.id}`} published_at={post.published_at} title={post.title} key={post.id} />
+          <PostLink {...post} key={post.id} />
         ))}
       </ul>
     </section>
