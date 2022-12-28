@@ -3,6 +3,7 @@
   list-style-type: none;
   display: flex;
   align-items: center;
+  gap: 16px;
 }
 .time {
   display: inline-block;
