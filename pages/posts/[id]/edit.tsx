@@ -74,7 +74,7 @@ const toParams = (value: Value) => ({
 const PreviewLink = ({ postId }: { postId: number }) => {
   return (
     <div className="fixed bottom-4 flex justify-center w-full left-0">
-      <Link href={`/admin/posts/${postId}`} className="rounded-lg bg-slate-100 w-80 py-2 text-center shadow-md hover:bg-slate-200">
+      <Link href={`/admin/posts/${postId}`} className="rounded-lg bg-slate-100 w-80 py-2 text-center shadow-md hover:bg-slate-200" target="_blank">
         プレビューURL
       </Link>
     </div>
