@@ -7,9 +7,7 @@ import { useAuthorization } from '../hooks/useAuthorization';
 import { useFetchPosts } from '../hooks/useFetchPosts';
 import PostLink from '../components/PostLink/index';
 
-type Props = {}
-
-export default function Admin(props: Props) {
+export default function Admin() {
   const { isAuthorized } = useAuthorization()
 
   return isAuthorized ? (
