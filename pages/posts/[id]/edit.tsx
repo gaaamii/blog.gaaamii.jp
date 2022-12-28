@@ -1,47 +1,19 @@
-import { GetServerSidePropsContext } from 'next'
 import Head from 'next/head'
 import Main from '../../../components/Main/index';
 import { Post } from '../../../models/post';
 import { get, put } from '../../../utils/api';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { Value, Form } from '../../../components/Form/index';
 import { useBlockNavigation } from '../../../hooks/useBlockNavigation';
 import { NavigationHeader } from '../../../components/NavigationHeader/index';
 import { useAuthorization } from '../../../hooks/useAuthorization';
+import { useRouter } from 'next/router';
 
-type Props = {
-  post?: Post | null;
-}
-
-export default function EditPage(props: Props) {
+export default function EditPage() {
   const { isAuthorized } = useAuthorization()
-
-  const toParams = useCallback((value: Value) => ({
-    post: {
-      title: value.title,
-      body: value.body,
-      published_at: value.publishedAt.toISOString(),
-      status: value.status,
-    }
-  }), [])
-
-  const toValues = useCallback((post: Post) => ({
-    title: props.post.title,
-    body: props.post.body,
-    publishedAt: props.post.published_at ? new Date(props.post.published_at) : null,
-    status: post.status,
-  }), [])
-
-  const handleSubmit = useCallback(async (value: Value) => {
-    const res = await put(`/posts/${props.post.id}`, toParams(value))
-    return {
-      isSuccess: res.ok,
-    }
-  }, [])
-
-  if (!props.post) {
-    return null
-  }
+  const { id } = useRouter().query as { id?: string; }
+  const { post, isLoading } = useFetchPost({ postId: id });
+  const { initialValues, onSubmit } = useEditForm({ post })
 
   useBlockNavigation()
 
@@ -53,22 +25,66 @@ export default function EditPage(props: Props) {
 
       <NavigationHeader />
       <Main>
-        {isAuthorized ? <Form onSubmit={handleSubmit} value={toValues(props.post)} /> : null}
+        {isLoading && <div>読込中...</div>}
+        {isAuthorized && !isLoading ? <Form onSubmit={onSubmit} value={initialValues} /> : null}
       </Main>
     </>
   )
 }
 
-type Query = {
-  id: string;
+type UseEditFormProps = {
+  post?: Post | null;
 }
-export async function getServerSideProps(context: GetServerSidePropsContext<Query>) {
-  const res = await get(`/posts/${context.params.id}`)
-  const post = res.ok ? await res.json() : null
+const useEditForm = ({ post }: UseEditFormProps) => {
+  const initialValues = post ? ({
+    title: post.title,
+    body: post.body,
+    publishedAt: post.published_at ? new Date(post.published_at) : null,
+    status: post.status
+  }) : null
+
+  const onSubmit = useCallback(async (value: Value) => {
+    if (!post) {
+      return { isSuccess: false}
+    }
+
+    const res = await put(`/posts/${post.id}`, toParams(value))
+    return {
+      isSuccess: res.ok,
+    }
+  }, [post])
 
   return {
-    props: {
-      post,
-    },
+    initialValues,
+    onSubmit,
   }
+}
+const toParams = (value: Value) => ({
+  post: {
+    title: value.title,
+    body: value.body,
+    published_at: value.publishedAt.toISOString(),
+    status: value.status,
+  }
+})
+
+const useFetchPost = ({ postId }: { postId?: string; }) => {
+  const [post, setPost] = useState<Post | null>(null)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const isFetched = post !== null
+
+  if (!isFetched && postId) {
+    get(`/admin/posts/${postId}`).then(res => {
+      if (res.ok) {
+        res.json().then((json: Post) => {
+          setPost(json)
+          setIsLoading(false)
+        })
+      } else {
+        setIsLoading(false)
+      }
+    })
+  }
+
+  return { isLoading, post }
 }
