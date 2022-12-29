@@ -10,7 +10,7 @@ import { useAuthorization } from '../../../hooks/useAuthorization';
 export default function AdminPostPage() {
   const { isAuthorized, isLoading, pageTitle, post } = useAdminPost()
 
-  if (!isAuthorized) {
+  if (!isLoading && !isAuthorized) {
     return 'Not Found'
   }
 
