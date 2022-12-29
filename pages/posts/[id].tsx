@@ -49,8 +49,7 @@ export async function getStaticProps(context: GetStaticPropsContext<Query>) {
   const post = res.ok ? await res.json() : null
 
   return {
-    props: { post, },
-    revalidate: 1200,
+    props: { post }
   }
 }
 
