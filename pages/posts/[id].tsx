@@ -50,7 +50,7 @@ export async function getStaticProps(context: GetStaticPropsContext<Query>) {
 
   return {
     props: { post, },
-    revalidate: 600,
+    revalidate: 1200,
   }
 }
 
