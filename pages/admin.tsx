@@ -4,7 +4,7 @@ import Main from '../components/Main/index';
 import { NavigationHeader } from '../components/NavigationHeader/index';
 import { PostStatus } from '../models/post';
 import { useAuthorization } from '../hooks/useAuthorization';
-import { useFetchPosts } from '../hooks/useFetchPosts';
+import { useFetchPostsAsAdmin } from '../hooks/useFetchPostsAsAdmin';
 import PostLink from '../components/PostLink/index';
 
 export default function Admin() {
@@ -70,7 +70,7 @@ const PostSelect = ({ onChange, value }: { onChange: any, value: PostStatus | nu
 }
 
 const PostList = ({ postStatus }: { postStatus: PostStatus | null }) => {
-  const { isLoading, posts } = useFetchPosts(postStatus)
+  const { isLoading, posts } = useFetchPostsAsAdmin(postStatus)
 
   if (isLoading) {
     return <p className="text-center bg-slate-200 py-2">読込中...</p>

@@ -49,16 +49,20 @@ export async function getStaticProps(context: GetStaticPropsContext<Query>) {
   const post = res.ok ? await res.json() : null
 
   return {
-    props: {
-      post,
-    },
+    props: { post, },
     revalidate: 300,
   }
 }
 
 export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: true,
+  const response = await get('/posts')
+
+  if (response.ok) {
+    const posts = await response.json() as Post[]
+    const paths = posts.map(post => `/posts/${post.id}`)
+
+    return { paths, fallback: false }
   }
+
+  return { paths: [], fallback: true }
 }

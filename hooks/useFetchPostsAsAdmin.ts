@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Post, PostStatus } from '../models/post';
 import { get } from '../utils/api';
 
-export const useFetchPosts = (postStatus: PostStatus | null) => {
+export const useFetchPostsAsAdmin = (postStatus: PostStatus | null) => {
   const [posts, setPosts] = useState<Post[] | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const isFetched = posts !== null
