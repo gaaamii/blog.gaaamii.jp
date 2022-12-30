@@ -20,6 +20,7 @@ export default function PostPage(props: Props) {
   if (props.post === null) {
     return "404 NotFound"
   }
+
   const pageTitle = `${props.post.title} - gaaamiiのブログ`
 
   return (
@@ -46,11 +47,13 @@ type Query = {
 }
 export async function getStaticProps(context: GetStaticPropsContext<Query>) {
   const res = await get(`/posts/${context.params.id}`)
-  const post = res.ok ? await res.json() : null
 
-  return {
-    props: { post }
+  if (res.status === 404) {
+    return { props: { post: null } }
   }
+
+  const post = res.ok ? await res.json() : null
+  return { props: { post } }
 }
 
 export async function getStaticPaths() {
