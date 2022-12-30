@@ -50,9 +50,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
   const posts = res.ok ? await res.json() : []
 
   return {
-    props: {
-      posts,
-    },
-    revalidate: 300,
+    props: { posts }
   }
 }
