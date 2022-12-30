@@ -5,6 +5,7 @@ export default async function handler(req, res) {
 
   try {
     await res.revalidate(`/posts/${req.query.post_id}`)
+    await res.revalidate(`/posts`)
     return res.json({ revalidated: true })
   } catch (err) {
     return res.status(500).send('Error revalidating')
