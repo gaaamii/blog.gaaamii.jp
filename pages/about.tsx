@@ -19,7 +19,7 @@ export default function About() {
             <br />
           </p>
           <p className="text-right">
-            <ExternalLink href="https://gaaamii.jp">著者詳細はこちら</ExternalLink>
+            <ExternalLink href="https://gaaamii.jp">筆者詳細はこちら</ExternalLink>
           </p>
         </SectionCard>
 
