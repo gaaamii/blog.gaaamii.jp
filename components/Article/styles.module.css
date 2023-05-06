@@ -31,10 +31,6 @@
 .root pre {
   margin-top: 16px;
   white-space: pre-wrap;
-  background: #f5f2f0;
-  color: #222;
-  padding: 8px;
-  border-radius: 8px;
 }
 .root hr {
   margin-top: 36px;

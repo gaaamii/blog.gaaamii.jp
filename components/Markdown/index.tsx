@@ -3,6 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import rehypeRaw from 'rehype-raw';
 import styles from './styles.module.css'
+import { useEffect, useState } from 'react';
 
 type Props = {
   children: string;
@@ -31,8 +32,16 @@ const codeComponent = ({ node, inline, className, children, ...props }) => {
   const classNameString = className as string
 
   const match = /language-(\w+)/.exec(classNameString || '')
+  const [ style, setStyle ] = useState({})
+  useEffect(() => {
+    import('react-syntax-highlighter/dist/esm/styles/prism/material-dark')
+    import('react-syntax-highlighter/dist/esm/styles/prism/a11y-dark')
+    .then(mod => setStyle(mod.default));
+  })
   return !inline && match ? (
     <SyntaxHighlighter
+    style={style}
+    customStyle={{ borderRadius: 8 }}
       language={match[1]} PreTag="div" children={String(children).replace(/\n$/, '')} {...props} />
   ) : (
     <code className={styles.plainCode}>{children}</code>
