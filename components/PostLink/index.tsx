@@ -13,7 +13,7 @@ const PostLink = (props: Props) => {
     <li className={styles.root}>
       <time className={styles.time}>{getLocalizedDateString(props.published_at)}</time>
       <h2 className={styles.title}>
-        <Link href={pageHref} prefetch className={styles.link}>
+        <Link href={pageHref} className={styles.link}>
           {props.title}
         </Link>
       </h2>
