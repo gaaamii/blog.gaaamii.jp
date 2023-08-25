@@ -6,6 +6,7 @@ import { useFetchPostAsAdmin } from '../../../hooks/useFetchPostAsAdmin';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { useAuthorization } from '../../../hooks/useAuthorization';
+import { MarkdownCompiledOnClient } from '../../../components/Markdown';
 
 export default function AdminPostPage() {
   const { isAuthorized, isLoading, pageTitle, post } = useAdminPost()
@@ -25,7 +26,13 @@ export default function AdminPostPage() {
       <Main>
         { isLoading
           ? <div>読み込み中...</div>
-          : <Article post={post} />
+          : (
+              <Article post={post}>
+                <MarkdownCompiledOnClient>
+                  {post.body}
+                </MarkdownCompiledOnClient>
+              </Article>
+            )
         }
       </Main>
     </>

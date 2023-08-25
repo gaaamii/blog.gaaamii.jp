@@ -5,9 +5,14 @@ import { Post } from '../../models/post';
 import { Article } from '../../components/Article/index';
 import { get } from '../../utils/api';
 import { NavigationHeader } from '../../components/NavigationHeader/index';
+import { serialize } from 'next-mdx-remote/serialize';
+import rehypeImageSize from '../../components/Markdown/rehype-plugins/rehype-image-size';
+import { MarkdownCompiledOnServer } from '../../components/Markdown';
+import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 
 type Props = {
   post?: Post | null;
+  mdxSource?: MDXRemoteSerializeResult;
 }
 
 export default function PostPage(props: Props) {
@@ -36,7 +41,9 @@ export default function PostPage(props: Props) {
 
       <NavigationHeader />
       <Main>
-        <Article post={props.post} />
+        <Article post={props.post}>
+          <MarkdownCompiledOnServer mdxSource={props.mdxSource} />
+        </Article>
       </Main>
     </>
   )
@@ -53,7 +60,13 @@ export async function getStaticProps(context: GetStaticPropsContext<Query>) {
   }
 
   const post = res.ok ? await res.json() : null
-  return { props: { post } }
+  const mdxSource = await serialize(
+    post.body,
+    {
+      mdxOptions: { rehypePlugins: [rehypeImageSize] }
+    }
+  )
+  return { props: { post, mdxSource } }
 }
 
 export async function getStaticPaths() {
