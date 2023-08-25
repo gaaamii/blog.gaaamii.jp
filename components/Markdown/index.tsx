@@ -1,16 +1,18 @@
 import Script from 'next/script';
-import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import rehypeRaw from 'rehype-raw';
 import styles from './styles.module.css'
 import { useEffect, useState } from 'react';
+import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
+import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
+import rehypeRaw from 'rehype-raw';
 
 type Props = {
-  children: string;
+  mdxSource: MDXRemoteSerializeResult;
 }
 
-export const Markdown = ({ children }: Props) => (
-  <ReactMarkdown
+export const MarkdownCompiledOnServer = ({ mdxSource }: Props) => {
+  return <MDXRemote
+    {...mdxSource}
     components={{
       code: codeComponent,
       script: scriptComponent,
@@ -19,10 +21,25 @@ export const Markdown = ({ children }: Props) => (
       p: pComponent,
       a: aComponent
     }}
+  />
+}
+
+export const MarkdownCompiledOnClient = ({ children }: { children: string }) => {
+  return <ReactMarkdown
     children={children}
+    components={{
+      code: codeComponent,
+      script: scriptComponent,
+      h2: h2Component,
+      h3: h3Component,
+      p: pComponent,
+      a: aComponent
+    }}
     rehypePlugins={[rehypeRaw]}
   />
-)
+}
+
+
 
 const scriptComponent = props => <Script {...props} />
 
