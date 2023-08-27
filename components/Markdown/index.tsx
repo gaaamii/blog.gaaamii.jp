@@ -39,27 +39,22 @@ export const MarkdownCompiledOnClient = ({ children }: { children: string }) => 
   />
 }
 
-
-
 const scriptComponent = props => <Script {...props} />
 
-
+import { a11yDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 const codeComponent = ({ node, inline, className, children, ...props }) => {
   // NOTE: CodeComponent's className is typed as unknown
   const classNameString = className as string
-
   const match = /language-(\w+)/.exec(classNameString || '')
-  const [ style, setStyle ] = useState({})
-  useEffect(() => {
-    import('react-syntax-highlighter/dist/esm/styles/prism/material-dark')
-    import('react-syntax-highlighter/dist/esm/styles/prism/a11y-dark')
-    .then(mod => setStyle(mod.default));
-  })
   return !inline && match ? (
     <SyntaxHighlighter
-    style={style}
-    customStyle={{ borderRadius: 8 }}
-      language={match[1]} PreTag="div" children={String(children).replace(/\n$/, '')} {...props} />
+      style={a11yDark}
+      language={match[1]}
+      PreTag="div"
+      {...props}
+    >
+      {String(children).replace(/\n$/, '')}
+    </SyntaxHighlighter>
   ) : (
     <code className={styles.plainCode}>{children}</code>
   )
