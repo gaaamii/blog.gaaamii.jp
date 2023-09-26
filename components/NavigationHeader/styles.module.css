@@ -1,6 +1,7 @@
 .navigation {
   width: 100%;
-  background: #45454b;
+  border-bottom: 2px solid #eee;
+  background: #474747;
 }
 .navigationList {
   width: 80%;
@@ -10,13 +11,13 @@
   list-style: none;
   gap: 16px;
   align-items: center;
-  height: 50px;
+  height: 60px;
   margin: 0 auto;
 }
-.navigationListItem > a {
-  color: #eee;
+.navigationListItem {
+  list-style: none;
 }
-.navigationListItem > a:hover {
+.navigationListItem > a {
   color: #fff;
 }
 .navigationListItem--isPrimary {
@@ -34,7 +35,8 @@
 }
 .logo {
   border-radius: 50%;
-  background: #ecebe4;
+  border: 1px solid #ccc;
+  background: #fff;
 }
 
 @media only screen and (max-width: 480px) {
