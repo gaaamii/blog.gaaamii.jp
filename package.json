@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.6.3",
-    "@types/react": "^18.2.22",
+    "@types/react": "^18.2.23",
     "prettier": "^3.0.3",
     "typescript": "^5.2.2"
   }
