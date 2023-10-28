@@ -64,10 +64,7 @@ const ArticleFooter = () => {
 };
 
 const BackToIndexLink = () => (
-  <Link
-    href="/"
-    className="border-2 px-8 py-2 rounded hover:border-blue-700 hover:font-bold"
-  >
+  <Link href="/" className="border-2 px-8 py-2 rounded hover:border-sky-600">
     記事一覧に戻る
   </Link>
 );
