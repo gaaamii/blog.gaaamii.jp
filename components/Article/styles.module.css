@@ -30,8 +30,22 @@
   border: 1px solid #eee;
   margin-top: 16px;
   box-shadow: 1px 1px 2px #fafafa;
-  background: #eee;
+
+  /* skelton */
+  background: linear-gradient(135deg, #eee 25%, #ddd 50%, #eee 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite ease-in-out;
 }
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
 .root pre {
   margin-top: 16px;
   white-space: pre-wrap;

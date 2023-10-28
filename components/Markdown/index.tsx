@@ -1,4 +1,3 @@
-import Script from "next/script";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import styles from "./styles.module.css";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
