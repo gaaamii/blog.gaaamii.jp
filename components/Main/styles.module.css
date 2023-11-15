@@ -1,6 +1,9 @@
 .root {
   width: 80%;
   max-width: 800px;
+  /* 100vh - header - footer(ざっくり) */
+  min-height: calc(100svh - 88px - 62px);
+
   margin: 24px auto 48px auto;
 }
 
@@ -8,5 +11,7 @@
   .root {
     width: 100%;
     margin: 0;
+    /* 100vh - header - footer(ざっくり) */
+    min-height: calc(100svh - 50px - 62px);
   }
 }

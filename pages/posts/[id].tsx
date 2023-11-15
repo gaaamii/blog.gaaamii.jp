@@ -1,15 +1,14 @@
 import { GetStaticPropsContext } from "next";
 import Head from "next/head";
-import Main from "../../components/Main/index";
 import { Post } from "../../models/post";
 import { Article } from "../../components/Article/index";
 import { get } from "../../utils/api";
-import { NavigationHeader } from "../../components/NavigationHeader/index";
 import { serialize } from "next-mdx-remote/serialize";
 import rehypeImageSize from "../../components/Markdown/rehype-plugins/rehype-image-size";
 import { MarkdownCompiledOnServer } from "../../components/Markdown";
 import { MDXRemoteSerializeResult } from "next-mdx-remote";
 import Link from "next/link";
+import MainLayout from "../../components/layouts/MainLayout";
 
 type Props = {
   post?: Post | null;
@@ -28,13 +27,8 @@ export default function PostPage(props: Props) {
   const pageTitle = `${props.post.title} - gaaamiiのブログ`;
 
   return (
-    <>
+    <MainLayout>
       <Head>
-        <title>{pageTitle}</title>
-        <meta
-          name="description"
-          content="間違ったことを書いている時があります。コメントやTwitter、ブコメなどでご指摘ください"
-        />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:site" content="@gaaamii" />
         <meta name="twitter:title" content={pageTitle} />
@@ -44,14 +38,11 @@ export default function PostPage(props: Props) {
         />
       </Head>
 
-      <NavigationHeader />
-      <Main>
-        <Article post={props.post}>
-          <MarkdownCompiledOnServer mdxSource={props.mdxSource} />
-          <ArticleFooter />
-        </Article>
-      </Main>
-    </>
+      <Article post={props.post}>
+        <MarkdownCompiledOnServer mdxSource={props.mdxSource} />
+        <ArticleFooter />
+      </Article>
+    </MainLayout>
   );
 }
 

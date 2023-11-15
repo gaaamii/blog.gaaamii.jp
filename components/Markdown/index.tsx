@@ -17,6 +17,8 @@ export const MarkdownCompiledOnServer = ({ mdxSource }: Props) => {
         h3: h3Component,
         p: pComponent,
         a: aComponent,
+        ul: ulComponent,
+        li: liComponent,
       }}
     />
   );
@@ -36,6 +38,8 @@ export const MarkdownCompiledOnClient = ({
         h3: h3Component,
         p: pComponent,
         a: aComponent,
+        ul: ulComponent,
+        li: liComponent,
       }}
     />
   );
@@ -68,7 +72,7 @@ const h3Component = ({ children }) => (
   </h3>
 );
 const pComponent = ({ children, node, className, ...props }) => (
-  <p className={className || "mt-6 leading-8"} {...props}>
+  <p className={className || "mt-4 leading-8"} {...props}>
     {children}
   </p>
 );
@@ -81,4 +85,16 @@ const aComponent = ({ node, children, href, ...props }) => (
   >
     {children}
   </a>
+);
+
+const ulComponent = ({ node, children, ...props }) => (
+  <ul className={"mt-4"} {...props}>
+    {children}
+  </ul>
+);
+
+const liComponent = ({ node, children, ...props }) => (
+  <li className={"mt-1 ml-5 leading-8"} {...props}>
+    {children}
+  </li>
 );

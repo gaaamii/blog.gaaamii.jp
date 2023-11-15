@@ -4,13 +4,6 @@
   padding: 32px;
   border-radius: 8px;
 }
-.root ul {
-  margin: 24px 8px 0 8px;
-  padding: 0 8px;
-}
-.root li {
-  margin-top: 10px;
-}
 .root li:first-child {
   margin-top: 0;
 }
