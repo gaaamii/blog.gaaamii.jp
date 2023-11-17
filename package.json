@@ -26,7 +26,7 @@
     "tailwindcss": "^3.3.5"
   },
   "devDependencies": {
-    "@types/node": "^20.8.9",
+    "@types/node": "^20.9.1",
     "@types/react": "^18.2.33",
     "prettier": "^3.0.3",
     "typescript": "^5.2.2"
