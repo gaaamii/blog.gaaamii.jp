@@ -9,6 +9,7 @@ import { MarkdownCompiledOnServer } from "../../components/Markdown";
 import { MDXRemoteSerializeResult } from "next-mdx-remote";
 import Link from "next/link";
 import MainLayout from "../../components/layouts/MainLayout";
+import { BackIcon } from "../../components/icons/Back";
 
 type Props = {
   post?: Post | null;
@@ -57,9 +58,10 @@ const ArticleFooter = ({ post }: { post: Post }) => {
 const BackToIndexLink = ({ postId }: { postId: number }) => (
   <Link
     href={`/#post-${postId}`}
-    className="border-2 px-8 py-2 rounded hover:border-sky-600"
+    className="border-2 px-8 py-2 rounded inline-flex gap-2 items-center hover:bg-slate-200 hover:text-black focus:bg-slate-200 focus:text-black active:bg-slate-200 active:text-black"
   >
-    記事一覧に戻る
+    <BackIcon />
+    <span>記事一覧に戻る</span>
   </Link>
 );
 

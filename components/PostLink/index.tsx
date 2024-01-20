@@ -11,12 +11,18 @@ const PostLink = (props: Props) => {
   const { pageHref, editPageHref } = getPageHrefs(props);
 
   return (
-    <li className={styles.root} id={`post-${id}`}>
+    <li
+      className="mt-0 sm:mt-4 relative list-none lg:flex items-center gap-1"
+      id={`post-${id}`}
+    >
       <time className={styles.time}>
         {getLocalizedDateString(props.published_at)}
       </time>
       <h2 className={styles.title}>
-        <Link href={pageHref} className={styles.link}>
+        <Link
+          href={pageHref}
+          className="block w-full m-0 pt-8 pb-4 px-4 sm:rounded-lg sm:py-2 sm:px-3 hover:bg-slate-200 hover:text-black focus:bg-slate-200 focus:text-black active:bg-slate-200 active:text-black"
+        >
           {props.title}
         </Link>
       </h2>

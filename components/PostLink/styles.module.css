@@ -1,10 +1,3 @@
-.root {
-  margin-top: 16px;
-  list-style-type: none;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
 .time {
   display: inline-block;
   width: 112px;
@@ -18,22 +11,8 @@
   flex-grow: 1;
   font-weight: bold;
 }
-.link {
-  display: block;
-  width: 100%;
-  padding: 8px;
-  border-radius: 8px;
-}
-.link:hover,
-.link:active {
-  background: #f2f2f2;
-  color: #000;
-}
 
 @media only screen and (max-width: 1000px) {
-  .root {
-    display: block;
-  }
   .time {
     display: block;
   }
@@ -41,16 +20,8 @@
     display: block;
     margin-left: -8px;
   }
-  .link {
-    padding: 8px;
-  }
 }
-@media only screen and (max-width: 480px) {
-  .root {
-    border-bottom: 2px solid #ccc;
-    position: relative;
-    margin-top: 0;
-  }
+@media only screen and (max-width: 640px) {
   .time {
     position: absolute;
     top: 12px;
@@ -59,12 +30,6 @@
     font-size: 12px;
     line-height: 1;
     display: inline-block;
-  }
-  .link {
-    display: block;
-    width: 100%;
-    margin: 0;
-    padding: 32px 16px 16px 16px;
   }
   .link:hover {
     text-decoration: none;

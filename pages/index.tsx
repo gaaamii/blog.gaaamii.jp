@@ -2,8 +2,6 @@ import { GetStaticPropsContext } from "next";
 import PostLink from "../components/PostLink/index";
 import { Post } from "../models/post";
 import { get } from "../utils/api";
-import styles from "./styles.module.css";
-import Footer from "../components/Footer";
 import MainLayout from "../components/layouts/MainLayout";
 
 type Props = {
@@ -24,7 +22,7 @@ const Posts = (props: Props) => {
   }
 
   return (
-    <section className={styles.pageList}>
+    <section className="py-4 sm:p-0">
       <ul>
         {props.posts.map((post) => (
           <PostLink {...post} key={post.id} />

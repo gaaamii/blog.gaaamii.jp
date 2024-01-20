@@ -1,7 +1,6 @@
 .navigation {
-  width: 100%;
-  border-bottom: 2px solid #eee;
-  background: #474747;
+  /* width: 100%;
+  border-bottom: 2px solid #ccc; */
 }
 .navigationList {
   width: 80%;
@@ -16,9 +15,6 @@
 }
 .navigationListItem {
   list-style: none;
-}
-.navigationListItem > a {
-  color: #fff;
 }
 .navigationListItem--isPrimary {
   flex-grow: 1;

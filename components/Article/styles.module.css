@@ -1,7 +1,6 @@
 .root {
   font-size: 18px;
   background: #fff;
-  padding: 32px;
   border-radius: 8px;
 }
 .root li:first-child {
@@ -49,7 +48,6 @@
 
 @media only screen and (max-width: 480px) {
   .root {
-    padding: 16px 16px 48px 16px;
     border-radius: 8px;
   }
   .root > time {
