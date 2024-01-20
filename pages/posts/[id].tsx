@@ -40,22 +40,25 @@ export default function PostPage(props: Props) {
 
       <Article post={props.post}>
         <MarkdownCompiledOnServer mdxSource={props.mdxSource} />
-        <ArticleFooter />
+        <ArticleFooter post={props.post} />
       </Article>
     </MainLayout>
   );
 }
 
-const ArticleFooter = () => {
+const ArticleFooter = ({ post }: { post: Post }) => {
   return (
     <div className="mt-20">
-      <BackToIndexLink />
+      <BackToIndexLink postId={post.id} />
     </div>
   );
 };
 
-const BackToIndexLink = () => (
-  <Link href="/" className="border-2 px-8 py-2 rounded hover:border-sky-600">
+const BackToIndexLink = ({ postId }: { postId: number }) => (
+  <Link
+    href={`/#post-${postId}`}
+    className="border-2 px-8 py-2 rounded hover:border-sky-600"
+  >
     記事一覧に戻る
   </Link>
 );
