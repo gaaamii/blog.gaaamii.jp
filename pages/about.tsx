@@ -21,11 +21,11 @@ export default function About() {
             スパムが来ると困るのでコメントフォームは設置していません。
             <br />
             ご感想やご指摘をお寄せいだたく際は、お手数ですが記事のリンクと一緒にTwitterでメンションをください。
-            <p className="mt-2 text-right">
-              <ExternalLink href="https://twitter.com/gaaamii">
-                @gaaamii
-              </ExternalLink>
-            </p>
+          </p>
+          <p className="mt-2 text-right">
+            <ExternalLink href="https://twitter.com/gaaamii">
+              @gaaamii
+            </ExternalLink>
           </p>
         </SectionCard>
 

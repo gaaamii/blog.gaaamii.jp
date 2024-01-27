@@ -57,7 +57,10 @@
   .root pre {
     font-size: 12px;
     width: 100vw;
-    margin-left: -16px;
+    margin-left: -24px;
+  }
+  .root pre > div {
+    border-radius: 0 !important;
   }
   .root img {
     max-width: 100vw;
