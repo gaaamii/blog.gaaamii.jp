@@ -1,7 +1,7 @@
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import styles from "./styles.module.css";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
-import { ReactMarkdown } from "react-markdown/lib/react-markdown";
+import Markdown from "react-markdown";
 
 type Props = {
   mdxSource: MDXRemoteSerializeResult;
@@ -30,7 +30,7 @@ export const MarkdownCompiledOnClient = ({
   children: string;
 }) => {
   return (
-    <ReactMarkdown
+    <Markdown
       children={children}
       components={{
         code: codeComponent,
