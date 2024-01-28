@@ -5,17 +5,18 @@ import { get } from "../utils/api";
 import MainLayout from "../components/layouts/MainLayout";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/router";
 
 type Props = {
   posts?: Post[];
 };
 
 export default function Home(props: Props) {
-  const { query, onChangeQuery } = useHome();
+  const { query, onChangeQuery, onEnterQuery } = useHome();
 
   return (
     <MainLayout>
-      <Search onChange={onChangeQuery} />
+      <Search onChange={onChangeQuery} onEnter={onEnterQuery} />
       <Posts posts={props.posts} query={query} />
     </MainLayout>
   );
@@ -33,19 +34,31 @@ const useHome = () => {
     setQuery(text);
   };
 
+  const router = useRouter();
+  const onEnterQuery = async (e) => {
+    e.preventDefault();
+    await router.push({ query: { query } });
+    e.target.childNodes[0].blur();
+  };
+
   return {
     query,
     onChangeQuery,
+    onEnterQuery,
   };
 };
 
-const Search = ({ onChange }: { onChange: (text: string) => void }) => {
+const Search = ({
+  onChange,
+  onEnter,
+}: {
+  onChange: (text: string) => void;
+  onEnter: () => void;
+}) => {
   return (
     <form
       role="search"
-      onSubmit={(e) => {
-        e.preventDefault();
-      }}
+      onSubmit={onEnter}
       className="flex justify-end w-full mt-4 px-2 sm:mt-0 sm:px-0"
     >
       <input
