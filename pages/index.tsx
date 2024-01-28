@@ -35,9 +35,9 @@ const useHome = () => {
   };
 
   const router = useRouter();
-  const onEnterQuery = async (e) => {
+  const onEnterQuery = (e) => {
     e.preventDefault();
-    await router.push({ query: { query } });
+    router.push({ query: { query } });
     e.target.childNodes[0].blur();
   };
 
@@ -53,7 +53,7 @@ const Search = ({
   onEnter,
 }: {
   onChange: (text: string) => void;
-  onEnter: () => void;
+  onEnter: (e: any) => void;
 }) => {
   return (
     <form
