@@ -70,6 +70,7 @@ const Search = ({
           e.preventDefault();
           onChange(e.target.value);
         }}
+        enterKeyHint="search"
       />
     </form>
   );
