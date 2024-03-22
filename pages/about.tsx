@@ -3,7 +3,7 @@ import MainLayout from "../components/layouts/MainLayout";
 export default function About() {
   return (
     <MainLayout>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-8 my-16">
         <SectionCard heading="このブログについて">
           <p className="mt-4">
             東京都在住のソフトウェアエンジニアが書いているブログです。個人的な日記やソフトウェア開発周りの雑記を、気が向いたときに書いています。
@@ -16,16 +16,12 @@ export default function About() {
           </p>
         </SectionCard>
 
-        <SectionCard heading="ご感想・ご指摘等">
+        <SectionCard heading="フィード配信">
           <p className="mt-2">
-            スパムが来ると困るのでコメントフォームは設置していません。
-            <br />
-            ご感想やご指摘をお寄せいだたく際は、お手数ですが記事のリンクと一緒にTwitterでメンションをください。
+            RSSを配信しています。フィードリーダーに登録する際は以下のリンクをお使いください。
           </p>
           <p className="mt-2 text-right">
-            <ExternalLink href="https://twitter.com/gaaamii">
-              @gaaamii
-            </ExternalLink>
+            <ExternalLink href="https://blog.gaaamii.jp/feed">RSS</ExternalLink>
           </p>
         </SectionCard>
 
