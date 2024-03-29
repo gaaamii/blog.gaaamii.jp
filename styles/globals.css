@@ -40,7 +40,9 @@ li {
 }
 
 @media (prefers-color-scheme: dark) {
-  body {
+  body,
+  input,
+  textarea {
     @apply bg-stone-800;
     @apply text-stone-300;
   }
