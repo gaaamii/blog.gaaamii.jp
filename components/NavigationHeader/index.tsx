@@ -5,7 +5,7 @@ import classNames from "classnames";
 
 export const NavigationHeader = () => (
   <header>
-    <nav className="w-full border-b-2">
+    <nav className="w-full border-b-2 dark:border-b-stone-500">
       <ul className={styles.navigationList}>
         <NavigationListItem isPrimary prefetch={false} href="/">
           <Avatar />

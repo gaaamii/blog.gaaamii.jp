@@ -67,7 +67,11 @@ const h2Component = ({ children }) => (
   <h2 className={"font-bold text-xl mt-10"}>{children}</h2>
 );
 const h3Component = ({ children }) => (
-  <h3 className={"font-bold text-lg mt-8 pl-6 border-l-4 border-black"}>
+  <h3
+    className={
+      "font-bold text-lg mt-8 pl-6 border-l-4 border-black dark:border-white"
+    }
+  >
     {children}
   </h3>
 );

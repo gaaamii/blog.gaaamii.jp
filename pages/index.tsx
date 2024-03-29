@@ -65,7 +65,7 @@ const Search = ({
         type="search"
         placeholder="記事を検索"
         aria-label="記事を検索"
-        className="bg-white px-4 py-2 rounded w-full border-2 focus:border-transparent"
+        className="bg-white dark:focus:bg-stone-700 dark:bg-stone-800 dark:text-white dark:placeholder:text-slate-300 px-4 py-2 rounded w-full border-2 dark:border-slate-500 focus:border-transparent"
         onChange={(e: ChangeEvent<HTMLInputElement>) => {
           e.preventDefault();
           onChange(e.target.value);
