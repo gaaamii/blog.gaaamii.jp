@@ -1,6 +1,5 @@
 .root {
   font-size: 18px;
-  background: #fff;
   border-radius: 8px;
 }
 .root li:first-child {
@@ -11,6 +10,12 @@
   background: #f3f3f3;
   border-radius: 4px;
   padding: 24px;
+}
+@media (prefers-color-scheme: dark) {
+  .root blockquote {
+    @apply bg-stone-800;
+    @apply text-stone-300;
+  }
 }
 .root blockquote > p {
   margin-top: 0;
@@ -27,6 +32,13 @@
   background: linear-gradient(135deg, #eee 25%, #ddd 50%, #eee 75%);
   background-size: 200% 100%;
   animation: loading 1.5s infinite ease-in-out;
+}
+
+@media (prefers-color-scheme: dark) {
+  .root img {
+    box-shadow: none;
+    border: 0;
+  }
 }
 
 @keyframes loading {

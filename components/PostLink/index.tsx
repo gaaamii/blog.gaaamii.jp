@@ -21,7 +21,7 @@ const PostLink = (props: Props) => {
       <h2 className={styles.title}>
         <Link
           href={pageHref}
-          className="block w-full m-0 pt-8 pb-4 px-4 sm:rounded-lg sm:py-2 sm:px-3 hover:bg-slate-200 hover:text-black focus:bg-slate-200 focus:text-black active:bg-slate-200 active:text-black"
+          className="block w-full m-0 pt-8 pb-4 px-4 sm:rounded-lg sm:py-2 sm:px-3 hover:bg-slate-200 hover:text-black focus:bg-slate-200 focus:text-black active:bg-slate-200 active:text-black dark:active:bg-stone-700 dark:hover:bg-stone-700 dark:hover:text-white"
         >
           {props.title}
         </Link>

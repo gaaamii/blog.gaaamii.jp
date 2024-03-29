@@ -38,3 +38,10 @@ li {
 * {
   box-sizing: border-box;
 }
+
+@media (prefers-color-scheme: dark) {
+  body {
+    @apply bg-stone-800;
+    @apply text-stone-300;
+  }
+}
