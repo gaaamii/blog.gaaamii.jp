@@ -129,8 +129,10 @@ const useForm = (props: Props) => {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setPublishedAt(new Date())
-    }, 30000)
+      if (props.value?.status === "draft") {
+        setPublishedAt(new Date());
+      }
+    }, 30000);
 
     return () => { clearInterval(intervalId) }
   }, [])
