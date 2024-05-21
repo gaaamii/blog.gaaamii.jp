@@ -1,30 +1,34 @@
-import { useState, useCallback, useEffect } from 'react';
-import { Block } from '../Block';
-import { Button } from '../Button/index';
-import { getISODateString, getFullTimeString, getTimeString } from '../../utils/datetime';
-import { PostStatus } from '../../models/post';
-import { PostStatusSelect } from './PostStatusSelect';
-import { Input } from './Input';
-import { Textarea } from './Textarea';
-import { ImageForm } from './ImageForm';
+import { useState, useCallback, useEffect } from "react";
+import { Block } from "../Block";
+import { Button } from "../Button/index";
+import {
+  getISODateString,
+  getFullTimeString,
+  getTimeString,
+} from "../../utils/datetime";
+import { PostStatus } from "../../models/post";
+import { PostStatusSelect } from "./PostStatusSelect";
+import { Input } from "./Input";
+import { Textarea } from "./Textarea";
+import { ImageForm } from "./ImageForm";
 
 export type Value = {
   title: string;
   body: string;
   publishedAt: Date | null;
   status: PostStatus;
-}
+};
 
 type ReturnBySubmit = {
   isSuccess: boolean;
-}
+};
 type Props = {
   onSubmit: (value: Value) => Promise<ReturnBySubmit>;
   value?: Value;
-}
+};
 
 export const Form = (props: Props) => {
-  const form = useForm(props)
+  const form = useForm(props);
 
   return (
     <form onSubmit={form.onSubmit}>
@@ -32,7 +36,9 @@ export const Form = (props: Props) => {
         <PostStatusSelect status={form.values.status} />
       </div>
       <Block>
-        <label htmlFor="publishedAt" className="block">公開日時</label>
+        <label htmlFor="publishedAt" className="block">
+          公開日時
+        </label>
         <Input
           id="publishedAtDate"
           value={getISODateString(form.values.publishedAt)}
@@ -52,80 +58,131 @@ export const Form = (props: Props) => {
       </Block>
 
       <Block>
-        <label htmlFor="title" className="block">タイトル</label>
-        <Input id="title" onChange={form.handleTitleChange} className="p-2 w-full border rounded-sm mt-1" value={form.values.title} />
+        <label htmlFor="title" className="block">
+          タイトル
+        </label>
+        <Input
+          id="title"
+          onChange={form.handleTitleChange}
+          className="p-2 w-full border rounded-sm mt-1"
+          value={form.values.title}
+        />
       </Block>
 
       <Block>
-        <label htmlFor="body" className="block">本文</label>
-        <Textarea id="body" onChange={form.handleBodyChange} className="p-2 w-full border rounded-sm mt-1" rows={10} value={form.values.body} />
+        <label htmlFor="body" className="block">
+          本文
+        </label>
+        <Textarea
+          id="body"
+          onChange={form.handleBodyChange}
+          className="p-2 w-full border rounded-sm mt-1"
+          rows={10}
+          value={form.values.body}
+        />
       </Block>
 
       <ImageForm />
 
       <div className="flex justify-end gap-2 w-full mt-6">
-        <Button type="button" theme="secondary" disabled={form.isSubmitting} onClick={form.handleDraftSave}>
+        <Button
+          type="button"
+          theme="secondary"
+          disabled={form.isSubmitting}
+          onClick={form.handleDraftSave}
+        >
           下書き保存
         </Button>
         <Button type="submit" disabled={form.isSubmitting} theme="primary">
           公開する
         </Button>
       </div>
-    </form >
-  )
-}
+    </form>
+  );
+};
 
 const useForm = (props: Props) => {
-  const [title, setTitle] = useState<string>(props.value?.title || "")
-  const [body, setBody] = useState<string>(props.value?.body || "")
-  const [publishedAt, setPublishedAt] = useState<Date>(props.value?.publishedAt || new Date())
-  const [isSubmitting, setSubmitting] = useState<boolean>(false)
+  const [title, setTitle] = useState<string>(props.value?.title || "");
+  const [body, setBody] = useState<string>(props.value?.body || "");
+  const [publishedAt, setPublishedAt] = useState<Date>(
+    props.value?.publishedAt || new Date(),
+  );
+  const [isSubmitting, setSubmitting] = useState<boolean>(false);
 
-  const handlePublishedAtDateChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const newDateString = e.target.value
-    const newDate = new Date(`${newDateString} ${getFullTimeString(publishedAt)}`)
-    setPublishedAt(newDate)
-  }, [publishedAt])
+  const handlePublishedAtDateChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const newDateString = e.target.value;
+      const newDate = new Date(
+        `${newDateString} ${getFullTimeString(publishedAt)}`,
+      );
+      setPublishedAt(newDate);
+    },
+    [publishedAt],
+  );
 
-  const handlePublishedAtTimeChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const newTimeString = e.target.value
-    const newDate = new Date(`${getISODateString(publishedAt)} ${newTimeString}:00`)
-    setPublishedAt(newDate)
-  }, [publishedAt])
+  const handlePublishedAtTimeChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const newTimeString = e.target.value;
+      const newDate = new Date(
+        `${getISODateString(publishedAt)} ${newTimeString}:00`,
+      );
+      setPublishedAt(newDate);
+    },
+    [publishedAt],
+  );
 
-  const handleTitleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.target.value)
-  }, [])
+  const handleTitleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setTitle(e.target.value);
+    },
+    [],
+  );
 
-  const handleBodyChange = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setBody(e.target.value)
-  }, [])
+  const handleBodyChange = useCallback(
+    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      setBody(e.target.value);
+    },
+    [],
+  );
 
   const handleDraftSave = async (e: any) => {
     e.preventDefault();
-    setSubmitting(false)
-    const result = await props.onSubmit({ publishedAt, title, body, status: "draft" })
-    alert('記事を保存しました')
-  }
+    setSubmitting(false);
+    const result = await props.onSubmit({
+      publishedAt,
+      title,
+      body,
+      status: "draft",
+    });
+    alert("記事を保存しました");
+  };
 
   const resetForm = useCallback(() => {
-    setTitle("")
-    setBody("")
-    setPublishedAt(new Date())
-  }, [])
+    setTitle("");
+    setBody("");
+    setPublishedAt(new Date());
+  }, []);
 
-  const onSubmit = useCallback(async (e: any) => {
-    e.preventDefault()
-    setSubmitting(true)
-    const result = await props.onSubmit({ publishedAt, title, body, status: "published" })
-    if (result.isSuccess) {
-      alert('記事を作成しました')
-    } else {
-      alert('記事を作成できませんでした')
-    }
-    setSubmitting(false)
-    resetForm()
-  }, [props.onSubmit, title, body, publishedAt])
+  const onSubmit = useCallback(
+    async (e: any) => {
+      e.preventDefault();
+      setSubmitting(true);
+      const result = await props.onSubmit({
+        publishedAt,
+        title,
+        body,
+        status: "published",
+      });
+      if (result.isSuccess) {
+        alert("記事を作成しました");
+      } else {
+        alert("記事を作成できませんでした");
+      }
+      setSubmitting(false);
+      resetForm();
+    },
+    [props.onSubmit, title, body, publishedAt],
+  );
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -134,8 +191,10 @@ const useForm = (props: Props) => {
       }
     }, 30000);
 
-    return () => { clearInterval(intervalId) }
-  }, [])
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
 
   return {
     onSubmit,
@@ -149,7 +208,7 @@ const useForm = (props: Props) => {
       title,
       body,
       publishedAt,
-      status: props.value?.status || "draft"
+      status: props.value?.status || "draft",
     },
-  }
-}
+  };
+};
