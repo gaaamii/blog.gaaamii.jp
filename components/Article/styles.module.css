@@ -13,7 +13,7 @@
 }
 @media (prefers-color-scheme: dark) {
   .root blockquote {
-    @apply bg-stone-800;
+    @apply bg-stone-700;
     @apply text-stone-300;
   }
 }
