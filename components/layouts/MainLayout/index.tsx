@@ -24,7 +24,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => (
         <InformationCircleIcon />
         <span>このブログについて</span>
       </FooterLink>
-      <FooterLink href="feed">
+      <FooterLink href="/feed">
         <RSSIcon />
         <span>RSS</span>
       </FooterLink>
