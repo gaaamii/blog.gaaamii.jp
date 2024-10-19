@@ -3,7 +3,7 @@ import PostLink from "../components/PostLink/index";
 import { Post } from "../models/post";
 import { get } from "../utils/api";
 import MainLayout from "../components/layouts/MainLayout";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/router";
 
@@ -48,6 +48,13 @@ const useHome = () => {
   };
 };
 
+const getSearchPlaceholder = () => {
+  const samples = ["Elm", "Next.js", "AtCoder", "Rails"];
+  const randomIndex = Math.floor(Math.random() * samples.length);
+
+  return samples[randomIndex];
+};
+
 const Search = ({
   onChange,
   onEnter,
@@ -55,17 +62,21 @@ const Search = ({
   onChange: (text: string) => void;
   onEnter: (e: any) => void;
 }) => {
+  const placeholder = useMemo(getSearchPlaceholder, []);
+
   return (
     <form
       role="search"
       onSubmit={onEnter}
-      className="flex justify-end w-full mt-4 px-2 sm:mt-0 sm:px-0"
+      className="w-full mt-4 px-2 sm:mt-0 sm:px-0"
     >
+      <label htmlFor="search-input">記事を検索する</label>
       <input
+        id="search-input"
         type="search"
-        placeholder="記事を検索"
+        placeholder={placeholder}
         aria-label="記事を検索"
-        className="bg-white dark:focus:bg-stone-700 dark:bg-stone-800 dark:text-white dark:placeholder:text-slate-300 px-4 py-2 rounded w-full border-2 dark:border-slate-500 focus:border-transparent"
+        className="mt-2 bg-white dark:focus:bg-stone-700 dark:bg-stone-800 dark:text-white dark:placeholder:text-stone-400 px-4 py-2 rounded w-full border-2 dark:border-stone-400 focus:border-transparent"
         onChange={(e: ChangeEvent<HTMLInputElement>) => {
           e.preventDefault();
           onChange(e.target.value);
