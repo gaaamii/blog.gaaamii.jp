@@ -49,10 +49,10 @@ const useHome = () => {
 };
 
 const getSearchPlaceholder = () => {
-  const samples = ["Elm", "Next.js", "AtCoder", "Rails"];
+  const samples = ["Elm", "Next.js", "AtCoder", "Rails", "CSS"];
   const currentMinute = new Date().getMinutes();
 
-  return samples[currentMinute % 4];
+  return samples[currentMinute % samples.length];
 };
 
 type SearchProps = {
