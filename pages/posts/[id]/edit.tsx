@@ -81,7 +81,7 @@ const PreviewLink = ({ postId }: { postId: number }) => {
     <div className="fixed bottom-4 flex justify-center w-full left-0">
       <Link
         href={`/admin/posts/${postId}`}
-        className="rounded-lg bg-slate-100 w-80 py-2 text-center shadow-md hover:bg-slate-200"
+        className="rounded-lg bg-neutral-100 w-80 py-2 text-center shadow-md hover:bg-neutral-200"
         target="_blank"
       >
         プレビューURL

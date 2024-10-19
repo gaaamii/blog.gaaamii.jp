@@ -12,7 +12,7 @@ export default function Admin() {
     <MainLayout>
       <>
         <section>
-          <h1 className="font-bold bg-slate-700 text-center rounded-sm p-2 text-white">
+          <h1 className="font-bold bg-neutral-700 text-center rounded-sm p-2 text-white">
             管理者ページ
           </h1>
         </section>
@@ -83,7 +83,7 @@ const PostList = ({ postStatus }: { postStatus: PostStatus | null }) => {
   const { isLoading, posts } = useFetchPostsAsAdmin(postStatus);
 
   if (isLoading) {
-    return <p className="text-center bg-slate-200 py-2">読込中...</p>;
+    return <p className="text-center bg-neutral-200 py-2">読込中...</p>;
   }
 
   return (

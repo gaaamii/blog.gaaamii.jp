@@ -43,7 +43,7 @@ li {
   body,
   input,
   textarea {
-    @apply bg-stone-800;
+    @apply bg-neutral-800;
     @apply text-stone-300;
   }
 }

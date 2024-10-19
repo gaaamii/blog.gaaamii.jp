@@ -58,7 +58,7 @@ const ArticleFooter = ({ post }: { post: Post }) => {
 const BackToIndexLink = ({ postId }: { postId: number }) => (
   <Link
     href={`/#post-${postId}`}
-    className="border-2 dark:border-stone-400 px-8 py-2 rounded inline-flex gap-2 items-center hover:bg-slate-200 hover:text-black focus:bg-slate-200 focus:text-black active:bg-slate-200 active:text-black dark:hover:bg-stone-900 dark:hover:text-stone-400 dark:hover:border-stone-500"
+    className="border-2 dark:border-stone-400 px-8 py-2 rounded inline-flex gap-2 items-center hover:bg-neutral-200 hover:text-black focus:bg-neutral-200 focus:text-black active:bg-neutral-200 active:text-black dark:hover:bg-neutral-800 dark:hover:text-stone-400 dark:hover:border-stone-500"
   >
     <BackIcon />
     <span>記事一覧に戻る</span>

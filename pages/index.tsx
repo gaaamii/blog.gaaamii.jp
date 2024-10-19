@@ -16,7 +16,7 @@ export default function Home(props: Props) {
 
   return (
     <MainLayout>
-      <Search onChange={onChangeQuery} onEnter={onEnterQuery} />
+      <Search query={query} onChange={onChangeQuery} onEnter={onEnterQuery} />
       <Posts posts={props.posts} query={query} />
     </MainLayout>
   );
@@ -24,7 +24,7 @@ export default function Home(props: Props) {
 
 const useHome = () => {
   const searchParamsQuery = useSearchParams().get("query");
-  const [query, setQuery] = useState<string | undefined>(undefined);
+  const [query, setQuery] = useState<string>(searchParamsQuery);
 
   useEffect(() => {
     setQuery(searchParamsQuery);
@@ -50,18 +50,17 @@ const useHome = () => {
 
 const getSearchPlaceholder = () => {
   const samples = ["Elm", "Next.js", "AtCoder", "Rails"];
-  const randomIndex = Math.floor(Math.random() * samples.length);
+  const currentMinute = new Date().getMinutes();
 
-  return samples[randomIndex];
+  return samples[currentMinute % 4];
 };
 
-const Search = ({
-  onChange,
-  onEnter,
-}: {
+type SearchProps = {
   onChange: (text: string) => void;
   onEnter: (e: any) => void;
-}) => {
+  query: string;
+};
+const Search = ({ onChange, onEnter, query }: SearchProps) => {
   const placeholder = useMemo(getSearchPlaceholder, []);
 
   return (
@@ -70,18 +69,21 @@ const Search = ({
       onSubmit={onEnter}
       className="w-full mt-4 px-2 sm:mt-0 sm:px-0"
     >
-      <label htmlFor="search-input">記事を検索する</label>
+      <label htmlFor="search-input" className="text-sm">
+        記事を検索する
+      </label>
       <input
         id="search-input"
         type="search"
         placeholder={placeholder}
         aria-label="記事を検索"
-        className="mt-2 bg-white dark:focus:bg-stone-700 dark:bg-stone-800 dark:text-white dark:placeholder:text-stone-400 px-4 py-2 rounded w-full border-2 dark:border-stone-400 focus:border-transparent"
+        className="mt-2 bg-white dark:focus:bg-neutral-800 dark:bg-neutral-800 dark:text-white dark:placeholder:text-stone-400 px-4 py-2 rounded w-full border-2 dark:border-stone-400 focus:border-transparent"
         onChange={(e: ChangeEvent<HTMLInputElement>) => {
           e.preventDefault();
           onChange(e.target.value);
         }}
         enterKeyHint="search"
+        defaultValue={query}
       />
     </form>
   );
