@@ -1,12 +1,13 @@
 import Head from "next/head";
+import { NavigationHeader } from "../../NavigationHeader";
 import Main from "../../Main";
 import Footer, { FooterLink } from "../../Footer";
 import { RSSIcon } from "../../icons/RSS";
 import { InformationCircleIcon } from "../../icons/InformationCircle";
 import { ArrowUpIcon } from "../../icons/ArrowUp";
-import { NavigationHeader } from "../../NavigationHeader";
+import { EditorNavigationHeader } from "./EditorNavigationHeader";
 
-const MainLayout = ({ children }: { children: React.ReactNode }) => (
+export const EditorLayout = ({ children }: { children: React.ReactNode }) => (
   <>
     <Head>
       <title>gaaamiiのブログ</title>
@@ -16,7 +17,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => (
       />
     </Head>
 
-    <NavigationHeader />
+    <EditorNavigationHeader />
     <Main>{children}</Main>
     <Footer>
       <FooterLink href="/about">
@@ -34,5 +35,3 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => (
     </Footer>
   </>
 );
-
-export default MainLayout;

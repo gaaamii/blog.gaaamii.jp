@@ -4,6 +4,7 @@ import { get, post } from "../../utils/api";
 import { Form, Value } from "../../components/Form/index";
 import { useBlockNavigation } from "../../hooks/useBlockNavigation";
 import MainLayout from "../../components/layouts/MainLayout";
+import { EditorLayout } from "../../components/layouts/EditorLayout/index";
 
 export default function NewPage() {
   const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
@@ -40,12 +41,12 @@ export default function NewPage() {
   useBlockNavigation();
 
   return (
-    <MainLayout>
+    <EditorLayout>
       <Head>
         <title>記事を作成する - gaaamiiのブログ</title>
       </Head>
 
       <>{isAuthorized ? <Form onSubmit={handleSubmit} /> : null}</>
-    </MainLayout>
+    </EditorLayout>
   );
 }

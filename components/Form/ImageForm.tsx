@@ -11,21 +11,26 @@ export const ImageForm = () => {
   return (
     <div className="p-2 rounded-sm border">
       <details>
-        <summary className="cursor-pointer">画像アップロード</summary>
+        <summary className="cursor-pointer text-gray-800 dark:text-gray-400 text-sm">
+          画像アップロード
+        </summary>
         <div className="pt-2 pb-4">
-          <div className="mt-2">
+          <div className="mt-4">
             <input
               type="file"
               className="border w-full"
               onChange={onSelectFile}
             />
           </div>
-          <div className="flex justify-end mt-2">
-            <div>
-              <Button type="button" onClick={onUpload} disabled={isUploading}>
-                画像をアップロードする
-              </Button>
-            </div>
+          <div className="flex justify-end mt-4">
+            <Button
+              type="button"
+              onClick={onUpload}
+              disabled={isUploading}
+              size="sm"
+            >
+              画像をアップロードする
+            </Button>
           </div>
           <div className="mt-2">
             {url && (

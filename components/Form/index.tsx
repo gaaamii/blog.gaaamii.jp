@@ -6,8 +6,8 @@ import {
   getFullTimeString,
   getTimeString,
 } from "../../utils/datetime";
-import { PostStatus } from "../../models/post";
-import { PostStatusSelect } from "./PostStatusSelect";
+import type { PostStatus as PostStatusType } from "../../models/post";
+import { PostStatus } from "./PostStatus";
 import { Input } from "./Input";
 import { Textarea } from "./Textarea";
 import { ImageForm } from "./ImageForm";
@@ -16,7 +16,7 @@ export type Value = {
   title: string;
   body: string;
   publishedAt: Date | null;
-  status: PostStatus;
+  status: PostStatusType;
 };
 
 type ReturnBySubmit = {
@@ -32,33 +32,30 @@ export const Form = (props: Props) => {
 
   return (
     <form onSubmit={form.onSubmit}>
-      <div className="absolute left-8 top-20">
-        <PostStatusSelect status={form.values.status} />
+      <div className="flex gap-2 justify-end">
+        <Button
+          theme="secondary"
+          size="sm"
+          type="button"
+          disabled={form.isSubmitting}
+          onClick={form.handleDraftSave}
+        >
+          下書き保存
+        </Button>
+        <Button
+          theme="primary"
+          size="sm"
+          type="submit"
+          disabled={form.isSubmitting}
+        >
+          公開する
+        </Button>
       </div>
       <Block>
-        <label htmlFor="publishedAt" className="block">
-          公開日時
-        </label>
-        <Input
-          id="publishedAtDate"
-          value={getISODateString(form.values.publishedAt)}
-          className="border p-1 rounded-md mt-1"
-          onChange={form.handlePublishedAtDateChange}
-          type="date"
-          aria-label="公開日"
-        />
-        <Input
-          id="publishedAtTime"
-          value={getTimeString(form.values.publishedAt)}
-          className="ml-2 border p-1 rounded-md"
-          onChange={form.handlePublishedAtTimeChange}
-          type="time"
-          aria-label="公開時刻"
-        />
-      </Block>
-
-      <Block>
-        <label htmlFor="title" className="block">
+        <label
+          htmlFor="title"
+          className="block text-gray-800 dark:text-gray-400"
+        >
           タイトル
         </label>
         <Input
@@ -70,32 +67,47 @@ export const Form = (props: Props) => {
       </Block>
 
       <Block>
-        <label htmlFor="body" className="block">
+        <label
+          htmlFor="body"
+          className="block text-gray-800 dark:text-gray-400"
+        >
           本文
         </label>
         <Textarea
           id="body"
           onChange={form.handleBodyChange}
           className="p-2 w-full border rounded-sm mt-1"
-          rows={10}
+          rows={14}
           value={form.values.body}
         />
       </Block>
 
       <ImageForm />
 
-      <div className="flex justify-end gap-2 w-full mt-6">
-        <Button
-          type="button"
-          theme="secondary"
-          disabled={form.isSubmitting}
-          onClick={form.handleDraftSave}
-        >
-          下書き保存
-        </Button>
-        <Button type="submit" disabled={form.isSubmitting} theme="primary">
-          公開する
-        </Button>
+      <div className="mt-8 flex gap-4 items-center justify-end text-gray-700 dark:text-gray-300">
+        <div>公開状態:</div>
+        <PostStatus status={form.values.status} />
+        <label htmlFor="publishedAt">
+          公開{form.values.status === "draft" ? "予定" : ""}日時:
+        </label>
+        <div>
+          <Input
+            id="publishedAtDate"
+            value={getISODateString(form.values.publishedAt)}
+            className="border p-1 rounded-md mt-1"
+            onChange={form.handlePublishedAtDateChange}
+            type="date"
+            aria-label="公開日"
+          />
+          <Input
+            id="publishedAtTime"
+            value={getTimeString(form.values.publishedAt)}
+            className="ml-2 border p-1 rounded-md"
+            onChange={form.handlePublishedAtTimeChange}
+            type="time"
+            aria-label="公開時刻"
+          />
+        </div>
       </div>
     </form>
   );

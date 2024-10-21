@@ -3,23 +3,21 @@ import { ButtonHTMLAttributes } from "react";
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: React.ReactNode;
   theme?: "primary" | "secondary";
+  size?: "sm" | "md" | "lg";
 };
 
-export const Button = (props: Props) => (
-  <button {...props} className={getClassNames(props.theme || "primary")}>
-    {props.children}
+export const Button = ({
+  theme = "primary",
+  size = "lg",
+  children,
+  ...attributes
+}: Props) => (
+  <button {...attributes} className={getClassNames({ theme, size })}>
+    {children}
   </button>
 );
 
-const getClassNames = (theme: Props["theme"]) => {
-  const baseClassNames = [
-    "px-12",
-    "py-3",
-    "rounded-md",
-    "cursor-pointer",
-    "transition-colors",
-  ];
-
+const getThemeClassNames = (theme: Props["theme"]) => {
   const primaryClassNames = [
     "bg-sky-600",
     "text-white",
@@ -39,5 +37,26 @@ const getClassNames = (theme: Props["theme"]) => {
   const themeClassNames =
     theme === "primary" ? primaryClassNames : secondaryClassNames;
 
-  return [...baseClassNames, ...themeClassNames].join(" ");
+  return themeClassNames;
+};
+
+const getSizeClassNames = (size: Props["size"]) => {
+  switch (size) {
+    case "lg":
+      return ["px-12", "py-3", "rounded-md"];
+    case "md": // TODO
+    case "sm":
+      return ["px-4", "py-1", "rounded-md"];
+    default:
+      return ["px-12", "py-3", "rounded-md"];
+  }
+};
+
+const getClassNames = ({ theme, size }: Pick<Props, "theme" | "size">) => {
+  const baseClassNames = ["cursor-pointer", "transition-colors"];
+
+  const themeClassNames = getThemeClassNames(theme);
+  const sizeClassNames = getSizeClassNames(size);
+
+  return [...baseClassNames, ...themeClassNames, ...sizeClassNames].join(" ");
 };

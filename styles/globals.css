@@ -44,6 +44,7 @@ li {
   input,
   textarea {
     @apply bg-neutral-800;
-    @apply text-stone-300;
+    @apply text-neutral-300;
+    @apply border-neutral-400;
   }
 }
