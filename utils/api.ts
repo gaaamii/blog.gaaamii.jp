@@ -1,7 +1,7 @@
 import { isDevelopment } from "./environment";
 
-export const PROD_API_BASE_URL = "https://api.gaaamii.jp";
-export const DEV_API_BASE_URL = "http://localhost:3000/api/mock";
+const PROD_API_BASE_URL = "https://api.gaaamii.jp";
+const DEV_API_BASE_URL = "http://localhost:3000/api/mock";
 
 function getAPIBaseURL() {
   return isDevelopment() ? DEV_API_BASE_URL : PROD_API_BASE_URL;
