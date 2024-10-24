@@ -24,6 +24,7 @@ const getThemeClassNames = (theme: Props["theme"]) => {
     "hover:bg-sky-800",
     "disabled:bg-sky-900",
     "disabled:text-white",
+    "font-bold",
   ];
 
   const secondaryClassNames = [
