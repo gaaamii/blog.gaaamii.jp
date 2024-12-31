@@ -17,7 +17,7 @@
     "luxon": "^3.5.0",
     "next": "15.0.3",
     "next-mdx-remote": "^5.0.0",
-    "postcss": "^8.4.47",
+    "postcss": "^8.4.49",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-markdown": "^9.0.1",
