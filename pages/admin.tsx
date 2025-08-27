@@ -3,22 +3,15 @@ import { PostStatus } from "../models/post";
 import { useAuthorization } from "../hooks/useAuthorization";
 import { useFetchPostsAsAdmin } from "../hooks/useFetchPostsAsAdmin";
 import PostLink from "../components/PostLink/index";
-import MainLayout from "../components/layouts/MainLayout";
+import { AdminLayout } from "../components/layouts/AdminLayout";
 
 export default function Admin() {
   const { isAuthorized } = useAuthorization();
 
   return isAuthorized ? (
-    <MainLayout>
-      <>
-        <section>
-          <h1 className="font-bold bg-neutral-700 text-center rounded-sm p-2 text-white">
-            管理者ページ
-          </h1>
-        </section>
-        <PostSection />
-      </>
-    </MainLayout>
+    <AdminLayout>
+      <PostSection />
+    </AdminLayout>
   ) : null;
 }
 
@@ -26,13 +19,12 @@ const PostSection = () => {
   const { postStatus, onChangeStatus } = usePostSelect();
 
   return (
-    <section className="mt-8">
-      <h2 className="font-bold">記事一覧</h2>
+    <section className="mt-8 border p-8 rounded-md">
+      <h2 className="text-lg font-bold">記事一覧</h2>
       <div className="flex gap-4 mt-4 items-center">
-        <div>公開状態</div>
-        <PostSelect value={postStatus} onChange={onChangeStatus} />
+        <PostFilter value={postStatus} onChange={onChangeStatus} />
       </div>
-      <div className="mt-4">
+      <div className="mt-8">
         <PostList postStatus={postStatus} />
       </div>
     </section>
@@ -54,6 +46,21 @@ const usePostSelect = () => {
     onChangeStatus,
   };
 };
+
+const PostFilter = ({
+  onChange,
+  value,
+}: {
+  onChange: any;
+  value: PostStatus | null;
+}) => {
+  return (
+    <>
+      <label htmlFor="post-select">公開状態</label>
+      <PostSelect onChange={onChange} value={value} />
+    </>
+  );
+};
 const PostSelect = ({
   onChange,
   value,
@@ -63,6 +70,7 @@ const PostSelect = ({
 }) => {
   return (
     <select
+      id="post-select"
       className="border border-slate-500 h-8 w-40 rounded"
       onChange={onChange}
     >

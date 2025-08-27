@@ -7,8 +7,7 @@ import { useBlockNavigation } from "../../../hooks/useBlockNavigation";
 import { useAuthorization } from "../../../hooks/useAuthorization";
 import { useRouter } from "next/router";
 import { useFetchPostAsAdmin } from "../../../hooks/useFetchPostAsAdmin";
-import Link from "next/link";
-import MainLayout from "../../../components/layouts/MainLayout";
+import { EditorLayout } from "../../../components/layouts/EditorLayout";
 
 export default function EditPage() {
   const { isAuthorized } = useAuthorization();
@@ -19,7 +18,7 @@ export default function EditPage() {
   useBlockNavigation();
 
   return (
-    <MainLayout>
+    <EditorLayout>
       <Head>
         <title>記事を編集する - gaaamiiのブログ</title>
       </Head>
@@ -27,11 +26,10 @@ export default function EditPage() {
       <>
         {isLoading && <div>読込中...</div>}
         {isAuthorized && !isLoading ? (
-          <Form onSubmit={onSubmit} value={initialValues} />
+          <Form onSubmit={onSubmit} value={initialValues} postId={post.id} />
         ) : null}
-        {post && <PreviewLink postId={post.id} />}
       </>
-    </MainLayout>
+    </EditorLayout>
   );
 }
 
@@ -75,17 +73,3 @@ const toParams = (value: Value) => ({
     status: value.status,
   },
 });
-
-const PreviewLink = ({ postId }: { postId: number }) => {
-  return (
-    <div className="fixed bottom-4 flex justify-center w-full left-0">
-      <Link
-        href={`/admin/posts/${postId}`}
-        className="rounded-lg bg-neutral-100 w-80 py-2 text-center shadow-md hover:bg-neutral-200"
-        target="_blank"
-      >
-        プレビューURL
-      </Link>
-    </div>
-  );
-};

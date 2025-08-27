@@ -1,20 +1,20 @@
-import { ButtonHTMLAttributes } from "react";
+import { AnchorHTMLAttributes } from "react";
 
-type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
+type Props = AnchorHTMLAttributes<HTMLAnchorElement> & {
   children: React.ReactNode;
   theme?: "primary" | "secondary";
   size?: "sm" | "md" | "lg";
 };
 
-export const Button = ({
+export const LinkButton = ({
   theme = "primary",
   size = "lg",
   children,
   ...attributes
 }: Props) => (
-  <button {...attributes} className={getClassNames({ theme, size })}>
+  <a {...attributes} className={getClassNames({ theme, size })}>
     {children}
-  </button>
+  </a>
 );
 
 const getThemeClassNames = (theme: Props["theme"]) => {
@@ -56,7 +56,11 @@ const getSizeClassNames = (size: Props["size"]) => {
 };
 
 const getClassNames = ({ theme, size }: Pick<Props, "theme" | "size">) => {
-  const baseClassNames = ["cursor-pointer", "transition-colors"];
+  const baseClassNames = [
+    "cursor-pointer",
+    "transition-colors",
+    "inline-block",
+  ];
 
   const themeClassNames = getThemeClassNames(theme);
   const sizeClassNames = getSizeClassNames(size);

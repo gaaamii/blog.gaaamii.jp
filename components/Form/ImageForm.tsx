@@ -4,17 +4,20 @@ import {
   CloudinaryResponseJson,
   postImageToCloudinary,
 } from "../../utils/cloudinary";
+import { PhotoIcon } from "../icons/Photo";
+import { ArrowUpTrayIcon } from "../icons/ArrowUpTray";
 
 export const ImageForm = () => {
-  const { isUploading, url, onUpload, onSelectFile } = useFileUploader();
+  const { isUploading, url, file, onUpload, onSelectFile } = useFileUploader();
 
   return (
-    <div className="p-2 rounded-sm border">
+    <div className="rounded-sm border">
       <details>
-        <summary className="cursor-pointer text-gray-800 dark:text-gray-400 text-sm">
-          画像アップロード
+        <summary className="p-2 hover:bg-slate-200 flex gap-2 items-center cursor-pointer text-gray-800 dark:text-gray-400 text-sm">
+          <PhotoIcon />
+          <span className="font-bold">画像アップロード</span>
         </summary>
-        <div className="pt-2 pb-4">
+        <div className="p-4">
           <div className="mt-4">
             <input
               type="file"
@@ -26,10 +29,14 @@ export const ImageForm = () => {
             <Button
               type="button"
               onClick={onUpload}
-              disabled={isUploading}
+              disabled={isUploading || !file}
               size="sm"
+              theme="secondary"
             >
-              画像をアップロードする
+              <div className="flex items-center gap-2">
+                <ArrowUpTrayIcon />
+                <span>アップロードする</span>
+              </div>
             </Button>
           </div>
           <div className="mt-2">
@@ -38,7 +45,7 @@ export const ImageForm = () => {
                 <img src={url} className="border-l border-r" />
               </div>
             )}
-            <div className="text-right">画像URL: {url}</div>
+            {url && <div className="text-right">画像URL: {url}</div>}
           </div>
         </div>
       </details>
@@ -52,6 +59,11 @@ const useFileUploader = () => {
   const [url, setUrl] = useState<string | null>(null);
 
   const onUpload = async () => {
+    if (!file) {
+      alert("ファイルを指定してください");
+      return;
+    }
+
     setUploading(true);
 
     const response = await postImageToCloudinary(file);
@@ -68,5 +80,5 @@ const useFileUploader = () => {
     setFile(e.target.files[0]);
   };
 
-  return { onUpload, onSelectFile, isUploading, url };
+  return { file, onUpload, onSelectFile, isUploading, url };
 };

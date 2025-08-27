@@ -1,5 +1,4 @@
 import { useState, useCallback, useEffect } from "react";
-import { Block } from "../Block";
 import { Button } from "../Button/index";
 import {
   getISODateString,
@@ -11,6 +10,7 @@ import { PostStatus } from "./PostStatus";
 import { Input } from "./Input";
 import { Textarea } from "./Textarea";
 import { ImageForm } from "./ImageForm";
+import Link from "next/link";
 
 export type Value = {
   title: string;
@@ -24,6 +24,7 @@ type ReturnBySubmit = {
 };
 type Props = {
   onSubmit: (value: Value) => Promise<ReturnBySubmit>;
+  postId?: number;
   value?: Value;
 };
 
@@ -32,57 +33,39 @@ export const Form = (props: Props) => {
 
   return (
     <form onSubmit={form.onSubmit}>
-      <div className="flex gap-2 justify-end">
-        <Button
-          theme="secondary"
-          size="sm"
-          type="button"
-          disabled={form.isSubmitting}
-          onClick={form.handleDraftSave}
-        >
-          下書き保存
-        </Button>
-        <Button
-          theme="primary"
-          size="sm"
-          type="submit"
-          disabled={form.isSubmitting}
-        >
-          公開する
-        </Button>
-      </div>
-      <Block>
+      <div className="flex items-center">
         <label
           htmlFor="title"
-          className="block text-gray-800 dark:text-gray-400"
+          className="w-24 block text-gray-600 dark:text-gray-400"
         >
           タイトル
         </label>
         <Input
           id="title"
           onChange={form.handleTitleChange}
-          className="p-2 w-full border rounded-sm mt-1"
+          className="p-2 w-full border rounded-sm"
           value={form.values.title}
         />
-      </Block>
+      </div>
 
-      <Block>
+      <div className="flex items-start mt-2">
         <label
           htmlFor="body"
-          className="block text-gray-800 dark:text-gray-400"
+          className="w-24 block text-gray-600 dark:text-gray-400"
         >
           本文
         </label>
-        <Textarea
-          id="body"
-          onChange={form.handleBodyChange}
-          className="p-2 w-full border rounded-sm mt-1"
-          rows={14}
-          value={form.values.body}
-        />
-      </Block>
-
-      <ImageForm />
+        <div className="w-full">
+          <Textarea
+            id="body"
+            onChange={form.handleBodyChange}
+            className="p-2 w-full border rounded-sm"
+            rows={16}
+            value={form.values.body}
+          />
+          <ImageForm />
+        </div>
+      </div>
 
       <div className="mt-8 flex gap-4 items-center justify-end text-gray-700 dark:text-gray-300">
         <div>公開状態:</div>
@@ -109,7 +92,34 @@ export const Form = (props: Props) => {
           />
         </div>
       </div>
+
+      <ControlPanel postId={props.postId} form={form} />
     </form>
+  );
+};
+
+const ControlPanel = ({ postId, form }: { postId?: number; form }) => {
+  return (
+    <div className="shadow-xl rounded-lg gap-4 m-auto fixed bottom-4 flex justify-center px-16 py-2 right-10 border border-gray-400 bg-white">
+      {postId && <PreviewLink postId={postId} />}
+      <Button
+        theme="secondary"
+        size="sm"
+        type="button"
+        disabled={form.isSubmitting}
+        onClick={form.handleDraftSave}
+      >
+        下書き保存
+      </Button>
+      <Button
+        theme="primary"
+        size="sm"
+        type="submit"
+        disabled={form.isSubmitting}
+      >
+        公開する
+      </Button>
+    </div>
   );
 };
 
@@ -223,4 +233,16 @@ const useForm = (props: Props) => {
       status: props.value?.status || "draft",
     },
   };
+};
+
+const PreviewLink = ({ postId }: { postId: number }) => {
+  return (
+    <Link
+      href={`/admin/posts/${postId}`}
+      className="inline-block bg-white rounded-lg p-2 border"
+      target="_blank"
+    >
+      プレビュー
+    </Link>
+  );
 };

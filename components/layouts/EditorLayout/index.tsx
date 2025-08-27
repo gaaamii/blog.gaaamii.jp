@@ -6,6 +6,7 @@ import { RSSIcon } from "../../icons/RSS";
 import { InformationCircleIcon } from "../../icons/InformationCircle";
 import { ArrowUpIcon } from "../../icons/ArrowUp";
 import { EditorNavigationHeader } from "./EditorNavigationHeader";
+import EditorMain from "../../EditorMain/index.tsx";
 
 export const EditorLayout = ({ children }: { children: React.ReactNode }) => (
   <>
@@ -18,7 +19,7 @@ export const EditorLayout = ({ children }: { children: React.ReactNode }) => (
     </Head>
 
     <EditorNavigationHeader />
-    <Main>{children}</Main>
+    <EditorMain>{children}</EditorMain>
     <Footer>
       <FooterLink href="/about">
         <InformationCircleIcon />

@@ -1,0 +1,14 @@
+.root {
+  width: 80%;
+  max-width: 800px;
+  /* 100vh - header - footer(ざっくり) */
+  min-height: calc(100svh - 88px - 62px);
+}
+
+@media only screen and (max-width: 480px) {
+  .root {
+    width: 100%;
+    /* 100vh - header - footer(ざっくり) */
+    min-height: calc(100svh - 50px - 62px);
+  }
+}
