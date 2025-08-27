@@ -37,7 +37,8 @@ const useHome = () => {
   const router = useRouter();
   const onEnterQuery = (e) => {
     e.preventDefault();
-    router.push({ query: { query } });
+    const nextQuery = query ? { query } : {};
+    router.push(nextQuery);
     e.target.childNodes[0].blur();
   };
 
