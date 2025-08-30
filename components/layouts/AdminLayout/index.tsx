@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Main from "../../Main";
 import { Button } from "../../Button";
-import { LinkButton } from "../../LinkButton";
 import { IconClosedIcon } from "../../icons/IconClosed";
 import { PencilSquareIcon } from "../../icons/PencilSquare";
 import { CodeBracketIcon } from "../../icons/CodeBracket";
@@ -30,24 +29,25 @@ const AdminHeader = () => {
         </h1>
         <ul className="flex justify-end gap-2">
           <AdminHeaderNavItem>
-            <LinkButton
+            <Button
               size="sm"
               theme="secondary"
               href="https://github.com/gaaamii/blog.gaaamii.jp"
+              as="Link"
             >
               <span className="flex items-center gap-1">
                 <CodeBracketIcon />
                 <span>コード直す</span>
               </span>
-            </LinkButton>
+            </Button>
           </AdminHeaderNavItem>
           <AdminHeaderNavItem>
-            <LinkButton size="sm" theme="primary" href="/posts/new">
+            <Button as="Link" size="sm" theme="primary" href="/posts/new">
               <span className="flex items-center gap-1">
                 <PencilSquareIcon />
                 <span>なにか書く！</span>
               </span>
-            </LinkButton>
+            </Button>
           </AdminHeaderNavItem>
         </ul>
       </nav>

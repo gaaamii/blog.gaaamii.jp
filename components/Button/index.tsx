@@ -1,21 +1,53 @@
-import { ButtonHTMLAttributes } from "react";
+import Link from "next/link";
+import { AnchorHTMLAttributes, ButtonHTMLAttributes } from "react";
+import { type LinkProps as NextLinkProps } from "next/link";
 
-type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
-  children: React.ReactNode;
-  theme?: "primary" | "secondary" | "text";
+type CommonProps = {
+  theme?: "primary" | "secondary" | "text" | "outline";
   size?: "sm" | "md" | "lg";
+  children: React.ReactNode;
 };
+type ButtonProps = CommonProps &
+  ButtonHTMLAttributes<HTMLButtonElement> & {
+    as?: "button";
+  };
+type LinkProps = CommonProps & NextLinkProps & { as: "Link" };
+type AnchorProps = CommonProps &
+  AnchorHTMLAttributes<HTMLAnchorElement> & { as: "a" };
+
+type Props = ButtonProps | LinkProps | AnchorProps;
 
 export const Button = ({
   theme = "primary",
   size = "lg",
   children,
+  as,
   ...attributes
-}: Props) => (
-  <button {...attributes} className={getClassNames({ theme, size })}>
-    {children}
-  </button>
-);
+}: Props) => {
+  const classNames = getClassNames({ theme, size });
+
+  switch (as) {
+    case "Link":
+      return (
+        <Link {...(attributes as LinkProps)} className={classNames}>
+          {children}
+        </Link>
+      );
+    case "a":
+      return (
+        <a {...(attributes as AnchorProps)} className={classNames}>
+          {children}
+        </a>
+      );
+    case "button":
+    default:
+      return (
+        <button {...(attributes as ButtonProps)} className={classNames}>
+          {children}
+        </button>
+      );
+  }
+};
 
 const getThemeClassNames = (theme: Props["theme"]) => {
   const primaryClassNames = [
@@ -29,12 +61,37 @@ const getThemeClassNames = (theme: Props["theme"]) => {
   ];
 
   const secondaryClassNames = [
+    "font-bold",
+    "disabled:cursor-not-allowed",
+
+    // light theme
     "bg-neutral-200",
     "text-black",
     "hover:bg-neutral-300",
     "disabled:bg-neutral-400",
     "disabled:text-white",
-    "disabled:cursor-not-allowed",
+
+    // dark theme
+    "dark:bg-stone-700",
+    "dark:text-stone-200",
+    "dark:hover:text-white",
+    "dark:focus:text-white",
+    "dark:hover:bg-stone-600",
+  ];
+
+  const outlineClassNames = [
+    "border-2",
+
+    // light
+    "border-gray-200",
+    "hover:bg-neutral-200",
+    "hover:border-neutral-400",
+
+    // dark
+    "dark:border-stone-400",
+    "dark:hover:bg-stone-700",
+    "dark:hover:border-stone-200",
+    "dark:hover:text-white",
   ];
 
   const textClassNames = ["underline", "cursor-pointer", "inline-block"];
@@ -43,6 +100,7 @@ const getThemeClassNames = (theme: Props["theme"]) => {
     primary: primaryClassNames,
     secondary: secondaryClassNames,
     text: textClassNames,
+    outline: outlineClassNames,
   };
 
   return themeClassNames[theme];
@@ -57,6 +115,7 @@ const getSizeClassNames = (size: Props["size"], theme: Props["theme"]) => {
     case "lg":
       return ["px-12", "py-3", "rounded-md"];
     case "md": // TODO
+      return ["px-10", "py-3", "rounded-md", "text-md"];
     case "sm":
       return ["px-8", "py-2", "rounded-md", "text-sm"];
     default:
@@ -65,7 +124,11 @@ const getSizeClassNames = (size: Props["size"], theme: Props["theme"]) => {
 };
 
 const getClassNames = ({ theme, size }: Pick<Props, "theme" | "size">) => {
-  const baseClassNames = ["cursor-pointer", "transition-colors"];
+  const baseClassNames = [
+    "cursor-pointer",
+    "transition-colors",
+    "inline-block",
+  ];
 
   const themeClassNames = getThemeClassNames(theme);
   const sizeClassNames = getSizeClassNames(size, theme);

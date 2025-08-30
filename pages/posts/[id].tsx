@@ -10,6 +10,8 @@ import { MDXRemoteSerializeResult } from "next-mdx-remote";
 import Link from "next/link";
 import MainLayout from "../../components/layouts/MainLayout";
 import { BackIcon } from "../../components/icons/Back";
+import { LinkButton } from "../../components/LinkButton";
+import { Button } from "../../components/Button";
 
 type Props = {
   post?: Post | null;
@@ -41,28 +43,27 @@ export default function PostPage(props: Props) {
 
       <Article post={props.post}>
         <MarkdownCompiledOnServer mdxSource={props.mdxSource} />
-        <ArticleFooter post={props.post} />
+        <ArticleFooter />
       </Article>
     </MainLayout>
   );
 }
 
-const ArticleFooter = ({ post }: { post: Post }) => {
+const ArticleFooter = () => {
   return (
     <div className="mt-20">
-      <BackToIndexLink postId={post.id} />
+      <BackToIndexLink />
     </div>
   );
 };
 
-const BackToIndexLink = ({ postId }: { postId: number }) => (
-  <Link
-    href={`/#post-${postId}`}
-    className="border-2 dark:border-stone-400 px-8 py-2 rounded inline-flex gap-2 items-center hover:bg-neutral-200 hover:text-black focus:bg-neutral-200 focus:text-black active:bg-neutral-200 active:text-black dark:hover:bg-neutral-800 dark:hover:text-stone-400 dark:hover:border-stone-500"
-  >
-    <BackIcon />
-    <span>記事一覧に戻る</span>
-  </Link>
+const BackToIndexLink = () => (
+  <Button as="Link" href={`/`} theme="outline" size="md">
+    <span className="flex items-center gap-2">
+      <BackIcon />
+      <span>一覧に戻る</span>
+    </span>
+  </Button>
 );
 
 type Query = {

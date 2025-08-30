@@ -39,7 +39,7 @@ const useHome = () => {
   const onEnterQuery = (e) => {
     e.preventDefault();
     const nextQuery = query ? { query } : {};
-    router.push(nextQuery);
+    router.push({ query: nextQuery });
     e.target.childNodes[0].blur();
   };
 
@@ -105,24 +105,24 @@ const Posts = ({ posts, query }: PostsProps) => {
 
   return (
     <section className="py-4 xs:p-0 xs:mt-4">
-      <ul>
-        {posts
-          .filter((post) => (query ? matchQuery(post, query) : post))
-          .map((post) => (
-            <PostItem post={post} key={post.id} />
-          ))}
-      </ul>
+      {posts
+        .filter((post) => (query ? matchQuery(post, query) : post))
+        .map((post) => (
+          <PostItem post={post} key={post.id} />
+        ))}
     </section>
   );
 };
 
 const PostItem = ({ post }: { post: Post }) => {
   return (
-    <div className="mt-0 sm:mt-4 relative list-none lg:flex items-center gap-1">
-      <time className="inline-block text-sm">
+    <div className="mt-4 relative lg:flex lg:items-center lg:gap-2">
+      <time className="block ml-4 lg:ml-0 sm:min-w-32 sm:inline-block">
         {getLocalizedDateString(post.published_at)}
       </time>
-      <PostLink post={post} href={`/posts/${post.id}`} />
+      <div className="grow">
+        <PostLink post={post} href={`/posts/${post.id}`} />
+      </div>
     </div>
   );
 };

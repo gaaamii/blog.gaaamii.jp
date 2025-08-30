@@ -1,4 +1,3 @@
-import styles from "./styles.module.css";
 import Link from "next/link";
 import { Post } from "../../models/post";
 
@@ -8,10 +7,10 @@ type Props = {
 };
 export const PostLink = ({ href, post }: Props) => {
   return (
-    <h2 className={styles.title}>
+    <h2 className="font-bold text-lg">
       <Link
         href={href}
-        className="block w-full m-0 pt-8 pb-4 px-4 sm:rounded-lg sm:py-2 sm:px-3 hover:bg-neutral-200 hover:text-black focus:bg-neutral-200 focus:text-black active:bg-neutral-200 active:text-black dark:active:bg-neutral-800 dark:hover:bg-neutral-800 dark:hover:text-white"
+        className="block m-0 py-4 px-4 rounded-lg sm:py-2 hover:bg-neutral-200 hover:text-black focus:text-black active:text-black dark:active:bg-neutral-800 dark:hover:bg-neutral-800 dark:focus:text-white dark:hover:text-white"
       >
         {post.title}
       </Link>
