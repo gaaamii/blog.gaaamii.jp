@@ -92,7 +92,7 @@ const PostSelect = ({
 };
 
 const PostList = ({ postStatus }: { postStatus: PostStatus | null }) => {
-  const { isLoading, posts } = useFetchPostsAsAdmin(postStatus);
+  const { isLoading, posts, refetch } = useFetchPostsAsAdmin(postStatus);
 
   if (isLoading) {
     return <p className="text-center bg-neutral-200 py-2">読込中...</p>;
@@ -102,14 +102,20 @@ const PostList = ({ postStatus }: { postStatus: PostStatus | null }) => {
     posts && (
       <div>
         {posts.map((post) => (
-          <PostItem post={post} key={post.id} />
+          <PostItem post={post} key={post.id} onDelete={refetch} />
         ))}
       </div>
     )
   );
 };
 
-const usePostItem = (post: Post) => {
+const usePostItem = ({
+  post,
+  onDelete,
+}: {
+  post: Post;
+  onDelete: () => void;
+}) => {
   const [isDeleting, setIsDeleting] = React.useState(false);
   const deletePost = async () => {
     setIsDeleting(true);
@@ -117,6 +123,7 @@ const usePostItem = (post: Post) => {
     if (response.ok) {
       alert("削除しました");
       setIsDeleting(false);
+      onDelete();
     } else {
       alert("エラーが発生しました");
       setIsDeleting(false);
@@ -126,8 +133,8 @@ const usePostItem = (post: Post) => {
   return { deletePost, isDeleting };
 };
 
-const PostItem = ({ post }: { post: Post }) => {
-  const { isDeleting, deletePost } = usePostItem(post);
+const PostItem = ({ post, onDelete }: { post: Post; onDelete: () => void }) => {
+  const { isDeleting, deletePost } = usePostItem({ post, onDelete });
 
   return (
     <div className="mt-0 sm:mt-4 relative list-none lg:flex items-center gap-1">
