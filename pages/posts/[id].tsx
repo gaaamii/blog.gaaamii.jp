@@ -7,10 +7,8 @@ import { serialize } from "next-mdx-remote/serialize";
 import rehypeImageSize from "../../components/Markdown/rehype-plugins/rehype-image-size";
 import { MarkdownCompiledOnServer } from "../../components/Markdown";
 import { MDXRemoteSerializeResult } from "next-mdx-remote";
-import Link from "next/link";
 import MainLayout from "../../components/layouts/MainLayout";
 import { BackIcon } from "../../components/icons/Back";
-import { LinkButton } from "../../components/LinkButton";
 import { Button } from "../../components/Button";
 
 type Props = {
