@@ -1,11 +1,12 @@
 import { GetStaticPropsContext } from "next";
-import PostLink from "../components/PostLink/index";
+import { PostLink } from "../components/PostLink/index";
 import { Post } from "../models/post";
 import { get } from "../utils/api";
 import MainLayout from "../components/layouts/MainLayout";
 import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/router";
+import { getLocalizedDateString } from "../utils/datetime";
 
 type Props = {
   posts?: Post[];
@@ -108,10 +109,21 @@ const Posts = ({ posts, query }: PostsProps) => {
         {posts
           .filter((post) => (query ? matchQuery(post, query) : post))
           .map((post) => (
-            <PostLink {...post} key={post.id} />
+            <PostItem post={post} key={post.id} />
           ))}
       </ul>
     </section>
+  );
+};
+
+const PostItem = ({ post }: { post: Post }) => {
+  return (
+    <div className="mt-0 sm:mt-4 relative list-none lg:flex items-center gap-1">
+      <time className="inline-block text-sm">
+        {getLocalizedDateString(post.published_at)}
+      </time>
+      <PostLink post={post} href={`/posts/${post.id}`} />
+    </div>
   );
 };
 

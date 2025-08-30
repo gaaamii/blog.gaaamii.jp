@@ -2,7 +2,7 @@ import { ButtonHTMLAttributes } from "react";
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: React.ReactNode;
-  theme?: "primary" | "secondary";
+  theme?: "primary" | "secondary" | "text";
   size?: "sm" | "md" | "lg";
 };
 
@@ -37,13 +37,22 @@ const getThemeClassNames = (theme: Props["theme"]) => {
     "disabled:cursor-not-allowed",
   ];
 
-  const themeClassNames =
-    theme === "primary" ? primaryClassNames : secondaryClassNames;
+  const textClassNames = ["underline", "cursor-pointer", "inline-block"];
 
-  return themeClassNames;
+  const themeClassNames: Record<Props["theme"], string[]> = {
+    primary: primaryClassNames,
+    secondary: secondaryClassNames,
+    text: textClassNames,
+  };
+
+  return themeClassNames[theme];
 };
 
-const getSizeClassNames = (size: Props["size"]) => {
+const getSizeClassNames = (size: Props["size"], theme: Props["theme"]) => {
+  if (theme === "text") {
+    return [];
+  }
+
   switch (size) {
     case "lg":
       return ["px-12", "py-3", "rounded-md"];
@@ -59,7 +68,7 @@ const getClassNames = ({ theme, size }: Pick<Props, "theme" | "size">) => {
   const baseClassNames = ["cursor-pointer", "transition-colors"];
 
   const themeClassNames = getThemeClassNames(theme);
-  const sizeClassNames = getSizeClassNames(size);
+  const sizeClassNames = getSizeClassNames(size, theme);
 
   return [...baseClassNames, ...themeClassNames, ...sizeClassNames].join(" ");
 };

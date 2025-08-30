@@ -45,6 +45,15 @@ export async function put(
   return response;
 }
 
+export async function destroy(path: string): Promise<Response> {
+  const response = await request(path, {
+    ...requestInitBase,
+    method: "DELETE",
+  });
+
+  return response;
+}
+
 async function request(path: string, init?: RequestInit): Promise<Response> {
   const baseURL = getAPIBaseURL();
   const url = `${baseURL}${path}`;

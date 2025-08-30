@@ -1,9 +1,13 @@
-import { useState } from "react";
-import { PostStatus } from "../models/post";
+import React, { useState } from "react";
+import { Post, PostStatus } from "../models/post";
 import { useAuthorization } from "../hooks/useAuthorization";
 import { useFetchPostsAsAdmin } from "../hooks/useFetchPostsAsAdmin";
-import PostLink from "../components/PostLink/index";
+import { PostLink } from "../components/PostLink/index";
 import { AdminLayout } from "../components/layouts/AdminLayout";
+import { getLocalizedDateString } from "../utils/datetime";
+import Link from "next/link";
+import { Button } from "../components/Button";
+import { destroy } from "../utils/api";
 
 export default function Admin() {
   const { isAuthorized } = useAuthorization();
@@ -98,9 +102,47 @@ const PostList = ({ postStatus }: { postStatus: PostStatus | null }) => {
     posts && (
       <div>
         {posts.map((post) => (
-          <PostLink {...post} editable key={post.id} />
+          <PostItem post={post} key={post.id} />
         ))}
       </div>
     )
+  );
+};
+
+const usePostItem = (post: Post) => {
+  const [isDeleting, setIsDeleting] = React.useState(false);
+  const deletePost = async () => {
+    setIsDeleting(true);
+    const response = await destroy(`/posts/${post.id}`);
+    if (response.ok) {
+      alert("削除しました");
+      setIsDeleting(false);
+    } else {
+      alert("エラーが発生しました");
+      setIsDeleting(false);
+    }
+  };
+
+  return { deletePost, isDeleting };
+};
+
+const PostItem = ({ post }: { post: Post }) => {
+  const { isDeleting, deletePost } = usePostItem(post);
+
+  return (
+    <div className="mt-0 sm:mt-4 relative list-none lg:flex items-center gap-1">
+      <time className="inline-block text-sm">
+        {getLocalizedDateString(post.published_at)}
+      </time>
+      <PostLink post={post} href={`/admin/posts/${post.id}`} />
+      <div className="flex gap-4">
+        <Link href={`/posts/${post.id}/edit`}>
+          <span className="underline cursor-pointer">編集する</span>
+        </Link>
+        <Button onClick={deletePost} disabled={isDeleting} theme="text">
+          削除する
+        </Button>
+      </div>
+    </div>
   );
 };
