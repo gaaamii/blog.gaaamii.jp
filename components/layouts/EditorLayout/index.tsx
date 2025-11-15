@@ -1,6 +1,3 @@
-import Head from "next/head";
-import { NavigationHeader } from "../../NavigationHeader";
-import Main from "../../Main";
 import Footer, { FooterLink } from "../../Footer";
 import { RSSIcon } from "../../icons/RSS";
 import { InformationCircleIcon } from "../../icons/InformationCircle";
@@ -10,14 +7,6 @@ import EditorMain from "../../EditorMain/index.tsx";
 
 export const EditorLayout = ({ children }: { children: React.ReactNode }) => (
   <>
-    <Head>
-      <title>gaaamiiのブログ</title>
-      <meta
-        name="description"
-        content="間違ったことを書いている時があります。コメントやTwitter、ブコメなどでご指摘ください"
-      />
-    </Head>
-
     <EditorNavigationHeader />
     <EditorMain>{children}</EditorMain>
     <Footer>

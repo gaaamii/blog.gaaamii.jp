@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Main from "../../Main";
 import { Button } from "../../Button";
 import { IconClosedIcon } from "../../icons/IconClosed";
@@ -7,14 +6,6 @@ import { CodeBracketIcon } from "../../icons/CodeBracket";
 
 export const AdminLayout = ({ children }: { children: React.ReactNode }) => (
   <>
-    <Head>
-      <title>gaaamiiのブログ</title>
-      <meta
-        name="description"
-        content="間違ったことを書いている時があります。コメントやTwitter、ブコメなどでご指摘ください"
-      />
-    </Head>
-
     <AdminHeader />
     <Main>{children}</Main>
   </>
