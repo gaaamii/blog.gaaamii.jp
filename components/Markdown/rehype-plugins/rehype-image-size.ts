@@ -22,14 +22,18 @@ const detectSizeFromURL = (url: string): Promise<{ width: number; height: number
   if (typeof window === 'undefined') {
     return new Promise((resolve) => {
       https.get(url, function (response) {
-        const chunks = []
+        const chunks: Uint8Array[] = []
         response.on('data', function (chunk) {
           chunks.push(chunk)
         }).on('end', function() {
           const buffer = Buffer.concat(chunks)
           try {
             const { width, height } = sizeOf(buffer)
-            resolve({ width, height })
+            if (typeof width === "number" && typeof height === "number") {
+              resolve({ width, height })
+              return
+            }
+            resolve({ width: 0, height: 0 })
           } catch(e) {
             console.log('url is invalid1!!!!!!!!!!!', url)
             throw e
@@ -38,6 +42,8 @@ const detectSizeFromURL = (url: string): Promise<{ width: number; height: number
       })
     })
   }
+
+  return Promise.resolve({ width: 0, height: 0 });
 }
 
 export default rehypeImageSize;

@@ -55,7 +55,7 @@ export const ImageForm = () => {
 
 const useFileUploader = () => {
   const [isUploading, setUploading] = useState<boolean>(false);
-  const [file, setFile] = useState<File>(null);
+  const [file, setFile] = useState<File | null>(null);
   const [url, setUrl] = useState<string | null>(null);
 
   const onUpload = async () => {

@@ -96,14 +96,14 @@ const getThemeClassNames = (theme: Props["theme"]) => {
 
   const textClassNames = ["underline", "cursor-pointer", "inline-block"];
 
-  const themeClassNames: Record<Props["theme"], string[]> = {
+  const themeClassNames: Record<NonNullable<Props["theme"]>, string[]> = {
     primary: primaryClassNames,
     secondary: secondaryClassNames,
     text: textClassNames,
     outline: outlineClassNames,
   };
 
-  return themeClassNames[theme];
+  return themeClassNames[theme ?? "primary"];
 };
 
 const getSizeClassNames = (size: Props["size"], theme: Props["theme"]) => {

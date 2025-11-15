@@ -76,7 +76,11 @@ export const Form = (props: Props) => {
         <div>
           <Input
             id="publishedAtDate"
-            value={getISODateString(form.values.publishedAt)}
+            value={
+              form.values.publishedAt
+                ? getISODateString(form.values.publishedAt) ?? ""
+                : ""
+            }
             className="border p-1 rounded-md mt-1"
             onChange={form.handlePublishedAtDateChange}
             type="date"
@@ -84,7 +88,11 @@ export const Form = (props: Props) => {
           />
           <Input
             id="publishedAtTime"
-            value={getTimeString(form.values.publishedAt)}
+            value={
+              form.values.publishedAt
+                ? getTimeString(form.values.publishedAt)
+                : ""
+            }
             className="ml-2 border p-1 rounded-md"
             onChange={form.handlePublishedAtTimeChange}
             type="time"
