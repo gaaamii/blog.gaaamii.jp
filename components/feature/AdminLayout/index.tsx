@@ -1,9 +1,9 @@
 import Head from "next/head";
-import Main from "../../Main";
-import { Button } from "../../Button";
-import { IconClosedIcon } from "../../icons/IconClosed";
-import { PencilSquareIcon } from "../../icons/PencilSquare";
-import { CodeBracketIcon } from "../../icons/CodeBracket";
+import Main from "../Main";
+import { Button } from "../../ui/Button";
+import { IconClosedIcon } from "../../ui/icons/IconClosed";
+import { PencilSquareIcon } from "../../ui/icons/PencilSquare";
+import { CodeBracketIcon } from "../../ui/icons/CodeBracket";
 
 export const AdminLayout = ({ children }: { children: React.ReactNode }) => (
   <>

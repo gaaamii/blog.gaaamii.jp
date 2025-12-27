@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { Post, PostStatus } from "../models/post";
 import { useAuthorization } from "../hooks/useAuthorization";
 import { useFetchPostsAsAdmin } from "../hooks/useFetchPostsAsAdmin";
-import { PostLink } from "../components/PostLink/index";
-import { AdminLayout } from "../components/layouts/AdminLayout";
+import { PostLink } from "../components/feature/PostLink";
+import { AdminLayout } from "../components/feature/AdminLayout";
 import { getLocalizedDateString } from "../utils/datetime";
 import Link from "next/link";
-import { Button } from "../components/Button";
+import { Button } from "../components/ui/Button";
 import { destroy } from "../utils/api";
 
 export default function Admin() {

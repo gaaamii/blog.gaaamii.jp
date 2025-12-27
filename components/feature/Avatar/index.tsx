@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import styles from "./styles.module.css";
 
-export const Avatar = () => (
+export const GaaamiiAvatar = () => (
   <svg
     role="img"
     aria-label="gaaamiiのアイコン画像"

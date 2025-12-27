@@ -1,9 +1,9 @@
 import Head from "next/head";
 import { useCallback, useEffect, useState } from "react";
 import { get, post } from "../../utils/api";
-import { Form, Value } from "../../components/Form/index";
+import { Form, Value } from "../../components/feature/Form";
 import { useBlockNavigation } from "../../hooks/useBlockNavigation";
-import { EditorLayout } from "../../components/layouts/EditorLayout/index";
+import { EditorLayout } from "../../components/feature/EditorLayout";
 
 export default function NewPage() {
   const [isAuthorized, setIsAuthorized] = useState<boolean>(false);

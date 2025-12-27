@@ -1,11 +1,11 @@
 import { useState, useCallback, useEffect } from "react";
-import { Button } from "../Button/index";
+import { Button } from "../../ui/Button";
 import {
   getISODateString,
   getFullTimeString,
   getTimeString,
-} from "../../utils/datetime";
-import type { PostStatus as PostStatusType } from "../../models/post";
+} from "../../../utils/datetime";
+import type { PostStatus as PostStatusType } from "../../../models/post";
 import { PostStatus } from "./PostStatus";
 import { Input } from "./Input";
 import { Textarea } from "./Textarea";

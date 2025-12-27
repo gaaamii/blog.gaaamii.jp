@@ -1,8 +1,8 @@
 import { GetStaticPropsContext } from "next";
-import { PostLink } from "../components/PostLink/index";
+import { PostLink } from "../components/feature/PostLink";
 import { Post } from "../models/post";
 import { get } from "../utils/api";
-import MainLayout from "../components/layouts/MainLayout";
+import MainLayout from "../components/feature/MainLayout";
 import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/router";

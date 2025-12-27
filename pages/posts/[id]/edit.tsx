@@ -2,12 +2,12 @@ import Head from "next/head";
 import { Post } from "../../../models/post";
 import { put } from "../../../utils/api";
 import { useCallback } from "react";
-import { Value, Form } from "../../../components/Form/index";
+import { Value, Form } from "../../../components/feature/Form";
 import { useBlockNavigation } from "../../../hooks/useBlockNavigation";
 import { useAuthorization } from "../../../hooks/useAuthorization";
 import { useRouter } from "next/router";
 import { useFetchPostAsAdmin } from "../../../hooks/useFetchPostAsAdmin";
-import { EditorLayout } from "../../../components/layouts/EditorLayout";
+import { EditorLayout } from "../../../components/feature/EditorLayout";
 
 export default function EditPage() {
   const { isAuthorized } = useAuthorization();
