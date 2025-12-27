@@ -33,6 +33,10 @@ export const Form = (props: Props) => {
 
   return (
     <form onSubmit={form.onSubmit}>
+      <ControlPanel postId={props.postId} form={form} />
+
+      <div aria-hidden className="h-32 md:h-28" />
+
       <div className="flex items-center">
         <label
           htmlFor="title"
@@ -66,59 +70,75 @@ export const Form = (props: Props) => {
           <ImageForm />
         </div>
       </div>
-
-      <div className="mt-8 flex gap-4 items-center justify-end text-gray-700 dark:text-gray-300">
-        <div>公開状態:</div>
-        <PostStatus status={form.values.status} />
-        <label htmlFor="publishedAt">
-          公開{form.values.status === "draft" ? "予定" : ""}日時:
-        </label>
-        <div>
-          <Input
-            id="publishedAtDate"
-            value={getISODateString(form.values.publishedAt)}
-            className="border p-1 rounded-md mt-1"
-            onChange={form.handlePublishedAtDateChange}
-            type="date"
-            aria-label="公開日"
-          />
-          <Input
-            id="publishedAtTime"
-            value={getTimeString(form.values.publishedAt)}
-            className="ml-2 border p-1 rounded-md"
-            onChange={form.handlePublishedAtTimeChange}
-            type="time"
-            aria-label="公開時刻"
-          />
-        </div>
-      </div>
-
-      <ControlPanel postId={props.postId} form={form} />
     </form>
   );
 };
 
 const ControlPanel = ({ postId, form }: { postId?: number; form }) => {
   return (
-    <div className="shadow-xl rounded-lg gap-4 m-auto fixed bottom-4 flex justify-center px-16 py-2 right-10 border border-gray-400 bg-white">
-      {postId && <PreviewLink postId={postId} />}
-      <Button
-        theme="secondary"
-        size="sm"
-        type="button"
-        disabled={form.isSubmitting}
-        onClick={form.handleDraftSave}
-      >
-        下書き保存
-      </Button>
-      <Button
-        theme="primary"
-        size="sm"
-        type="submit"
-        disabled={form.isSubmitting}
-      >
-        公開する
-      </Button>
+    <div className="fixed inset-x-0 top-0 z-50 w-full shadow px-4 py-3 text-gray-700 shadow-sm backdrop-blur dark:border-neutral-700 dark:bg-neutral-900/95 dark:text-gray-300">
+      <div className="flex flex-col gap-3">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <Link
+            href="/admin"
+            prefetch={false}
+            className="w-fit rounded px-2 py-2 text-sm font-medium underline hover:bg-neutral-200 dark:hover:bg-neutral-600"
+          >
+            ◀ 管理画面に戻る
+          </Link>
+
+          <div className="flex flex-wrap items-center justify-end gap-3">
+            <PostStatus status={form.values.status} />
+            {postId && <PreviewLink postId={postId} />}
+            <Button
+              theme="secondary"
+              size="sm"
+              type="button"
+              disabled={form.isSubmitting}
+              onClick={form.handleDraftSave}
+            >
+              下書き保存
+            </Button>
+            <Button
+              theme="primary"
+              size="sm"
+              type="submit"
+              disabled={form.isSubmitting}
+            >
+              公開する
+            </Button>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap items-center justify-end gap-x-6 gap-y-2 md:pl-2">
+          <div className="flex flex-wrap items-center justify-end gap-2">
+            <label
+              htmlFor="publishedAtDate"
+              className="whitespace-nowrap text-sm font-medium"
+            >
+              公開{form.values.status === "draft" ? "予定" : ""}日時
+            </label>
+            <div className="flex flex-wrap items-center justify-end gap-2">
+              <Input
+                id="publishedAtDate"
+                value={getISODateString(form.values.publishedAt)}
+                className="rounded-md border border-gray-300 bg-white p-1 text-sm dark:border-neutral-700 dark:bg-neutral-950"
+                onChange={form.handlePublishedAtDateChange}
+                type="date"
+                aria-label="公開日"
+              />
+              <Input
+                id="publishedAtTime"
+                value={getTimeString(form.values.publishedAt)}
+                className="rounded-md border border-gray-300 bg-white p-1 text-sm dark:border-neutral-700 dark:bg-neutral-950"
+                onChange={form.handlePublishedAtTimeChange}
+                type="time"
+                aria-label="公開時刻"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
@@ -237,12 +257,15 @@ const useForm = (props: Props) => {
 
 const PreviewLink = ({ postId }: { postId: number }) => {
   return (
-    <Link
+    <Button
+      as="a"
       href={`/admin/posts/${postId}`}
-      className="inline-block bg-white rounded-lg p-2 border"
+      theme="secondary"
+      size="sm"
       target="_blank"
+      rel="noreferrer"
     >
       プレビュー
-    </Link>
+    </Button>
   );
 };
