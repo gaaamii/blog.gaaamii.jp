@@ -1,5 +1,5 @@
-import type { PostStatus as PostStatusType } from "../../models/post";
-import { CheckCircleIcon } from "../icons/CheckCircle";
+import type { PostStatus as PostStatusType } from "../../../models/post";
+import { CheckCircleIcon } from "../../ui/icons/CheckCircle";
 
 export const PostStatus = ({ status }: { status: PostStatusType }) => {
   return status === "draft" ? <DraftStatus /> : <PublishedStatus />;

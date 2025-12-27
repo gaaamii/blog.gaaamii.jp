@@ -1,11 +1,11 @@
-import { Button } from "../Button/index";
+import { Button } from "../../ui/Button";
 import { useState } from "react";
 import {
   CloudinaryResponseJson,
   postImageToCloudinary,
-} from "../../utils/cloudinary";
-import { PhotoIcon } from "../icons/Photo";
-import { ArrowUpTrayIcon } from "../icons/ArrowUpTray";
+} from "../../../utils/cloudinary";
+import { PhotoIcon } from "../../ui/icons/Photo";
+import { ArrowUpTrayIcon } from "../../ui/icons/ArrowUpTray";
 
 export const ImageForm = () => {
   const { isUploading, url, file, onUpload, onSelectFile } = useFileUploader();

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Post } from "../../models/post";
+import { Post } from "../../../models/post";
 
 type Props = {
   post: Post;

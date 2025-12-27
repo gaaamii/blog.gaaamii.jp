@@ -1,7 +1,7 @@
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import styles from "./styles.module.css";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import Markdown from "react-markdown";
+import { useEffect, useState } from "react";
 
 type Props = {
   mdxSource: MDXRemoteSerializeResult;
@@ -45,24 +45,66 @@ export const MarkdownCompiledOnClient = ({
   );
 };
 
-import { a11yDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 const codeComponent = ({ node, inline, className, children, ...props }) => {
   // NOTE: CodeComponent's className is typed as unknown
   const classNameString = className as string;
   const match = /language-(\w+)/.exec(classNameString || "");
-  return !inline && match ? (
-    <SyntaxHighlighter
-      style={a11yDark}
+  if (inline || !match) {
+    return <code className={styles.plainCode}>{children}</code>;
+  }
+
+  return (
+    <CodeBlock
       language={match[1]}
-      PreTag="div"
-      {...props}
-    >
-      {String(children).replace(/\n$/, "")}
-    </SyntaxHighlighter>
-  ) : (
-    <code className={styles.plainCode}>{children}</code>
+      value={String(children).replace(/\n$/, "")}
+    />
   );
 };
+
+const CodeBlock = ({ language, value }: { language: string; value: string }) => {
+  const [SyntaxHighlighter, setSyntaxHighlighter] =
+    useState<null | React.ComponentType<any>>(null);
+  const [syntaxStyle, setSyntaxStyle] = useState<any>(null);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    Promise.all([
+      import("react-syntax-highlighter/dist/esm/prism").then(
+        (module) => module.default,
+      ),
+      import("react-syntax-highlighter/dist/esm/styles/prism/a11y-dark").then(
+        (module) => module.default,
+      ),
+    ]).then(([Highlighter, style]) => {
+      if (!isMounted) {
+        return;
+      }
+
+      setSyntaxHighlighter(() => Highlighter);
+      setSyntaxStyle(style);
+    });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  if (!SyntaxHighlighter || !syntaxStyle) {
+    return (
+      <pre className="my-4 overflow-auto rounded bg-neutral-900 p-4 text-sm">
+        <code className="text-neutral-100">{value}</code>
+      </pre>
+    );
+  }
+
+  return (
+    <SyntaxHighlighter style={syntaxStyle} language={language} PreTag="div">
+      {value}
+    </SyntaxHighlighter>
+  );
+};
+
 const h2Component = ({ children }) => (
   <h2 className={"font-bold text-xl mt-10"}>{children}</h2>
 );

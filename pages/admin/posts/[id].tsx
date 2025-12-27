@@ -1,10 +1,10 @@
-import { Article } from "../../../components/Article/index";
+import { Article } from "../../../components/feature/Article";
 import { useFetchPostAsAdmin } from "../../../hooks/useFetchPostAsAdmin";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { useAuthorization } from "../../../hooks/useAuthorization";
-import { MarkdownCompiledOnClient } from "../../../components/Markdown";
-import MainLayout from "../../../components/layouts/MainLayout";
+import { MarkdownCompiledOnClient } from "../../../components/feature/Markdown";
+import MainLayout from "../../../components/feature/MainLayout";
 
 export default function AdminPostPage() {
   const { isAuthorized, isLoading, pageTitle, post } = useAdminPost();

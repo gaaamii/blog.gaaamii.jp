@@ -1,15 +1,15 @@
 import { GetStaticPropsContext } from "next";
 import Head from "next/head";
 import { Post } from "../../models/post";
-import { Article } from "../../components/Article/index";
+import { Article } from "../../components/feature/Article";
 import { get } from "../../utils/api";
 import { serialize } from "next-mdx-remote/serialize";
-import rehypeImageSize from "../../components/Markdown/rehype-plugins/rehype-image-size";
-import { MarkdownCompiledOnServer } from "../../components/Markdown";
+import rehypeImageSize from "../../components/feature/Markdown/rehype-plugins/rehype-image-size";
+import { MarkdownCompiledOnServer } from "../../components/feature/Markdown";
 import { MDXRemoteSerializeResult } from "next-mdx-remote";
-import MainLayout from "../../components/layouts/MainLayout";
-import { BackIcon } from "../../components/icons/Back";
-import { Button } from "../../components/Button";
+import MainLayout from "../../components/feature/MainLayout";
+import { BackIcon } from "../../components/ui/icons/Back";
+import { Button } from "../../components/ui/Button";
 
 type Props = {
   post?: Post | null;

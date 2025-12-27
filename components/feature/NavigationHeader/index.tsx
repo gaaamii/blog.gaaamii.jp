@@ -2,14 +2,14 @@ import Link, { LinkProps } from "next/link";
 import styles from "./styles.module.css";
 import React, { AnchorHTMLAttributes } from "react";
 import classNames from "classnames";
-import { Avatar } from "../Avatar";
+import { GaaamiiAvatar } from "../Avatar";
 
 export const NavigationHeader = () => (
   <header>
     <nav className="w-full border-b-2 dark:border-b-stone-500">
       <ul className={styles.navigationList}>
         <NavigationListItem isPrimary prefetch={false} href="/">
-          <Avatar />
+          <GaaamiiAvatar />
           gaaamiiのブログ
         </NavigationListItem>
         <NavigationListItem prefetch={false} href="/about">

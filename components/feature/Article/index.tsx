@@ -1,6 +1,6 @@
-import { Post } from "../../models/post";
+import { Post } from "../../../models/post";
 import styles from "./styles.module.css";
-import { getLocalizedDateString } from "../../utils/datetime";
+import { getLocalizedDateString } from "../../../utils/datetime";
 
 export const Article = ({
   post,

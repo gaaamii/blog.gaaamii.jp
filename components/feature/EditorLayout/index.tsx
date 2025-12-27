@@ -1,5 +1,5 @@
 import Head from "next/head";
-import EditorMain from "../../EditorMain/index.tsx";
+import EditorMain from "../EditorMain/index.tsx";
 
 export const EditorLayout = ({ children }: { children: React.ReactNode }) => (
   <>

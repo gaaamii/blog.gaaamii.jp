@@ -1,10 +1,10 @@
 import Head from "next/head";
-import Main from "../../Main";
-import Footer, { FooterLink } from "../../Footer";
-import { RSSIcon } from "../../icons/RSS";
-import { InformationCircleIcon } from "../../icons/InformationCircle";
-import { ArrowUpIcon } from "../../icons/ArrowUp";
-import { NavigationHeader } from "../../NavigationHeader";
+import Main from "../Main";
+import Footer, { FooterLink } from "../Footer";
+import { RSSIcon } from "../../ui/icons/RSS";
+import { InformationCircleIcon } from "../../ui/icons/InformationCircle";
+import { ArrowUpIcon } from "../../ui/icons/ArrowUp";
+import { NavigationHeader } from "../NavigationHeader";
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => (
   <>
