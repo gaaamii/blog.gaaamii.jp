@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { get, post } from "../../utils/api";
 import { Form, Value } from "../../components/feature/Form";
 import { useBlockNavigation } from "../../hooks/useBlockNavigation";
-import { EditorLayout } from "../../components/feature/EditorLayout";
+import EditorMain from "../../components/feature/EditorMain/index.tsx";
 
 export default function NewPage() {
   const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
@@ -40,12 +40,12 @@ export default function NewPage() {
   useBlockNavigation();
 
   return (
-    <EditorLayout>
+    <EditorMain>
       <Head>
         <title>記事を作成する - gaaamiiのブログ</title>
       </Head>
 
       <>{isAuthorized ? <Form onSubmit={handleSubmit} /> : null}</>
-    </EditorLayout>
+    </EditorMain>
   );
 }
