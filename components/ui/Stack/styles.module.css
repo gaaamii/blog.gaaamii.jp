@@ -1,8 +1,0 @@
-.root {
-  display: flex;
-  flex-direction: column;
-  justify-content: var(--stack-justify, flex-start);
-  align-items: var(--stack-align, stretch);
-  gap: var(--stack-space, 1.5rem);
-}
-

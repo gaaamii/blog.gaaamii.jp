@@ -1,9 +1,10 @@
-import styles from "./styles.module.css";
-import React from "react";
+import type React from "react";
+import type { TwMaxWidth, TwSpacing } from "../tw";
+import { cx, twMaxWidthToClass, twSpacingToClass } from "../tw";
 
 type CustomProps = {
-  maxWidth?: string;
-  gutter?: string;
+  maxWidth?: TwMaxWidth;
+  gutter?: TwSpacing;
   centerText?: boolean;
   children?: React.ReactNode;
 };
@@ -27,22 +28,17 @@ export const Center = <T extends React.ElementType = "div">({
 
   return (
     <Component
-      className={[
-        styles.root,
-        centerText ? styles.centerText : "",
+      className={cx(
+        "mx-auto",
+        twMaxWidthToClass(maxWidth),
+        twSpacingToClass("px", gutter),
+        centerText ? "text-center" : undefined,
         className,
-      ]
-        .filter(Boolean)
-        .join(" ")}
-      style={{
-        ...(style as React.CSSProperties),
-        ["--center-max-width" as any]: maxWidth,
-        ["--center-gutter" as any]: gutter,
-      }}
+      )}
+      style={style}
       {...props}
     >
       {children}
     </Component>
   );
 };
-

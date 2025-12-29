@@ -1,10 +1,16 @@
-import styles from "./styles.module.css";
-import React from "react";
+import type React from "react";
+import type { TwAlign, TwJustify, TwSpacing } from "../tw";
+import {
+  cx,
+  twAlignToItemsClass,
+  twJustifyToClass,
+  twSpacingToClass,
+} from "../tw";
 
 type CustomProps = {
-  space?: string;
-  align?: React.CSSProperties["alignItems"];
-  justify?: React.CSSProperties["justifyContent"];
+  space?: TwSpacing;
+  align?: TwAlign;
+  justify?: TwJustify;
   children?: React.ReactNode;
 };
 
@@ -27,17 +33,17 @@ export const Cluster = <T extends React.ElementType = "div">({
 
   return (
     <Component
-      className={[styles.root, className].filter(Boolean).join(" ")}
-      style={{
-        ...(style as React.CSSProperties),
-        ["--cluster-space" as any]: space,
-        ["--cluster-align" as any]: align,
-        ["--cluster-justify" as any]: justify,
-      }}
+      className={cx(
+        "flex flex-wrap",
+        twSpacingToClass("gap", space),
+        twAlignToItemsClass(align),
+        twJustifyToClass(justify),
+        className,
+      )}
+      style={style}
       {...props}
     >
       {children}
     </Component>
   );
 };
-

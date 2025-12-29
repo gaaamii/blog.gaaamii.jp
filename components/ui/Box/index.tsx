@@ -1,13 +1,20 @@
-import styles from "./styles.module.css";
-import React from "react";
+import type React from "react";
+import {
+  cx,
+  twBorderWidthToClass,
+  twColorToClass,
+  twRadiusToClass,
+  twSpacingToClass,
+} from "../tw";
+import type { TwBorderWidth, TwColor, TwRadius, TwSpacing } from "../tw";
 
 type CustomProps = {
-  padding?: string;
-  borderWidth?: string;
-  borderColor?: string;
-  radius?: string;
-  backgroundColor?: string;
-  color?: string;
+  padding?: TwSpacing;
+  borderWidth?: TwBorderWidth;
+  radius?: TwRadius;
+  borderColor?: TwColor;
+  backgroundColor?: TwColor;
+  colorClassName?: string;
   children?: React.ReactNode;
 };
 
@@ -20,10 +27,10 @@ export const Box = <T extends React.ElementType = "div">({
   as,
   padding,
   borderWidth,
-  borderColor,
   radius,
+  borderColor,
   backgroundColor,
-  color,
+  colorClassName,
   className,
   style,
   children,
@@ -33,20 +40,19 @@ export const Box = <T extends React.ElementType = "div">({
 
   return (
     <Component
-      className={[styles.root, className].filter(Boolean).join(" ")}
-      style={{
-        ...(style as React.CSSProperties),
-        ["--box-padding" as any]: padding,
-        ["--box-border-width" as any]: borderWidth,
-        ["--box-border-color" as any]: borderColor,
-        ["--box-radius" as any]: radius,
-        ["--box-background-color" as any]: backgroundColor,
-        ["--box-color" as any]: color,
-      }}
+      className={cx(
+        twSpacingToClass("p", padding),
+        twBorderWidthToClass(borderWidth),
+        twRadiusToClass(radius),
+        twColorToClass("border", borderColor),
+        twColorToClass("bg", backgroundColor),
+        colorClassName,
+        className,
+      )}
+      style={style}
       {...props}
     >
       {children}
     </Component>
   );
 };
-

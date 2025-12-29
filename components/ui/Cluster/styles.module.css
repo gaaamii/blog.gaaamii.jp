@@ -1,8 +1,0 @@
-.root {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--cluster-space, 1rem);
-  align-items: var(--cluster-align, center);
-  justify-content: var(--cluster-justify, flex-start);
-}
-
