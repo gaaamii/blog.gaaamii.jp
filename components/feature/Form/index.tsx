@@ -1,5 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
 import { Button } from "../../ui/Button";
+import { Cluster } from "../../ui/Cluster";
+import { Stack } from "../../ui/Stack";
 import {
   getISODateString,
   getFullTimeString,
@@ -11,6 +13,7 @@ import { Input } from "./Input";
 import { Textarea } from "./Textarea";
 import { ImageForm } from "./ImageForm";
 import Link from "next/link";
+import { Center } from "../../ui/Center";
 
 export type Value = {
   title: string;
@@ -34,51 +37,50 @@ export const Form = (props: Props) => {
   return (
     <form onSubmit={form.onSubmit}>
       <ControlPanel postId={props.postId} form={form} />
-
-      <div aria-hidden className="h-32 md:h-28" />
-
-      <div className="flex items-center">
-        <label
-          htmlFor="title"
-          className="w-24 block text-gray-600 dark:text-gray-400"
-        >
-          タイトル
-        </label>
-        <Input
-          id="title"
-          onChange={form.handleTitleChange}
-          className="p-2 w-full border rounded-sm"
-          value={form.values.title}
-        />
-      </div>
-
-      <div className="flex items-start mt-2">
-        <label
-          htmlFor="body"
-          className="w-24 block text-gray-600 dark:text-gray-400"
-        >
-          本文
-        </label>
-        <div className="w-full">
-          <Textarea
-            id="body"
-            onChange={form.handleBodyChange}
+      <Center maxWidth="prose">
+        <Cluster space="2" align="center">
+          <label
+            htmlFor="title"
+            className="w-24 block text-gray-600 dark:text-gray-400"
+          >
+            タイトル
+          </label>
+          <Input
+            id="title"
+            onChange={form.handleTitleChange}
             className="p-2 w-full border rounded-sm"
-            rows={16}
-            value={form.values.body}
+            value={form.values.title}
           />
-          <ImageForm />
-        </div>
-      </div>
+        </Cluster>
+
+        <Cluster space="2" align="start" className="mt-2">
+          <label
+            htmlFor="body"
+            className="w-24 block text-gray-600 dark:text-gray-400"
+          >
+            本文
+          </label>
+          <Stack space="2" className="w-full">
+            <Textarea
+              id="body"
+              onChange={form.handleBodyChange}
+              className="p-2 w-full border rounded-sm"
+              rows={16}
+              value={form.values.body}
+            />
+            <ImageForm />
+          </Stack>
+        </Cluster>
+      </Center>
     </form>
   );
 };
 
 const ControlPanel = ({ postId, form }: { postId?: number; form }) => {
   return (
-    <div className="fixed inset-x-0 top-0 z-50 w-full shadow px-4 py-3 text-gray-700 shadow-sm backdrop-blur dark:border-neutral-700 dark:bg-neutral-900/95 dark:text-gray-300">
-      <div className="flex flex-col gap-3">
-        <div className="flex flex-wrap items-center justify-between gap-3">
+    <div className="inset-x-0 top-0 z-50 w-full shadow px-4 py-3 text-gray-700 shadow-sm backdrop-blur dark:border-neutral-700 dark:bg-neutral-900/95 dark:text-gray-300">
+      <Stack space="3">
+        <Cluster space="3" align="center" justify="between">
           <Link
             href="/admin"
             prefetch={false}
@@ -87,7 +89,7 @@ const ControlPanel = ({ postId, form }: { postId?: number; form }) => {
             ◀ 管理画面に戻る
           </Link>
 
-          <div className="flex flex-wrap items-center justify-end gap-3">
+          <Cluster space="3" align="center" justify="end">
             <PostStatus status={form.values.status} />
             {postId && <PreviewLink postId={postId} />}
             <Button
@@ -107,18 +109,22 @@ const ControlPanel = ({ postId, form }: { postId?: number; form }) => {
             >
               公開する
             </Button>
-          </div>
-        </div>
+          </Cluster>
+        </Cluster>
 
-        <div className="flex flex-wrap items-center justify-end gap-x-6 gap-y-2 md:pl-2">
-          <div className="flex flex-wrap items-center justify-end gap-2">
+        <Cluster
+          align="center"
+          justify="end"
+          className="gap-x-6 gap-y-2 md:pl-2"
+        >
+          <Cluster space="2" align="center" justify="end">
             <label
               htmlFor="publishedAtDate"
               className="whitespace-nowrap text-sm font-medium"
             >
               公開{form.values.status === "draft" ? "予定" : ""}日時
             </label>
-            <div className="flex flex-wrap items-center justify-end gap-2">
+            <Cluster space="2" align="center" justify="end">
               <Input
                 id="publishedAtDate"
                 value={getISODateString(form.values.publishedAt)}
@@ -135,10 +141,10 @@ const ControlPanel = ({ postId, form }: { postId?: number; form }) => {
                 type="time"
                 aria-label="公開時刻"
               />
-            </div>
-          </div>
-        </div>
-      </div>
+            </Cluster>
+          </Cluster>
+        </Cluster>
+      </Stack>
     </div>
   );
 };

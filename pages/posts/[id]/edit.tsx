@@ -7,7 +7,7 @@ import { useBlockNavigation } from "../../../hooks/useBlockNavigation";
 import { useAuthorization } from "../../../hooks/useAuthorization";
 import { useRouter } from "next/router";
 import { useFetchPostAsAdmin } from "../../../hooks/useFetchPostAsAdmin";
-import { EditorLayout } from "../../../components/feature/EditorLayout";
+import EditorMain from "../../../components/feature/EditorMain/index.tsx";
 
 export default function EditPage() {
   const { isAuthorized } = useAuthorization();
@@ -18,7 +18,7 @@ export default function EditPage() {
   useBlockNavigation();
 
   return (
-    <EditorLayout>
+    <>
       <Head>
         <title>記事を編集する - gaaamiiのブログ</title>
       </Head>
@@ -29,7 +29,7 @@ export default function EditPage() {
           <Form onSubmit={onSubmit} value={initialValues} postId={post.id} />
         ) : null}
       </>
-    </EditorLayout>
+    </>
   );
 }
 
