@@ -18,7 +18,7 @@ export default function EditPage() {
   useBlockNavigation();
 
   return (
-    <EditorMain>
+    <>
       <Head>
         <title>記事を編集する - gaaamiiのブログ</title>
       </Head>
@@ -29,7 +29,7 @@ export default function EditPage() {
           <Form onSubmit={onSubmit} value={initialValues} postId={post.id} />
         ) : null}
       </>
-    </EditorMain>
+    </>
   );
 }
 
