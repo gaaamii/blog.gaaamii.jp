@@ -3,6 +3,7 @@ import styles from "./styles.module.css";
 import React, { AnchorHTMLAttributes } from "react";
 import classNames from "classnames";
 import { GaaamiiAvatar } from "../Avatar";
+import { ThemeToggle } from "../../ui/ThemeToggle";
 
 export const NavigationHeader = () => (
   <header>
@@ -15,6 +16,9 @@ export const NavigationHeader = () => (
         <NavigationListItem prefetch={false} href="/about">
           このブログについて
         </NavigationListItem>
+        <li className={classNames(styles.navigationListItem, styles.utilityItem)}>
+          <ThemeToggle />
+        </li>
       </ul>
     </nav>
   </header>

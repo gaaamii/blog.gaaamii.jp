@@ -4,6 +4,7 @@ import { Button } from "../../ui/Button";
 import { IconClosedIcon } from "../../ui/icons/IconClosed";
 import { PencilSquareIcon } from "../../ui/icons/PencilSquare";
 import { CodeBracketIcon } from "../../ui/icons/CodeBracket";
+import { ThemeToggle } from "../../ui/ThemeToggle";
 
 export const AdminLayout = ({ children }: { children: React.ReactNode }) => (
   <>
@@ -28,6 +29,9 @@ const AdminHeader = () => {
           <IconClosedIcon /> blog.gaaamii.jp の管理画面
         </h1>
         <ul className="flex justify-end gap-2">
+          <AdminHeaderNavItem>
+            <ThemeToggle />
+          </AdminHeaderNavItem>
           <AdminHeaderNavItem>
             <Button
               size="sm"

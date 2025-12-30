@@ -29,6 +29,9 @@
 .navigationListItem--isPrimary > a:hover {
   text-decoration: underline;
 }
+.utilityItem {
+  list-style: none;
+}
 .logo {
   border-radius: 50%;
   border: 1px solid #ccc;
@@ -49,5 +52,8 @@
   .navigationListItem--isPrimary {
     display: inline-block;
     flex-grow: initial;
+  }
+  .utilityItem {
+    display: inline-block;
   }
 }
