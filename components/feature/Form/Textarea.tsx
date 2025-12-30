@@ -1,7 +1,14 @@
-import { TextareaHTMLAttributes } from 'react'
+import { TextareaHTMLAttributes } from "react";
 
-export const Textarea = (props: TextareaHTMLAttributes<HTMLTextAreaElement>) => {
+export const Textarea = (
+  props: TextareaHTMLAttributes<HTMLTextAreaElement>,
+) => {
+  const { className, ...rest } = props;
+
   return (
-    <textarea {...props} />
-  )
-}
+    <textarea
+      {...rest}
+      className={["p-2 border rounded-sm", className].filter(Boolean).join(" ")}
+    />
+  );
+};

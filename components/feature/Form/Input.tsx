@@ -1,7 +1,12 @@
-import { InputHTMLAttributes } from 'react'
+import { InputHTMLAttributes } from "react";
 
 export const Input = (props: InputHTMLAttributes<HTMLInputElement>) => {
+  const { className, ...rest } = props;
+
   return (
-    <input {...props} />
-  )
-}
+    <input
+      {...rest}
+      className={["p-2 border rounded-sm", className].filter(Boolean).join(" ")}
+    />
+  );
+};

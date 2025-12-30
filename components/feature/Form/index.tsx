@@ -14,6 +14,7 @@ import { Textarea } from "./Textarea";
 import { ImageForm } from "./ImageForm";
 import Link from "next/link";
 import { Center } from "../../ui/Center";
+import { Box } from "../../ui/Box";
 
 export type Value = {
   title: string;
@@ -36,42 +37,48 @@ export const Form = (props: Props) => {
 
   return (
     <form onSubmit={form.onSubmit}>
-      <ControlPanel postId={props.postId} form={form} />
-      <Center maxWidth="prose">
-        <Cluster space="2" align="center">
-          <label
-            htmlFor="title"
-            className="w-24 block text-gray-600 dark:text-gray-400"
-          >
-            タイトル
-          </label>
-          <Input
-            id="title"
-            onChange={form.handleTitleChange}
-            className="p-2 w-full border rounded-sm"
-            value={form.values.title}
-          />
-        </Cluster>
+      <Stack space="8">
+        <ControlPanel postId={props.postId} form={form} />
+        <Center maxWidth="prose">
+          <Box padding="4">
+            <Stack space="4">
+              <Cluster space="1" align="center">
+                <label
+                  htmlFor="title"
+                  className="w-24 text-gray-600 dark:text-gray-400"
+                >
+                  タイトル
+                </label>
+                <Input
+                  id="title"
+                  onChange={form.handleTitleChange}
+                  value={form.values.title}
+                  className="grow w-lg max-w-[90svw]"
+                />
+              </Cluster>
 
-        <Cluster space="2" align="start" className="mt-2">
-          <label
-            htmlFor="body"
-            className="w-24 block text-gray-600 dark:text-gray-400"
-          >
-            本文
-          </label>
-          <Stack space="2" className="w-full">
-            <Textarea
-              id="body"
-              onChange={form.handleBodyChange}
-              className="p-2 w-full border rounded-sm"
-              rows={16}
-              value={form.values.body}
-            />
-            <ImageForm />
-          </Stack>
-        </Cluster>
-      </Center>
+              <Cluster space="2" align="start" className="mt-2">
+                <label
+                  htmlFor="body"
+                  className="w-24 text-gray-600 dark:text-gray-400"
+                >
+                  本文
+                </label>
+                <Stack space="4" className="grow">
+                  <Textarea
+                    id="body"
+                    onChange={form.handleBodyChange}
+                    rows={16}
+                    value={form.values.body}
+                    className="grow w-lg max-w-[90svw]"
+                  />
+                  <ImageForm />
+                </Stack>
+              </Cluster>
+            </Stack>
+          </Box>
+        </Center>
+      </Stack>
     </form>
   );
 };
