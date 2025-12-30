@@ -11,7 +11,7 @@
     "@types/classnames": "^2.3.4",
     "@types/luxon": "^3.4.2",
     "@types/react-syntax-highlighter": "^15.5.13",
-    "autoprefixer": "^10.4.20",
+    "@tailwindcss/postcss": "^4.0.15",
     "classnames": "^2.5.1",
     "image-size": "^2.0.2",
     "luxon": "^3.5.0",
@@ -23,7 +23,7 @@
     "react-markdown": "^9.0.1",
     "react-syntax-highlighter": "^16.1.0",
     "rss": "^1.2.2",
-    "tailwindcss": "^3.4.17"
+    "tailwindcss": "^4.0.15"
   },
   "devDependencies": {
     "@types/node": "^24.8.1",
