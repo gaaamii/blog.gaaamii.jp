@@ -29,9 +29,10 @@ export const ThemeToggle = ({ size = "sm" }: { size?: "sm" | "md" | "lg" }) => {
 
   useEffect(() => {
     const preferred = getPreferredTheme();
-    setTheme(preferred);
-    applyThemeToDocument(preferred);
-    window.localStorage.setItem(STORAGE_KEY, preferred);
+    setTheme((current) => {
+      const next = current ?? preferred;
+      return next;
+    });
   }, []);
 
   useEffect(() => {
@@ -43,11 +44,8 @@ export const ThemeToggle = ({ size = "sm" }: { size?: "sm" | "md" | "lg" }) => {
     window.localStorage.setItem(STORAGE_KEY, theme);
   }, [theme]);
 
-  if (theme === null) {
-    return null;
-  }
-
-  const isDark = theme === "dark";
+  const effectiveTheme: Theme = theme ?? "light";
+  const isDark = effectiveTheme === "dark";
   const currentLabel = isDark ? "ダーク" : "ライト";
   const nextLabel = isDark ? "ライト" : "ダーク";
 
@@ -104,7 +102,7 @@ export const ThemeToggle = ({ size = "sm" }: { size?: "sm" | "md" | "lg" }) => {
         className={[
           "rounded px-2 py-1 text-xs font-medium",
           isDark
-            ? "bg-neutral-800 text-neutral-300"
+            ? "bg-black text-neutral-300"
             : "bg-neutral-200 text-neutral-700",
         ].join(" ")}
       >
