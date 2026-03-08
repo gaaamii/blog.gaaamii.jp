@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Post, PostStatus } from "@gaaamii/domain/post";
-import { contentApi } from "../lib/api";
+import { api } from "../lib/api";
 
 export const useFetchPostsAsAdmin = (postStatus: PostStatus | null) => {
   const [posts, setPosts] = useState<Post[] | null>(null);
@@ -18,7 +18,7 @@ export const useFetchPostsAsAdmin = (postStatus: PostStatus | null) => {
     const path = postStatus ? `${basePath}?status=${postStatus}` : basePath;
 
     try {
-      const response = await contentApi.get(path);
+      const response = await api.get(path);
       if (response.ok) {
         const json: Post[] = await response.json();
         setPosts(json);

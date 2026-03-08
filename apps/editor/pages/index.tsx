@@ -7,7 +7,7 @@ import { AdminLayout } from "../components/feature/AdminLayout";
 import { getLocalizedDateString } from "@gaaamii/utils/datetime";
 import Link from "next/link";
 import { Button } from "@gaaamii/ui/Button";
-import { contentApi } from "../lib/api";
+import { api } from "../lib/api";
 
 export default function Admin() {
   const { isAuthorized } = useAuthorization();
@@ -127,7 +127,7 @@ const usePostItem = ({
   const [isDeleting, setIsDeleting] = React.useState(false);
   const deletePost = async () => {
     setIsDeleting(true);
-    const response = await contentApi.destroy(`/posts/${post.id}`);
+    const response = await api.destroy(`/posts/${post.id}`);
     if (response.ok) {
       alert("削除しました");
       setIsDeleting(false);
