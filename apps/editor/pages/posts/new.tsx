@@ -1,7 +1,6 @@
 import Head from "next/head";
 import { useCallback, useEffect, useState } from "react";
-import { post } from "../../lib/content-api";
-import { get } from "../../lib/editor-api";
+import { contentApi, editorApi } from "../../lib/api";
 import { Form, Value } from "../../components/feature/Form";
 import { useBlockNavigation } from "../../hooks/useBlockNavigation";
 
@@ -9,7 +8,7 @@ export default function NewPage() {
   const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
 
   const fetchUserSession = useCallback(() => {
-    get("/user_sessions/ping").then((res) => {
+    editorApi.get("/user_sessions/ping").then((res) => {
       if (res.ok) {
         setIsAuthorized(true);
       }
@@ -31,7 +30,7 @@ export default function NewPage() {
   );
 
   const handleSubmit = useCallback(async (value: Value) => {
-    const res = await post("/posts", toParams(value));
+    const res = await contentApi.post("/posts", toParams(value));
     return {
       isSuccess: res.ok,
     };

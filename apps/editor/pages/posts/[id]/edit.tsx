@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { Post } from "@gaaamii/domain/post";
-import { put } from "../../../lib/content-api";
+import { contentApi } from "../../../lib/api";
 import { useCallback } from "react";
 import { Value, Form } from "../../../components/feature/Form";
 import { useBlockNavigation } from "../../../hooks/useBlockNavigation";
@@ -51,7 +51,7 @@ const useEditForm = ({ post }: UseEditFormProps) => {
         return { isSuccess: false };
       }
 
-      const res = await put(`/posts/${post.id}`, toParams(value));
+      const res = await contentApi.put(`/posts/${post.id}`, toParams(value));
       return {
         isSuccess: res.ok,
       };

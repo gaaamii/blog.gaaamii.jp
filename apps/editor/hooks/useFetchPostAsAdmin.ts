@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Post } from "@gaaamii/domain/post";
-import { get } from "../lib/content-api";
+import { contentApi } from "../lib/api";
 
 export const useFetchPostAsAdmin = ({ postId }: { postId?: string }) => {
   const [post, setPost] = useState<Post | null>(null);
@@ -15,7 +15,7 @@ export const useFetchPostAsAdmin = ({ postId }: { postId?: string }) => {
     setIsLoading(true);
     setError(null);
 
-    get(`/admin/posts/${postId}`)
+    contentApi.get(`/admin/posts/${postId}`)
       .then((res) => {
         if (res.ok) {
           res.json().then((json: Post) => {

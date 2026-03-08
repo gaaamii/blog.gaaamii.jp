@@ -1,4 +1,4 @@
-import { get } from "./editor-api";
+import { editorApi } from "./api";
 
 type SignData = {
   signature: string;
@@ -39,7 +39,7 @@ export type CloudinaryResponseJson = {
 const CLOUDINARY_URL = `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUDNAME}/image/upload`;
 
 export const postImageToCloudinary = async (file: File): Promise<Response> => {
-  const signDataResponse = await get("/cloudinary_signature");
+  const signDataResponse = await editorApi.get("/cloudinary_signature");
   const signData = (await signDataResponse.json()) as SignData;
 
   const formData = new FormData();
