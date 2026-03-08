@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/apps/site/components/feature/Main/styles.module.css"],"sourcesContent":[".root {\n  width: 80%;\n  max-width: 800px;\n  /* 100vh - header - footer(ざっくり) */\n  min-height: calc(100svh - 88px - 62px);\n}\n\n@media only screen and (max-width: 480px) {\n  .root {\n    width: 100%;\n    /* 100vh - header - footer(ざっくり) */\n    min-height: calc(100svh - 50px - 62px);\n  }\n}\n"],"names":[],"mappings":"AAAA;;;;;;AAOA;EACE"}}]
-}

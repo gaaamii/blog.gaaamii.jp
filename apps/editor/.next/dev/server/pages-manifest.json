@@ -1,9 +1,0 @@
-{
-  "/": "pages/index.js",
-  "/_app": "pages/_app.js",
-  "/_document": "pages/_document.js",
-  "/api/mock/user_sessions/ping": "pages/api/mock/user_sessions/ping.js",
-  "/posts/[id]": "pages/posts/[id].js",
-  "/posts/[id]/edit": "pages/posts/[id]/edit.js",
-  "/posts/new": "pages/posts/new.js"
-}

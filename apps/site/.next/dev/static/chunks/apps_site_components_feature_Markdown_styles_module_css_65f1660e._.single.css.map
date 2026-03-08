@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/apps/site/components/feature/Markdown/styles.module.css"],"sourcesContent":[".plainCode {\n  width: 100%;\n  border-radius: 2px;\n}\n"],"names":[],"mappings":"AAAA"}}]
-}

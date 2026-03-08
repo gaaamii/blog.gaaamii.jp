@@ -1,5 +1,0 @@
-[00:00:00.543] Server  LOG     ✓ Ready in 352ms
-[00:00:01.453] Browser ERROR   Use the `defaultValue` or `value` props on <select> instead of setting `selected` on <option>.
-[03:37:15.720] Server  LOG     ✓ Compiled in 442ms
-[04:18:40.829] Server  LOG     ✓ Compiled in 89ms
-[04:19:06.953] Browser ERROR   Use the `defaultValue` or `value` props on <select> instead of setting `selected` on <option>.

@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/apps/editor/components/feature/Avatar/styles.module.css"],"sourcesContent":[".avatar {\n  border-radius: 50%;\n  border: 1px solid #ccc;\n  background: #fff;\n}\n"],"names":[],"mappings":"AAAA"}}]
-}
