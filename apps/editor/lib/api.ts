@@ -1,9 +1,8 @@
 import { isDevelopment } from "@gaaamii/utils/environment";
 
-const PROD_API_BASE_URL =
-  process.env.NEXT_PUBLIC_EDITOR_API_BASE_URL || "https://api.gaaamii.jp";
-const DEV_API_BASE_URL =
-  process.env.EDITOR_API_BASE_URL || "http://localhost:3001/api/mock";
+const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_BASE_URL ||
+  (isDevelopment() ? "http://localhost:3001/api/mock" : "https://api.gaaamii.jp");
 
 const requestInitBase: RequestInit = {
   mode: "cors",
@@ -14,7 +13,7 @@ const requestInitBase: RequestInit = {
 };
 
 function getAPIBaseURL() {
-  return isDevelopment() ? DEV_API_BASE_URL : PROD_API_BASE_URL;
+  return API_BASE_URL;
 }
 
 async function request(path: string, init?: RequestInit): Promise<Response> {

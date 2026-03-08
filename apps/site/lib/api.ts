@@ -1,12 +1,11 @@
 import { isDevelopment } from "@gaaamii/utils/environment";
 
-const PROD_API_BASE_URL =
-  process.env.NEXT_PUBLIC_SITE_API_BASE_URL || "https://api.gaaamii.jp";
-const DEV_API_BASE_URL =
-  process.env.SITE_API_BASE_URL || "http://localhost:3000/api/mock";
+const API_BASE_URL =
+  process.env.NEXT_PUBLIC_SITE_API_BASE_URL ||
+  (isDevelopment() ? "http://localhost:3000/api/mock" : "https://api.gaaamii.jp");
 
 function getAPIBaseURL() {
-  return isDevelopment() ? DEV_API_BASE_URL : PROD_API_BASE_URL;
+  return API_BASE_URL;
 }
 
 const requestInitBase: RequestInit = {
