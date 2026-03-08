@@ -1,0 +1,49 @@
+import Link, { LinkProps } from "next/link";
+import styles from "./styles.module.css";
+import React, { AnchorHTMLAttributes } from "react";
+import classNames from "classnames";
+import { GaaamiiAvatar } from "../Avatar";
+import { ThemeToggle } from "@gaaamii/ui/ThemeToggle";
+
+const siteRoot = process.env.NEXT_PUBLIC_SITE_URL || "https://blog.gaaamii.jp";
+
+export const NavigationHeader = () => (
+  <header>
+    <nav className="w-full border-b-2 dark:border-b-stone-500">
+      <ul className={styles.navigationList}>
+        <NavigationListItem isPrimary prefetch={false} href={siteRoot}>
+          <GaaamiiAvatar />
+          gaaamiiのブログ
+        </NavigationListItem>
+        <NavigationListItem prefetch={false} href={`${siteRoot}/about`}>
+          このブログについて
+        </NavigationListItem>
+        <li className={classNames(styles.navigationListItem, styles.utilityItem)}>
+          <ThemeToggle />
+        </li>
+      </ul>
+    </nav>
+  </header>
+);
+type NavigationListItemProps = LinkProps & {
+  children: React.ReactNode;
+  target?: AnchorHTMLAttributes<HTMLAnchorElement>["target"];
+  isPrimary?: boolean;
+};
+const NavigationListItem = (props: NavigationListItemProps) => {
+  const { children, target, isPrimary, ...linkProps } = props;
+  const anchorRelAttribute =
+    target === "_blank" ? "noopener noreferrer" : undefined;
+
+  return (
+    <li
+      className={classNames(styles.navigationListItem, {
+        [styles["navigationListItem--isPrimary"]]: !!isPrimary,
+      })}
+    >
+      <Link {...linkProps} target={target} rel={anchorRelAttribute}>
+        {children}
+      </Link>
+    </li>
+  );
+};

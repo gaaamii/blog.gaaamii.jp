@@ -1,0 +1,10 @@
+{
+  "name": "@gaaamii/editor",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbo -p 3001",
+    "build": "next build",
+    "start": "next start -p 3001"
+  }
+}

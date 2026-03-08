@@ -1,0 +1,15 @@
+/* [project]/apps/editor/components/feature/Main/styles.module.css [client] (css) */
+.styles-module__7aonoG__root {
+  width: 80%;
+  max-width: 800px;
+  min-height: calc(100svh - 150px);
+}
+
+@media only screen and (max-width: 480px) {
+  .styles-module__7aonoG__root {
+    width: 100%;
+    min-height: calc(100svh - 112px);
+  }
+}
+
+/*# sourceMappingURL=apps_editor_components_feature_Main_styles_module_a0868994.css.map*/

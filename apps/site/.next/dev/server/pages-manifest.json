@@ -1,0 +1,11 @@
+{
+  "/": "pages/index.js",
+  "/_app": "pages/_app.js",
+  "/_document": "pages/_document.js",
+  "/_error": "pages/_error.js",
+  "/api/mock/admin/posts": "pages/api/mock/admin/posts.js",
+  "/api/mock/admin/posts/[id]": "pages/api/mock/admin/posts/[id].js",
+  "/api/mock/posts": "pages/api/mock/posts.js",
+  "/api/mock/posts/[id]": "pages/api/mock/posts/[id].js",
+  "/posts/[id]": "pages/posts/[id].js"
+}

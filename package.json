@@ -2,10 +2,17 @@
   "name": "blog-server",
   "version": "0.1.0",
   "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
-    "dev": "next dev --turbo",
-    "build": "next build",
-    "start": "next start"
+    "dev:site": "yarn workspace @gaaamii/site dev",
+    "dev:editor": "yarn workspace @gaaamii/editor dev",
+    "build:site": "yarn workspace @gaaamii/site build",
+    "build:editor": "yarn workspace @gaaamii/editor build",
+    "start:site": "yarn workspace @gaaamii/site start",
+    "start:editor": "yarn workspace @gaaamii/editor start"
   },
   "dependencies": {
     "@types/classnames": "^2.3.4",

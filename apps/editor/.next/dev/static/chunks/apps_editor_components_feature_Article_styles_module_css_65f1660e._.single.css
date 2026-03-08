@@ -1,0 +1,101 @@
+/* [project]/apps/editor/components/feature/Article/styles.module.css [client] (css) */
+.styles-module__mBW2yG__root {
+  border-radius: 8px;
+  font-size: 18px;
+}
+
+.styles-module__mBW2yG__root li:first-child {
+  margin-top: 0;
+}
+
+.styles-module__mBW2yG__root blockquote {
+  background: #f3f3f3;
+  border-radius: 4px;
+  margin-top: 18px;
+  padding: 24px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .styles-module__mBW2yG__root blockquote {
+    background-color: var(--color-neutral-800, #262626);
+    color: var(--color-stone-300, #d6d3d1);
+  }
+
+  @supports (color: lab(0% 0 0)) {
+    .styles-module__mBW2yG__root blockquote {
+      background-color: var(--color-neutral-800, lab(15.204% 0 -.00000596046));
+      color: var(--color-stone-300, lab(84.7909% .928015 1.59738));
+    }
+  }
+}
+
+.styles-module__mBW2yG__root blockquote > p {
+  margin-top: 0;
+}
+
+.styles-module__mBW2yG__root img {
+  background: linear-gradient(135deg, #eee 25%, #ddd 50%, #eee 75%) 0 0 / 200% 100%;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  max-width: 100%;
+  margin-top: 16px;
+  animation: 1.5s ease-in-out infinite styles-module__mBW2yG__loading;
+  box-shadow: 1px 1px 2px #fafafa;
+}
+
+@media (prefers-color-scheme: dark) {
+  .styles-module__mBW2yG__root img {
+    box-shadow: none;
+    border: 0;
+  }
+}
+
+@keyframes styles-module__mBW2yG__loading {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.styles-module__mBW2yG__root pre {
+  white-space: pre-wrap;
+  margin-top: 16px;
+}
+
+.styles-module__mBW2yG__root hr {
+  margin-top: 36px;
+}
+
+@media only screen and (max-width: 480px) {
+  .styles-module__mBW2yG__root {
+    border-radius: 8px;
+  }
+
+  .styles-module__mBW2yG__root > time {
+    margin-top: 16px;
+    display: block;
+  }
+
+  .styles-module__mBW2yG__root pre {
+    width: 100vw;
+    margin-left: -24px;
+    font-size: 12px;
+  }
+
+  .styles-module__mBW2yG__root pre > div {
+    border-radius: 0 !important;
+  }
+
+  .styles-module__mBW2yG__root img {
+    max-width: 100vw;
+    box-shadow: 0;
+    border: none;
+    border-radius: 0;
+    margin-left: -24px;
+  }
+}
+
+/*# sourceMappingURL=apps_editor_components_feature_Article_styles_module_css_65f1660e._.single.css.map*/

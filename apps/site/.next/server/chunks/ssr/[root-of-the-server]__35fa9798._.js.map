@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../../../../apps/site/pages/_app.tsx"],"sourcesContent":["import \"../styles/globals.css\";\n\nfunction MyApp({ Component, pageProps }) {\n  return <Component {...pageProps} />;\n}\n\nexport default MyApp;\n"],"names":[],"mappings":"4JAEA,SAAS,AAAM,WAAE,CAAS,WAAE,CAAS,CAAE,EACrC,MAAO,CAAA,EAAA,EAAA,GAAA,EAAC,EAAA,CAAW,GAAG,CAAS,EACjC"}

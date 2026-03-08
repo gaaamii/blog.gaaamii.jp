@@ -1,0 +1,19 @@
+{
+  "extends": "../../packages/config/tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@gaaamii/domain/*": ["../../packages/domain/*"],
+      "@gaaamii/utils/*": ["../../packages/utils/*"],
+      "@gaaamii/ui/*": ["../../packages/ui/*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "../../packages/**/*.ts",
+    "../../packages/**/*.tsx"
+  ],
+  "exclude": ["node_modules"]
+}

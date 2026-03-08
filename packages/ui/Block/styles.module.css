@@ -1,0 +1,17 @@
+.root {
+  display: block;
+  margin: 24px 0;
+}
+.wide {
+  margin: 32px 0;
+}
+.narrow {
+  margin: 16px 0;
+}
+.alignLeft {
+  text-align: left;
+}
+
+.alignRight {
+  text-align: right;
+}

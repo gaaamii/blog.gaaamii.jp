@@ -1,0 +1,3 @@
+{
+  "/api/mock/admin/posts/[id]": "pages/api/mock/admin/posts/[id].js"
+}

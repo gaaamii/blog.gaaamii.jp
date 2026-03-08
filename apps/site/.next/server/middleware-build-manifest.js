@@ -1,0 +1,65 @@
+globalThis.__BUILD_MANIFEST = {
+  "pages": {
+    "/": [
+      "static/chunks/7d576baa31dcb5b4.js",
+      "static/chunks/204e2614e99eb52b.js",
+      "static/chunks/c4084b0383832ef6.js",
+      "static/chunks/7074e53888ca5fad.js",
+      "static/chunks/c0d8ff6f5b603025.js",
+      "static/chunks/49c45defc7213976.js",
+      "static/chunks/eb132717630f16f7.js",
+      "static/chunks/19d9e85f401447ef.css",
+      "static/chunks/turbopack-fd16994cc1999fb7.js"
+    ],
+    "/404": [
+      "static/chunks/ef56179b95047c09.js",
+      "static/chunks/204e2614e99eb52b.js",
+      "static/chunks/c0d8ff6f5b603025.js",
+      "static/chunks/7074e53888ca5fad.js",
+      "static/chunks/turbopack-83e264b36994dae7.js"
+    ],
+    "/_app": [
+      "static/chunks/bfab6aef2e087cdf.js",
+      "static/chunks/204e2614e99eb52b.js",
+      "static/chunks/7074e53888ca5fad.js",
+      "static/chunks/c0d8ff6f5b603025.js",
+      "static/chunks/f31c70d8329e7d9a.css",
+      "static/chunks/turbopack-09cf3cba68d1bb6b.js"
+    ],
+    "/_error": [
+      "static/chunks/a924a2f90b2db396.js",
+      "static/chunks/204e2614e99eb52b.js",
+      "static/chunks/c0d8ff6f5b603025.js",
+      "static/chunks/7074e53888ca5fad.js",
+      "static/chunks/turbopack-fdb564b2cd1bb541.js"
+    ],
+    "/about": [
+      "static/chunks/31419afd89067505.js",
+      "static/chunks/0aeb262a8575a1fa.js",
+      "static/chunks/c0d8ff6f5b603025.js",
+      "static/chunks/7074e53888ca5fad.js",
+      "static/chunks/204e2614e99eb52b.js",
+      "static/chunks/19d9e85f401447ef.css",
+      "static/chunks/turbopack-f7d1bd445600e31e.js"
+    ],
+    "/posts/[id]": [
+      "static/chunks/077e778c9a8e3d28.js",
+      "static/chunks/49c45defc7213976.js",
+      "static/chunks/0aeb262a8575a1fa.js",
+      "static/chunks/f9986477ad7297e6.js",
+      "static/chunks/c0d8ff6f5b603025.js",
+      "static/chunks/7074e53888ca5fad.js",
+      "static/chunks/204e2614e99eb52b.js",
+      "static/chunks/19d9e85f401447ef.css",
+      "static/chunks/turbopack-617e301ea5039bdb.js"
+    ]
+  },
+  "devFiles": [],
+  "polyfillFiles": [],
+  "lowPriorityFiles": [],
+  "rootMainFiles": []
+};
+globalThis.__BUILD_MANIFEST.lowPriorityFiles = [
+"/static/" + process.env.__NEXT_BUILD_ID + "/_buildManifest.js",
+"/static/" + process.env.__NEXT_BUILD_ID + "/_ssgManifest.js"
+];
