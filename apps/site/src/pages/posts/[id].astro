@@ -1,0 +1,27 @@
+---
+import { getLocalizedDateString } from '@gaaamii/utils/datetime';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getPublishedPostById, getPublishedPosts } from '../../lib/posts';
+import { SiteFrame } from '../../components/SiteFrame';
+
+export const getStaticPaths = async () => {
+  const posts = getPublishedPosts();
+  return posts.map((post) => ({
+    params: { id: String(post.id) },
+  }));
+};
+
+const id = Number(Astro.params.id);
+const post = getPublishedPostById(id);
+
+if (!post) {
+  return Astro.redirect('/404');
+}
+---
+
+<BaseLayout title={`${post.title} | blog.gaaamii.jp`} description={post.title}>
+  <SiteFrame title={post.title}>
+    <p class="mb-4 text-sm text-gray-600">{getLocalizedDateString(post.published_at)}</p>
+    <article class="prose max-w-none whitespace-pre-wrap">{post.body}</article>
+  </SiteFrame>
+</BaseLayout>
