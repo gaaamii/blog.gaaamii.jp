@@ -3,8 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo -p 3000",
-    "build": "next build",
-    "start": "next start -p 3000"
+    "dev": "astro dev --host --port 3000",
+    "build": "astro build",
+    "start": "astro preview --host --port 3000",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/react": "^4.4.0",
+    "astro": "^5.14.1"
   }
 }

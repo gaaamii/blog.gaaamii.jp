@@ -1,0 +1,23 @@
+---
+import { getLocalizedDateString } from '@gaaamii/utils/datetime';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getPublishedPosts } from '../lib/posts';
+import { SiteFrame } from '../components/SiteFrame';
+
+const posts = getPublishedPosts();
+---
+
+<BaseLayout title="blog.gaaamii.jp" description="gaaamii blog top page">
+  <SiteFrame title="Posts">
+    <ul class="space-y-3">
+      {posts.map((post) => (
+        <li>
+          <a class="font-medium underline underline-offset-2" href={`/posts/${post.id}`}>
+            {post.title}
+          </a>
+          <p class="text-sm text-gray-600">{getLocalizedDateString(post.published_at)}</p>
+        </li>
+      ))}
+    </ul>
+  </SiteFrame>
+</BaseLayout>
