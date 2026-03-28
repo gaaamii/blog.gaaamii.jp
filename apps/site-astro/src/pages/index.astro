@@ -1,0 +1,17 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import { posts } from "../data/posts";
+---
+
+<MainLayout title="blog.gaaamii.jp (Astro PoC)">
+  <h1>Astro Site PoC</h1>
+  <p>Phase 1 で site 側を Astro に移行するための最小構成です。</p>
+
+  <ul>
+    {posts.map((post) => (
+      <li><a href={`/posts/${post.id}`}>{post.title}</a></li>
+    ))}
+  </ul>
+
+  <p><a href="/about">About</a></p>
+</MainLayout>
