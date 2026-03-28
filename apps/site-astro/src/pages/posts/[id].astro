@@ -1,0 +1,21 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import { posts } from "../../data/posts";
+
+export async function getStaticPaths() {
+  return posts.map((post) => ({
+    params: { id: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+---
+
+<MainLayout title={`${post.title} | Astro PoC`}>
+  <article>
+    <h1>{post.title}</h1>
+    <p>{post.body}</p>
+    <p><a href="/">一覧へ戻る</a></p>
+  </article>
+</MainLayout>
