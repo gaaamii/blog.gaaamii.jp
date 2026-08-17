@@ -5,6 +5,8 @@ import {
   uploadImageToCloudinary,
 } from "@gaaamii/editor-shared/cloudinary";
 
+export type { CloudinaryResponseJson } from "@gaaamii/editor-shared/cloudinary";
+
 export const postImageToCloudinary = async (file: File): Promise<Response> => {
   const json = await uploadImageToCloudinary({
     file,
