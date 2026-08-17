@@ -1,85 +1,45 @@
 import { useState } from "react";
 import type { Post, PostStatus } from "@gaaamii/domain/post";
+import { Box } from "@gaaamii/ui/Box";
+import { Cluster } from "@gaaamii/ui/Cluster";
+import { Stack } from "@gaaamii/ui/Stack";
 import { getLocalizedDateString } from "@gaaamii/utils/datetime";
 import { Link, useSearchParams } from "react-router-dom";
 import { api } from "../lib/api";
 import { useAdminPosts } from "../hooks/useAdminPosts";
 
-const filterSelectStyle = {
-  height: "40px",
-  minWidth: "180px",
-  padding: "0 12px",
-  borderRadius: "12px",
-  border: "1px solid rgba(17, 24, 39, 0.16)",
-  backgroundColor: "#fff",
-};
-
-const buttonStyle = {
-  padding: "10px 14px",
-  borderRadius: "12px",
-  border: "1px solid rgba(17, 24, 39, 0.12)",
-  backgroundColor: "#ffffff",
-  cursor: "pointer",
-  textDecoration: "none",
-  color: "#111827",
-  fontWeight: 600,
-};
-
-const sectionStyle = {
-  padding: "24px",
-  border: "1px solid rgba(17, 24, 39, 0.08)",
-  borderRadius: "20px",
-  backgroundColor: "rgba(255, 255, 255, 0.86)",
-  boxShadow: "0 20px 60px rgba(17, 24, 39, 0.08)",
-};
-
 export const DashboardPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const rawStatus = searchParams.get("status");
   const postStatus =
-    rawStatus === "draft" || rawStatus === "published"
-      ? rawStatus
-      : null;
+    rawStatus === "draft" || rawStatus === "published" ? rawStatus : null;
 
   const { posts, isLoading, error, refetch } = useAdminPosts(postStatus);
 
   return (
-    <section style={sectionStyle}>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "end",
-          gap: "16px",
-          flexWrap: "wrap",
-          marginBottom: "24px",
-        }}
-      >
+    <section className="rounded-[20px] border border-[rgba(17,24,39,0.08)] bg-white p-6">
+      <Cluster justify="between" align="end" className="mb-6">
         <div>
-          <h2 style={{ margin: 0, fontSize: "24px" }}>記事一覧</h2>
-          <p style={{ margin: "8px 0 0", color: "#6b7280" }}>
+          <h2 className="m-0 text-2xl">記事一覧</h2>
+          <p className="mt-2 text-gray-500">
             `apps/editor` の一覧画面を React Router 側へ移植中です。
           </p>
         </div>
-        <Link to="/posts/new" style={buttonStyle}>
+        <Link to="/posts/new" className={buttonLinkClassName}>
           新規投稿
         </Link>
-      </div>
+      </Cluster>
 
-      <label
+      <Stack
+        as="label"
         htmlFor="post-status"
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "8px",
-          marginBottom: "20px",
-          fontWeight: 600,
-        }}
+        space="2"
+        className="mb-5 font-semibold"
       >
         <span>公開状態</span>
         <select
           id="post-status"
-          style={filterSelectStyle}
+          className="h-10 min-w-[180px] rounded-xl border border-[rgba(17,24,39,0.16)] bg-white px-3"
           value={postStatus ?? "all"}
           onChange={(event) => {
             const nextStatus = event.target.value;
@@ -98,12 +58,13 @@ export const DashboardPage = () => {
           <option value="draft">下書き</option>
           <option value="published">公開済み</option>
         </select>
-      </label>
+      </Stack>
 
       {isLoading ? <StatusPanel>読込中...</StatusPanel> : null}
       {!isLoading && error ? (
         <StatusPanel tone="error">
-          記事一覧の取得に失敗しました。`yarn dev:editor-mock-api` を確認してください。
+          記事一覧の取得に失敗しました。`yarn dev:editor-mock-api`
+          を確認してください。
         </StatusPanel>
       ) : null}
       {!isLoading && !error ? (
@@ -134,17 +95,18 @@ const StatusPanel = ({
         };
 
   return (
-    <div
-      style={{
-        padding: "16px",
-        borderRadius: "16px",
-        border: `1px solid ${palette.borderColor}`,
-        backgroundColor: palette.backgroundColor,
-        color: palette.color,
-      }}
+    <Box
+      padding="4"
+      borderWidth="1"
+      radius="2xl"
+      className={
+        tone === "error"
+          ? "border-red-200 bg-red-50 text-red-800"
+          : "border-gray-200 bg-gray-100 text-gray-700"
+      }
     >
       {children}
-    </div>
+    </Box>
   );
 };
 
@@ -160,11 +122,11 @@ const PostList = ({
   }
 
   return (
-    <div style={{ display: "grid", gap: "12px" }}>
+    <Stack space="3">
       {posts.map((post) => (
         <PostListItem key={post.id} post={post} onDelete={onDelete} />
       ))}
-    </div>
+    </Stack>
   );
 };
 
@@ -196,56 +158,35 @@ const PostListItem = ({
   };
 
   return (
-    <article
-      style={{
-        display: "grid",
-        gap: "12px",
-        padding: "18px",
-        borderRadius: "16px",
-        border: "1px solid rgba(17, 24, 39, 0.08)",
-        backgroundColor: "#fff",
-      }}
+    <Box
+      as="article"
+      borderWidth="1"
+      radius="2xl"
+      className="border-[rgba(17,24,39,0.08)] bg-white p-[18px]"
     >
-      <div
-        style={{
-          display: "flex",
-          gap: "12px",
-          justifyContent: "space-between",
-          alignItems: "start",
-          flexWrap: "wrap",
-        }}
-      >
-        <div style={{ display: "grid", gap: "10px" }}>
-          <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-            <time style={{ fontSize: "14px", color: "#6b7280" }}>
+      <Cluster justify="between" align="start" className="gap-3">
+        <Stack className="gap-2.5">
+          <Cluster align="center" space="2">
+            <time className="text-sm text-gray-500">
               {getLocalizedDateString(post.published_at)}
             </time>
             <StatusBadge status={post.status} />
-          </div>
+          </Cluster>
           <Link
             to={`/posts/${post.id}`}
-            style={{
-              fontWeight: 700,
-              fontSize: "18px",
-              lineHeight: 1.5,
-              textDecoration: "none",
-            }}
+            className="text-lg leading-6 font-bold no-underline"
           >
             {post.title}
           </Link>
-        </div>
+        </Stack>
 
-        <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
-          <Link to={`/posts/${post.id}/edit`} style={buttonStyle}>
+        <Cluster space="2.5">
+          <Link to={`/posts/${post.id}/edit`} className={buttonLinkClassName}>
             編集する
           </Link>
           <button
             type="button"
-            style={{
-              ...buttonStyle,
-              color: "#991b1b",
-              backgroundColor: "#fef2f2",
-            }}
+            className={`${buttonLinkClassName} bg-red-50 text-red-800`}
             onClick={() => {
               void handleDelete();
             }}
@@ -253,9 +194,9 @@ const PostListItem = ({
           >
             {isDeleting ? "削除中..." : "削除する"}
           </button>
-        </div>
-      </div>
-    </article>
+        </Cluster>
+      </Cluster>
+    </Box>
   );
 };
 
@@ -272,19 +213,18 @@ const StatusBadge = ({ status }: { status: PostStatus }) => {
         };
 
   return (
-    <span
-      style={{
-        display: "inline-flex",
-        alignItems: "center",
-        padding: "4px 10px",
-        borderRadius: "999px",
-        fontSize: "12px",
-        fontWeight: 700,
-        backgroundColor: palette.backgroundColor,
-        color: palette.color,
-      }}
+    <Box
+      as="span"
+      className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-bold ${
+        status === "published"
+          ? "bg-green-100 text-green-800"
+          : "bg-violet-100 text-violet-800"
+      }`}
     >
       {status === "published" ? "公開済み" : "下書き"}
-    </span>
+    </Box>
   );
 };
+
+const buttonLinkClassName =
+  "cursor-pointer rounded-xl border border-[rgba(17,24,39,0.12)] bg-white px-[14px] py-2.5 font-semibold text-gray-900 no-underline disabled:cursor-not-allowed";

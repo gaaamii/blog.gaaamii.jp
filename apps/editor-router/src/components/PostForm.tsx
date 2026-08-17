@@ -1,3 +1,6 @@
+import { Box } from "@gaaamii/ui/Box";
+import { Center } from "@gaaamii/ui/Center";
+import { Stack } from "@gaaamii/ui/Stack";
 import { PostImageUpload } from "./PostImageUpload";
 
 type Props = {
@@ -18,49 +21,47 @@ export const PostForm = ({
   onBodyChange,
 }: Props) => {
   return (
-    <form
-      id={formId}
-      onSubmit={onSubmit}
-      style={{
-        maxWidth: "840px",
-        margin: "0 auto",
-        display: "grid",
-        gap: "20px",
-        marginTop: "48px",
-        padding: "24px 32px",
-        border: "1px solid rgba(17, 24, 39, 0.08)",
-        borderRadius: "20px",
-        backgroundColor: "rgba(255, 255, 255, 0.86)",
-      }}
-    >
-      <Field label="タイトル" htmlFor="title">
-        <input
-          id="title"
-          value={title}
-          onChange={(event) => {
-            onTitleChange(event.target.value);
-          }}
-          style={textInputStyle}
-        />
-      </Field>
+    <Center maxWidth="4xl">
+      <Box
+        as="form"
+        id={formId}
+        onSubmit={onSubmit}
+        padding="6"
+        borderWidth="1"
+        radius="3xl"
+        className="mt-12 max-w-[840px] border-[rgba(17,24,39,0.08)] bg-white/85"
+      >
+        <Stack space="5">
+          <Field label="タイトル" htmlFor="title">
+            <input
+              id="title"
+              value={title}
+              onChange={(event) => {
+                onTitleChange(event.target.value);
+              }}
+              className={inputClassName}
+            />
+          </Field>
 
-      <Field label="本文" htmlFor="body">
-        <textarea
-          id="body"
-          rows={18}
-          value={body}
-          onChange={(event) => {
-            onBodyChange(event.target.value);
-          }}
-          style={textareaStyle}
-        />
-        <PostImageUpload
-          onInsertMarkdown={(markdown) => {
-            onBodyChange(`${body}${markdown}`);
-          }}
-        />
-      </Field>
-    </form>
+          <Field label="本文" htmlFor="body">
+            <textarea
+              id="body"
+              rows={18}
+              value={body}
+              onChange={(event) => {
+                onBodyChange(event.target.value);
+              }}
+              className={textareaClassName}
+            />
+            <PostImageUpload
+              onInsertMarkdown={(markdown) => {
+                onBodyChange(`${body}${markdown}`);
+              }}
+            />
+          </Field>
+        </Stack>
+      </Box>
+    </Center>
   );
 };
 
@@ -73,30 +74,17 @@ const Field = ({
   htmlFor: string;
   children: React.ReactNode;
 }) => (
-  <label
+  <Stack
+    as="label"
     htmlFor={htmlFor}
-    style={{
-      display: "grid",
-      gap: "10px",
-      fontWeight: 600,
-      color: "#374151",
-    }}
+    className="gap-2.5 font-semibold text-gray-700"
   >
     <span>{label}</span>
     {children}
-  </label>
+  </Stack>
 );
 
-const textInputStyle = {
-  width: "100%",
-  padding: "12px 14px",
-  borderRadius: "14px",
-  border: "1px solid rgba(17, 24, 39, 0.14)",
-  backgroundColor: "#ffffff",
-};
+const inputClassName =
+  "w-full rounded-[14px] border border-[rgba(17,24,39,0.14)] bg-white px-[14px] py-3";
 
-const textareaStyle = {
-  ...textInputStyle,
-  resize: "vertical" as const,
-  lineHeight: 1.8,
-};
+const textareaClassName = `${inputClassName} resize-y leading-[1.8]`;

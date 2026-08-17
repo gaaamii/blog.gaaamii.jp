@@ -1,3 +1,6 @@
+import { Box } from "@gaaamii/ui/Box";
+import { Center } from "@gaaamii/ui/Center";
+import { Cluster } from "@gaaamii/ui/Cluster";
 import type { PostStatus } from "@gaaamii/domain/post";
 import {
   getFullTimeString,
@@ -26,59 +29,29 @@ export const PostFormToolbar = ({
   onPublishedAtChange: (value: Date) => void;
 }) => {
   return (
-    <div
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 30,
-        padding: "12px 20px",
-        borderBottom: "1px solid rgba(17, 24, 39, 0.08)",
-        backgroundColor: "rgba(255, 255, 255, 0.92)",
-      }}
+    <Box
+      className="fixed inset-x-0 top-0 z-30 border-b border-[rgba(17,24,39,0.08)] bg-white/92 px-5 py-3"
     >
-      <div
-        style={{
-          maxWidth: "1440px",
-          margin: "0 auto",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            gap: "16px",
-            alignItems: "center",
-            flexWrap: "nowrap",
-          }}
+      <Center maxWidth="none" className="max-w-[1440px]">
+        <Cluster
+          justify="between"
+          align="center"
+          className="gap-4 flex-nowrap"
         >
           <Link
             to="/"
-            style={{
-              textDecoration: "none",
-              fontWeight: 600,
-              color: "#374151",
-            }}
+            className="font-semibold text-gray-700 no-underline"
           >
             ← 一覧に戻る
           </Link>
 
-          <div
-            style={{
-              display: "flex",
-              gap: "12px",
-              alignItems: "center",
-              flexWrap: "nowrap",
-            }}
+          <Cluster
+            align="center"
+            className="gap-3 flex-nowrap"
           >
             <label
               htmlFor="publishedAtDate"
-              style={{
-                whiteSpace: "nowrap",
-                fontSize: "14px",
-                fontWeight: 600,
-              }}
+              className="whitespace-nowrap text-sm font-semibold"
             >
               公開{status === "draft" ? "予定" : ""}日時
             </label>
@@ -93,7 +66,7 @@ export const PostFormToolbar = ({
                 );
                 onPublishedAtChange(nextDate);
               }}
-              style={dateInputStyle}
+              className={dateInputClassName}
             />
             <input
               id="publishedAtTime"
@@ -106,7 +79,7 @@ export const PostFormToolbar = ({
                 );
                 onPublishedAtChange(nextDate);
               }}
-              style={dateInputStyle}
+              className={dateInputClassName}
             />
             <StatusBadge status={status} />
             {typeof previewPostId === "number" ? (
@@ -114,7 +87,7 @@ export const PostFormToolbar = ({
                 href={`${siteRoot}/posts/${previewPostId}`}
                 target="_blank"
                 rel="noreferrer"
-                style={secondaryLinkStyle}
+                className={secondaryActionClassName}
               >
                 プレビュー
               </a>
@@ -123,7 +96,7 @@ export const PostFormToolbar = ({
               type="button"
               onClick={onDraftSave}
               disabled={isSubmitting}
-              style={secondaryButtonStyle}
+              className={secondaryActionClassName}
             >
               下書き保存
             </button>
@@ -131,70 +104,35 @@ export const PostFormToolbar = ({
               type="submit"
               form={formId}
               disabled={isSubmitting}
-              style={primaryButtonStyle}
+              className={primaryActionClassName}
             >
               公開する
             </button>
-          </div>
-        </div>
-      </div>
-    </div>
+          </Cluster>
+        </Cluster>
+      </Center>
+    </Box>
   );
 };
 
 const StatusBadge = ({ status }: { status: PostStatus }) => (
-  <span
-    style={{
-      display: "inline-flex",
-      alignItems: "center",
-      padding: "6px 12px",
-      borderRadius: "999px",
-      backgroundColor: status === "draft" ? "#ede9fe" : "#dcfce7",
-      color: status === "draft" ? "#5b21b6" : "#166534",
-      fontWeight: 700,
-      fontSize: "13px",
-    }}
+  <Box
+    as="span"
+    className={`inline-flex items-center rounded-full px-3 py-1.5 text-[13px] font-bold ${
+      status === "draft"
+        ? "bg-violet-100 text-violet-800"
+        : "bg-green-100 text-green-800"
+    }`}
   >
     {status === "draft" ? "下書き" : "公開済み"}
-  </span>
+  </Box>
 );
 
-const dateInputStyle = {
-  padding: "6px 12px",
-  borderRadius: "999px",
-  border: "1px solid rgba(17, 24, 39, 0.14)",
-  backgroundColor: "#fff",
-  fontSize: "13px",
-  lineHeight: 1.2,
-};
+const dateInputClassName =
+  "rounded-full border border-[rgba(17,24,39,0.14)] bg-white px-3 py-1.5 text-[13px] leading-[1.2]";
 
-const secondaryButtonStyle = {
-  padding: "6px 12px",
-  borderRadius: "999px",
-  border: "1px solid rgba(17, 24, 39, 0.12)",
-  backgroundColor: "#f3f4f6",
-  cursor: "pointer",
-  fontWeight: 700,
-  fontSize: "13px",
-  lineHeight: 1.2,
-};
+const secondaryActionClassName =
+  "inline-flex cursor-pointer items-center rounded-full border border-[rgba(17,24,39,0.12)] bg-gray-100 px-3 py-1.5 text-[13px] leading-[1.2] font-bold text-gray-900 no-underline transition-colors disabled:cursor-not-allowed";
 
-const primaryButtonStyle = {
-  padding: "6px 12px",
-  borderRadius: "999px",
-  border: "1px solid rgba(2, 132, 199, 0.2)",
-  backgroundColor: "#0284c7",
-  color: "#fff",
-  cursor: "pointer",
-  fontWeight: 700,
-  fontSize: "13px",
-  lineHeight: 1.2,
-};
-
-const secondaryLinkStyle = {
-  ...secondaryButtonStyle,
-  color: "#111827",
-  textDecoration: "none",
-  display: "inline-flex",
-  alignItems: "center",
-};
+const primaryActionClassName =
+  "cursor-pointer rounded-full border border-sky-600/20 bg-sky-600 px-3 py-1.5 text-[13px] leading-[1.2] font-bold text-white transition-colors disabled:cursor-not-allowed";

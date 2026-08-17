@@ -33,14 +33,7 @@ const CodeComponent = ({
 
   if (inline || !match) {
     return (
-      <code
-        style={{
-          padding: "0.2em 0.45em",
-          borderRadius: "8px",
-          backgroundColor: "#e5e7eb",
-          fontSize: "0.95em",
-        }}
-      >
+      <code className="rounded-lg bg-gray-200 px-[0.45em] py-[0.2em] text-[0.95em]">
         {children}
       </code>
     );
@@ -85,15 +78,7 @@ const CodeBlock = ({ language, value }: { language: string; value: string }) => 
 
   if (!SyntaxHighlighter || !syntaxStyle) {
     return (
-      <pre
-        style={{
-          overflow: "auto",
-          padding: "16px",
-          borderRadius: "16px",
-          backgroundColor: "#111827",
-          color: "#f9fafb",
-        }}
-      >
+      <pre className="overflow-auto rounded-2xl bg-gray-900 p-4 text-gray-50">
         <code>{value}</code>
       </pre>
     );
@@ -107,21 +92,11 @@ const CodeBlock = ({ language, value }: { language: string; value: string }) => 
 };
 
 const Heading2 = ({ children }: { children?: React.ReactNode }) => (
-  <h2 style={{ marginTop: "40px", marginBottom: 0, fontSize: "1.4rem" }}>
-    {children}
-  </h2>
+  <h2 className="mt-10 text-[1.4rem]">{children}</h2>
 );
 
 const Heading3 = ({ children }: { children?: React.ReactNode }) => (
-  <h3
-    style={{
-      marginTop: "32px",
-      marginBottom: 0,
-      paddingLeft: "16px",
-      borderLeft: "4px solid #111827",
-      fontSize: "1.15rem",
-    }}
-  >
+  <h3 className="mt-8 border-l-4 border-black pl-4 text-[1.15rem]">
     {children}
   </h3>
 );
@@ -132,10 +107,7 @@ const Paragraph = ({
 }: {
   children?: React.ReactNode;
 }) => (
-  <p
-    style={{ marginTop: "16px", marginBottom: 0, lineHeight: 1.9 }}
-    {...props}
-  >
+  <p className="mt-4 leading-[1.9]" {...props}>
     {children}
   </p>
 );
@@ -152,7 +124,7 @@ const Anchor = ({
     href={href}
     target="_blank"
     rel="noreferrer"
-    style={{ fontWeight: 700, textDecoration: "underline", color: "#0369a1" }}
+    className="font-bold text-sky-700 underline"
     {...props}
   >
     {children}
@@ -160,9 +132,9 @@ const Anchor = ({
 );
 
 const UnorderedList = ({ children }: { children?: React.ReactNode }) => (
-  <ul style={{ marginTop: "16px", paddingLeft: "20px" }}>{children}</ul>
+  <ul className="mt-4 pl-5">{children}</ul>
 );
 
 const ListItem = ({ children }: { children?: React.ReactNode }) => (
-  <li style={{ marginTop: "8px", lineHeight: 1.9 }}>{children}</li>
+  <li className="mt-2 leading-[1.9]">{children}</li>
 );

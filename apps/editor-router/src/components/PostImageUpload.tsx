@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { Box } from "@gaaamii/ui/Box";
+import { Cluster } from "@gaaamii/ui/Cluster";
+import { Stack } from "@gaaamii/ui/Stack";
 import { postImageToCloudinary } from "../lib/cloudinary";
 
 export const PostImageUpload = ({
@@ -44,26 +47,17 @@ export const PostImageUpload = ({
   };
 
   return (
-    <details
-      style={{
-        marginTop: "12px",
-        borderRadius: "14px",
-        border: "1px solid rgba(17, 24, 39, 0.12)",
-        backgroundColor: "#fff",
-      }}
+    <Box
+      as="details"
+      borderWidth="1"
+      radius="2xl"
+      className="mt-3 border-[rgba(17,24,39,0.12)] bg-white"
     >
-      <summary
-        style={{
-          cursor: "pointer",
-          padding: "14px 16px",
-          fontWeight: 700,
-          color: "#374151",
-        }}
-      >
+      <summary className="cursor-pointer px-4 py-[14px] font-bold text-gray-700">
         画像アップロード
       </summary>
 
-      <div style={{ padding: "0 16px 16px", display: "grid", gap: "12px" }}>
+      <Stack space="3" className="px-4 pb-4">
         <input
           type="file"
           accept="image/*"
@@ -72,14 +66,14 @@ export const PostImageUpload = ({
           }}
         />
 
-        <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+        <Cluster space="2.5">
           <button
             type="button"
             onClick={() => {
               void handleUpload();
             }}
             disabled={isUploading || !file}
-            style={secondaryButtonStyle}
+            className={secondaryButtonClassName}
           >
             {isUploading ? "アップロード中..." : "アップロードする"}
           </button>
@@ -91,7 +85,7 @@ export const PostImageUpload = ({
                 onClick={() => {
                   void handleCopy();
                 }}
-                style={secondaryButtonStyle}
+                className={secondaryButtonClassName}
               >
                 URL をコピー
               </button>
@@ -100,66 +94,44 @@ export const PostImageUpload = ({
                 onClick={() => {
                   onInsertMarkdown(`\n![](${url})\n`);
                 }}
-                style={secondaryButtonStyle}
+                className={secondaryButtonClassName}
               >
                 本文に追記
               </button>
             </>
           ) : null}
-        </div>
+        </Cluster>
 
         {error ? (
-          <p style={{ margin: 0, color: "#991b1b", lineHeight: 1.6 }}>{error}</p>
+          <p className="m-0 leading-[1.6] text-red-800">{error}</p>
         ) : null}
 
         {url ? (
-          <div
-            style={{
-              display: "grid",
-              gap: "10px",
-              padding: "12px",
-              borderRadius: "14px",
-              border: "1px solid rgba(17, 24, 39, 0.08)",
-              backgroundColor: "#f9fafb",
-            }}
+          <Box
+            borderWidth="1"
+            radius="2xl"
+            className="border-[rgba(17,24,39,0.08)] bg-gray-50 p-3"
           >
-            <img
-              src={url}
-              alt="Uploaded preview"
-              style={{
-                maxWidth: "100%",
-                maxHeight: "320px",
-                objectFit: "contain",
-                borderRadius: "12px",
-                backgroundColor: "#fff",
-              }}
-            />
-            <p
-              style={{
-                margin: 0,
-                fontSize: "13px",
-                color: "#4b5563",
-                overflowWrap: "anywhere",
-              }}
-            >
-              画像URL: {url}
-            </p>
-          </div>
+            <Stack space="2.5">
+              <img
+                src={url}
+                alt="Uploaded preview"
+                className="max-h-80 max-w-full rounded-xl bg-white object-contain"
+              />
+              <p className="m-0 overflow-wrap-anywhere text-[13px] text-gray-600 [overflow-wrap:anywhere]">
+                画像URL: {url}
+              </p>
+            </Stack>
+          </Box>
         ) : (
-          <p style={{ margin: 0, color: "#6b7280", fontSize: "14px" }}>
+          <p className="m-0 text-sm text-gray-500">
             Cloudinary 設定がある場合、ここから画像 URL を生成できます。
           </p>
         )}
-      </div>
-    </details>
+      </Stack>
+    </Box>
   );
 };
 
-const secondaryButtonStyle = {
-  padding: "10px 14px",
-  borderRadius: "12px",
-  border: "1px solid rgba(17, 24, 39, 0.12)",
-  backgroundColor: "#f3f4f6",
-  cursor: "pointer",
-  fontWeight: 600,
-};
+const secondaryButtonClassName =
+  "cursor-pointer rounded-xl border border-[rgba(17,24,39,0.12)] bg-gray-100 px-[14px] py-2.5 font-semibold disabled:cursor-not-allowed";

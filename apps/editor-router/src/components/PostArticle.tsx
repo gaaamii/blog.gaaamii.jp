@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 import type { Post } from "@gaaamii/domain/post";
+import { Center } from "@gaaamii/ui/Center";
+import { Stack } from "@gaaamii/ui/Stack";
 import { getLocalizedDateString } from "@gaaamii/utils/datetime";
 
 export const PostArticle = ({
@@ -10,27 +12,18 @@ export const PostArticle = ({
   children: ReactNode;
 }) => {
   return (
-    <article
-      style={{
-        maxWidth: "760px",
-        margin: "0 auto",
-        paddingBottom: "32px",
-      }}
-    >
-      <time style={{ fontSize: "14px", color: "#6b7280" }}>
-        {getLocalizedDateString(post.published_at)}
-      </time>
-      <h2
-        style={{
-          marginTop: "16px",
-          marginBottom: 0,
-          fontSize: "2rem",
-          lineHeight: 1.25,
-        }}
-      >
-        {post.title}
-      </h2>
-      <div style={{ marginTop: "32px" }}>{children}</div>
-    </article>
+    <Center as="article" maxWidth="3xl" className="pb-8">
+      <Stack space="8">
+        <div>
+          <time className="text-sm text-gray-500">
+            {getLocalizedDateString(post.published_at)}
+          </time>
+          <h2 className="mt-4 text-[2rem] leading-[1.25]">
+            {post.title}
+          </h2>
+        </div>
+        <div>{children}</div>
+      </Stack>
+    </Center>
   );
 };
