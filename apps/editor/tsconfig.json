@@ -4,6 +4,7 @@
     "baseUrl": ".",
     "paths": {
       "@gaaamii/domain/*": ["../../packages/domain/*"],
+      "@gaaamii/editor-shared/*": ["../../packages/editor-shared/*"],
       "@gaaamii/utils/*": ["../../packages/utils/*"],
       "@gaaamii/ui/*": ["../../packages/ui/*"]
     }

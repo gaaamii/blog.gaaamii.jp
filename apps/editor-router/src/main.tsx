@@ -6,28 +6,42 @@ import {
   Outlet,
   RouterProvider,
 } from "react-router-dom";
+import "./styles.css";
 import { DashboardPage } from "./pages/DashboardPage";
 import { PostDetailPage } from "./pages/PostDetailPage";
 import { PostEditPage } from "./pages/PostEditPage";
 import { PostNewPage } from "./pages/PostNewPage";
 import { useAuthorization } from "./useAuthorization";
+import { AppShell } from "./components/AppShell";
 
 const AppLayout = () => {
-  const { isAuthorized, isLoading } = useAuthorization();
+  const { isAuthorized, isLoading, error } = useAuthorization();
 
   if (isLoading) {
     return <p>Checking session...</p>;
   }
 
+  if (error === "mock_api_unavailable") {
+    return (
+      <AppShell>
+        <p>Mock API is not reachable.</p>
+        <p>Start `yarn dev:editor-mock-api` and reload this page.</p>
+      </AppShell>
+    );
+  }
+
   if (!isAuthorized) {
-    return <p>Not authorized. Please sign in from the legacy editor flow.</p>;
+    return (
+      <AppShell>
+        <p>Not authorized. Please sign in from the legacy editor flow.</p>
+      </AppShell>
+    );
   }
 
   return (
-    <main style={{ maxWidth: 920, margin: "0 auto", padding: "2rem 1rem" }}>
-      <h1>React Router Editor PoC</h1>
+    <AppShell>
       <Outlet />
-    </main>
+    </AppShell>
   );
 };
 

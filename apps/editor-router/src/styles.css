@@ -1,0 +1,39 @@
+:root {
+  font-family:
+    "SF Pro Text",
+    "Hiragino Sans",
+    "Noto Sans JP",
+    sans-serif;
+  color: #111827;
+  background: #f4f4f1;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.88), transparent 36%),
+    linear-gradient(180deg, #f4f4f1 0%, #ece7df 100%);
+  color: #111827;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
