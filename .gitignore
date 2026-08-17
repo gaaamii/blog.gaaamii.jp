@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/apps/*/node_modules
 /.pnp
 .pnp.js
 
@@ -11,10 +12,13 @@
 # next.js
 /.next/
 /apps/*/.next/
+/apps/*/.astro
 /out/
 
 # production
 /build
+/apps/*/dist
+*.tsbuildinfo
 
 # misc
 .DS_Store
