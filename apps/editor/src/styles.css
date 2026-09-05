@@ -1,0 +1,39 @@
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+:root {
+  font-family:
+    "SF Pro Text",
+    "Hiragino Sans",
+    "Noto Sans JP",
+    sans-serif;
+  color: #111827;
+  background: #f4f4f1;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  color: #111827;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}

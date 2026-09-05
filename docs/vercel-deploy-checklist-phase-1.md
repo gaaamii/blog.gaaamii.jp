@@ -30,7 +30,9 @@
 
 - Root Directory: `apps/editor`
 - Domain: `blog-editor.gaaamii.jp`
-- Framework Preset: `Next.js`
+- Framework Preset: `Vite`
+- Build Command: `yarn build`
+- Output Directory: `dist`
 
 ## 環境変数
 
@@ -46,11 +48,9 @@
 
 `apps/editor/.env.example` を基準に設定する。
 
-- `NEXT_PUBLIC_API_BASE_URL`
-- `NEXT_PUBLIC_SITE_URL`
-- `NEXT_PUBLIC_CLOUDINARY_CLOUDNAME`
-- `CLOUDINARY_API_KEY`
-- `CLOUDINARY_API_SECRET`
+- `VITE_API_BASE_URL`
+- `VITE_SITE_URL`
+- `VITE_CLOUDINARY_CLOUDNAME`
 
 ## 重要な確認事項
 

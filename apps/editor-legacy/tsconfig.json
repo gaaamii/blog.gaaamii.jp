@@ -1,18 +1,20 @@
 {
   "extends": "../../packages/config/tsconfig.base.json",
   "compilerOptions": {
-    "target": "ES2022",
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "moduleResolution": "Bundler",
-    "strict": true,
     "baseUrl": ".",
     "paths": {
       "@gaaamii/domain/*": ["../../packages/domain/*"],
       "@gaaamii/editor-shared/*": ["../../packages/editor-shared/*"],
       "@gaaamii/utils/*": ["../../packages/utils/*"],
       "@gaaamii/ui/*": ["../../packages/ui/*"]
-    },
-    "types": ["vite/client"]
+    }
   },
-  "include": ["src"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "../../packages/**/*.ts",
+    "../../packages/**/*.tsx"
+  ],
+  "exclude": ["node_modules"]
 }
