@@ -39,5 +39,3 @@ yarn dev:site
 - `editor`: `http://localhost:3200`
 - mock API: `http://127.0.0.1:3005`
 - preview link の向き先: site 側ローカル URL
-
-旧 Next.js 版は `apps/editor-legacy` に残しており、`yarn dev:editor-legacy` で起動できる。

@@ -10,14 +10,11 @@
     "dev:site": "yarn workspace @gaaamii/site dev",
     "dev:editor": "yarn workspace @gaaamii/editor dev",
     "dev:editor-mock-api": "yarn workspace @gaaamii/editor mock:api",
-    "dev:editor-legacy": "yarn workspace @gaaamii/editor-legacy dev",
     "build:site": "yarn workspace @gaaamii/site build",
     "build:editor": "yarn workspace @gaaamii/editor build",
-    "build:editor-legacy": "yarn workspace @gaaamii/editor-legacy build",
     "start:site": "yarn workspace @gaaamii/site start",
     "start:editor": "yarn workspace @gaaamii/editor preview",
-    "preview:editor": "yarn workspace @gaaamii/editor preview",
-    "start:editor-legacy": "yarn workspace @gaaamii/editor-legacy start"
+    "preview:editor": "yarn workspace @gaaamii/editor preview"
   },
   "dependencies": {
     "@types/classnames": "^2.3.4",
