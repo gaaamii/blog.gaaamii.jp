@@ -22,7 +22,7 @@ export const DashboardPage = () => {
         <div>
           <h2 className="m-0 text-2xl">記事一覧</h2>
           <p className="mt-2 text-gray-500">
-            `apps/editor` の一覧画面を React Router 側へ移植中です。
+            記事の管理と公開状態の変更ができます。
           </p>
         </div>
         <Link to="/posts/new" className={buttonLinkClassName}>

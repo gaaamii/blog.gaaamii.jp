@@ -1,5 +1,8 @@
 # Rearchitecture Phase 2 Editor Router Implementation Plan
 
+> 2026-09-05: React Router 版を正式な `apps/editor` とし、旧 Next.js 版を
+> `apps/editor-legacy` へ移動した。以下は移行時点の計画として残す。
+
 `apps/editor` を移行元として、`apps/editor-router` を雛形から実運用可能な管理画面へ引き上げるための実装計画をまとめる。
 
 ## 目的
@@ -39,12 +42,12 @@
 
 ### ルート対応
 
-| 旧 (`apps/editor`) | 新 (`apps/editor-router`) | 現状 | 備考 |
-| --- | --- | --- | --- |
-| `/` | `/` | PoC のみ | 記事一覧、status filter、削除導線が必要 |
-| `/posts/new` | `/posts/new` | PoC のみ | 投稿フォーム移植が必要 |
-| `/posts/:id` | `/posts/:id` | PoC のみ | 記事詳細、Markdown 表示が必要 |
-| `/posts/:id/edit` | `/posts/:id/edit` | PoC のみ | 初期値ロード付き編集フォームが必要 |
+| 旧 (`apps/editor`) | 新 (`apps/editor-router`) | 現状     | 備考                                    |
+| ------------------ | ------------------------- | -------- | --------------------------------------- |
+| `/`                | `/`                       | PoC のみ | 記事一覧、status filter、削除導線が必要 |
+| `/posts/new`       | `/posts/new`              | PoC のみ | 投稿フォーム移植が必要                  |
+| `/posts/:id`       | `/posts/:id`              | PoC のみ | 記事詳細、Markdown 表示が必要           |
+| `/posts/:id/edit`  | `/posts/:id/edit`         | PoC のみ | 初期値ロード付き編集フォームが必要      |
 
 ### 移植対象コンポーネント
 
@@ -261,12 +264,12 @@ PoC の `useEffect + fetch` を増やすより、React Router 側の route modul
 
 ## route migration table
 
-| 優先度 | route | 旧実装の主責務 | 新実装の主責務 |
-| --- | --- | --- | --- |
-| P1 | `/` | 認証後に記事一覧、status 絞り込み、削除 | layout 配下で一覧表示、search params 管理、削除後再検証 |
-| P1 | `/posts/:id` | 管理用記事詳細、Markdown 表示 | `:id` 読込、エラー分岐、Markdown 表示 |
-| P1 | `/posts/new` | 新規投稿、下書き保存、画像アップロード | form submit、block navigation、upload |
-| P1 | `/posts/:id/edit` | 既存記事編集、プレビュー | 初期値読込、更新 submit、preview link |
+| 優先度 | route             | 旧実装の主責務                          | 新実装の主責務                                          |
+| ------ | ----------------- | --------------------------------------- | ------------------------------------------------------- |
+| P1     | `/`               | 認証後に記事一覧、status 絞り込み、削除 | layout 配下で一覧表示、search params 管理、削除後再検証 |
+| P1     | `/posts/:id`      | 管理用記事詳細、Markdown 表示           | `:id` 読込、エラー分岐、Markdown 表示                   |
+| P1     | `/posts/new`      | 新規投稿、下書き保存、画像アップロード  | form submit、block navigation、upload                   |
+| P1     | `/posts/:id/edit` | 既存記事編集、プレビュー                | 初期値読込、更新 submit、preview link                   |
 
 ## リスク
 
