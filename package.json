@@ -8,11 +8,15 @@
   ],
   "scripts": {
     "dev:site": "yarn workspace @gaaamii/site dev",
+    "dev:site-astro": "yarn workspace @gaaamii/site-astro dev",
     "dev:editor": "yarn workspace @gaaamii/editor dev",
     "dev:editor-mock-api": "yarn workspace @gaaamii/editor mock:api",
     "build:site": "yarn workspace @gaaamii/site build",
+    "build:site-astro": "yarn workspace @gaaamii/site-astro build",
     "build:editor": "yarn workspace @gaaamii/editor build",
     "start:site": "yarn workspace @gaaamii/site start",
+    "preview:site-astro": "yarn workspace @gaaamii/site-astro preview",
+    "check:site-astro": "yarn workspace @gaaamii/site-astro run check",
     "start:editor": "yarn workspace @gaaamii/editor preview",
     "preview:editor": "yarn workspace @gaaamii/editor preview"
   },

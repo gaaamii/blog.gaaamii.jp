@@ -1,15 +1,17 @@
 ---
 import MainLayout from "../../layouts/MainLayout.astro";
-import { posts } from "../../data/posts";
+import { getPublishedPost, getPublishedPosts } from "../../lib/posts";
 
 export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+
   return posts.map((post) => ({
-    params: { id: post.id },
-    props: { post },
+    params: { id: String(post.id) },
   }));
 }
 
-const { post } = Astro.props;
+const id = Number(Astro.params.id);
+const post = await getPublishedPost(id);
 ---
 
 <MainLayout title={`${post.title} | Astro PoC`}>

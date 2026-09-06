@@ -1,11 +1,13 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
-import { posts } from "../data/posts";
+import { getPublishedPosts } from "../lib/posts";
+
+const posts = await getPublishedPosts();
 ---
 
 <MainLayout title="blog.gaaamii.jp (Astro PoC)">
   <h1>Astro Site PoC</h1>
-  <p>Phase 1 で site 側を Astro に移行するための最小構成です。</p>
+  <p>Content API から取得した公開記事を静的に生成しています。</p>
 
   <ul>
     {posts.map((post) => (
