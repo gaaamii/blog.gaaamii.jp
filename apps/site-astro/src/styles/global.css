@@ -1,12 +1,120 @@
 @import "tailwindcss";
 @source "../../../../packages/ui";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer base {
   html {
-    font-family: ui-sans-serif, system-ui, sans-serif;
+    color-scheme: light;
+    font-family:
+      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+      Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  }
+
+  html.dark {
+    color-scheme: dark;
   }
 
   body {
     margin: 0;
+    background: white;
+    color: black;
+  }
+
+  html.dark body {
+    background: var(--color-neutral-800);
+    color: var(--color-neutral-300);
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+}
+
+@layer components {
+  .markdown h2 {
+    @apply mt-10 text-xl font-bold;
+  }
+
+  .markdown h3 {
+    @apply mt-8 border-l-4 border-black pl-6 text-lg font-bold dark:border-white;
+  }
+
+  .markdown p,
+  .markdown ul,
+  .markdown ol {
+    @apply mt-4 leading-8;
+  }
+
+  .markdown li {
+    @apply mt-1 ml-5 leading-8;
+  }
+
+  .markdown ul > li {
+    list-style-type: disc;
+  }
+
+  .markdown ol > li {
+    list-style-type: decimal;
+  }
+
+  .markdown a {
+    @apply font-bold underline hover:text-sky-600;
+  }
+
+  .markdown :not(pre) > code {
+    @apply rounded bg-neutral-100 px-1 py-0.5 dark:bg-neutral-700;
+  }
+
+  .markdown pre {
+    @apply mt-4 overflow-x-auto rounded-lg p-4 text-sm;
+    white-space: pre-wrap;
+  }
+
+  .markdown blockquote {
+    @apply mt-4 rounded bg-neutral-100 p-6 dark:bg-neutral-700;
+  }
+
+  .markdown blockquote > p:first-child {
+    margin-top: 0;
+  }
+
+  .markdown img {
+    @apply mt-4 h-auto max-w-full rounded-lg border border-neutral-200 dark:border-0;
+  }
+
+  .markdown hr {
+    @apply mt-9;
+  }
+
+  .markdown .astro-code,
+  .markdown .astro-code span {
+    color: var(--shiki-light);
+    background-color: var(--shiki-light-bg);
+  }
+
+  html.dark .markdown .astro-code,
+  html.dark .markdown .astro-code span {
+    color: var(--shiki-dark);
+    background-color: var(--shiki-dark-bg);
+  }
+}
+
+@media (max-width: 480px) {
+  .markdown pre {
+    width: 100vw;
+    margin-left: -24px;
+    border-radius: 0;
+    font-size: 12px;
+  }
+
+  .markdown img {
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: -24px;
+    border: 0;
+    border-radius: 0;
   }
 }

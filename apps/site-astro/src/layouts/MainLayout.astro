@@ -1,25 +1,66 @@
 ---
 import { Center } from "@gaaamii/ui/Center";
+import Footer from "../components/Footer.astro";
+import NavigationHeader from "../components/NavigationHeader.astro";
+import { SITE_DESCRIPTION, SITE_TITLE, TWITTER_ACCOUNT } from "../config/site";
+import logoImage from "../../../site/public/logo.png";
 import "../styles/global.css";
 
 interface Props {
-  title: string;
+  title?: string;
+  description?: string;
+  pathname?: string;
+  type?: "website" | "article";
 }
 
-const { title } = Astro.props;
+const {
+  title = SITE_TITLE,
+  description = SITE_DESCRIPTION,
+  pathname = Astro.url.pathname,
+  type = "website",
+} = Astro.props;
+const canonical = new URL(pathname, Astro.site);
+const socialImage = new URL(logoImage.src, Astro.site);
 ---
 
 <!doctype html>
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href={logoImage.src} />
+    <link rel="apple-touch-icon" href={logoImage.src} />
+    <meta property="og:type" content={type} />
+    <meta property="og:site_name" content={SITE_TITLE} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content={TWITTER_ACCOUNT} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
     <title>{title}</title>
+    <script is:inline>
+      (() => {
+        try {
+          const stored = localStorage.getItem("theme");
+          const dark = stored === "dark" ||
+            (stored !== "light" && matchMedia("(prefers-color-scheme: dark)").matches);
+          document.documentElement.classList.toggle("dark", dark);
+        } catch {}
+      })();
+    </script>
   </head>
   <body>
-    <Center as="main" maxWidth="4xl" gutter="4" className="py-8">
+    <NavigationHeader />
+    <Center as="main" maxWidth="4xl" gutter="4" className="min-h-[calc(100svh-18rem)] py-8 sm:py-12">
       <slot />
     </Center>
+    <Footer />
   </body>
 </html>

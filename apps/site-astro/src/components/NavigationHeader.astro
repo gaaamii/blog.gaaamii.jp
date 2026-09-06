@@ -1,0 +1,27 @@
+---
+import { Center } from "@gaaamii/ui/Center";
+import { Cluster } from "@gaaamii/ui/Cluster";
+import { ThemeToggle } from "@gaaamii/ui/ThemeToggle";
+import Avatar from "./Avatar.astro";
+---
+
+<header>
+  <nav class="border-b-2 border-neutral-200 dark:border-neutral-600" aria-label="メインナビゲーション">
+    <Center maxWidth="5xl" gutter="4">
+      <Cluster as="ul" align="center" justify="end" space="4" className="h-15 list-none">
+        <li class="mr-auto list-none font-bold">
+          <a href="/" class="flex items-center gap-2 underline">
+            <Avatar />
+            <span>gaaamiiのブログ</span>
+          </a>
+        </li>
+        <li class="hidden list-none sm:block">
+          <a href="/about" class="hover:underline">このブログについて</a>
+        </li>
+        <li class="list-none">
+          <ThemeToggle client:load />
+        </li>
+      </Cluster>
+    </Center>
+  </nav>
+</header>
