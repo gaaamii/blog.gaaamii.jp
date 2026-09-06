@@ -1,3 +1,13 @@
 {
-  "extends": "astro/tsconfigs/strict"
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "jsx": "react-jsx",
+    "paths": {
+      "@gaaamii/domain/*": ["../../packages/domain/*"],
+      "@gaaamii/utils/*": ["../../packages/utils/*"],
+      "@gaaamii/ui/*": ["../../packages/ui/*"]
+    }
+  },
+  "include": [".astro/types.d.ts", "**/*"]
 }

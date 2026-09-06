@@ -19,7 +19,8 @@ const buildPosts = () => [
   }),
   buildPost({
     id: 2,
-    title: "長いタイトル。タイトルにしてはとても長くて改行もするかもしれない。たぶん改行する",
+    title:
+      "長いタイトル。タイトルにしてはとても長くて改行もするかもしれない。たぶん改行する",
     published_at: new Date("2025-02-26").toISOString(),
   }),
   buildPost({
@@ -47,6 +48,8 @@ const seedPosts = () =>
 
 let posts = seedPosts();
 
+const toPostSummary = ({ body: _body, ...post }) => post;
+
 const getNextId = () =>
   posts.reduce((maxId, post) => Math.max(maxId, post.id), 0) + 1;
 
@@ -64,11 +67,15 @@ const withTimestamp = (postPayload) => ({
 export const handlers = [
   http.get("/api/mock/user_sessions/ping", () => HttpResponse.json({})),
 
-  http.get("/api/mock/posts", () => HttpResponse.json(posts)),
+  http.get("/api/mock/posts", () =>
+    HttpResponse.json(
+      posts.filter((post) => post.status === "published").map(toPostSummary),
+    ),
+  ),
 
   http.get("/api/mock/posts/:id", ({ params }) => {
     const post = posts.find((entry) => String(entry.id) === String(params.id));
-    if (!post) {
+    if (!post || post.status !== "published") {
       return HttpResponse.json({ message: "Not Found" }, { status: 404 });
     }
 

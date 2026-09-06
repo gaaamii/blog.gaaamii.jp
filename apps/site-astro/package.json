@@ -2,12 +2,28 @@
   "name": "@gaaamii/site-astro",
   "version": "0.0.0",
   "private": true,
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
     "dev": "astro dev --port 3100",
+    "check": "astro check",
     "build": "astro build",
     "preview": "astro preview --port 3100"
   },
   "dependencies": {
-    "astro": "^5.0.0"
+    "@astrojs/react": "6.0.5",
+    "@tailwindcss/vite": "4.3.3",
+    "astro": "7.3.1",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "tailwindcss": "4.3.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3",
+    "typescript": "5.9.3",
+    "vite": "8.2.2"
   }
 }
