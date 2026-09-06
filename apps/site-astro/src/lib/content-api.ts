@@ -2,52 +2,16 @@ import type { Post, PostStatus } from "@gaaamii/domain/post";
 
 type Fetch = typeof globalThis.fetch;
 
-export class ContentApiError extends Error {
-  constructor(message: string, options?: ErrorOptions) {
-    super(message, options);
-    this.name = new.target.name;
-  }
-}
-
-export class ContentApiConfigurationError extends ContentApiError {}
-
-export class ContentApiNetworkError extends ContentApiError {
-  constructor(
-    readonly url: string,
-    cause: unknown,
-  ) {
-    super(`Content API request failed: ${url}`, { cause });
-  }
-}
-
-export class ContentApiHttpError extends ContentApiError {
-  constructor(
-    readonly url: string,
-    readonly status: number,
-  ) {
-    super(`Content API returned HTTP ${status}: ${url}`);
-  }
-}
-
-export class ContentApiNotFoundError extends ContentApiHttpError {}
-
-export class ContentApiInvalidResponseError extends ContentApiError {
-  constructor(
-    readonly url: string,
-    message: string,
-    options?: ErrorOptions,
-  ) {
-    super(`Invalid Content API response from ${url}: ${message}`, options);
-  }
-}
+type RequestOptions = {
+  apiBaseUrl?: URL;
+  fetchImplementation?: Fetch;
+};
 
 const getApiBaseUrl = () => {
   const value = import.meta.env.SITE_API_BASE_URL;
 
   if (!value) {
-    throw new ContentApiConfigurationError(
-      "SITE_API_BASE_URL is required to build the Astro site",
-    );
+    throw new Error("SITE_API_BASE_URL is required to build the Astro site");
   }
 
   try {
@@ -55,10 +19,7 @@ const getApiBaseUrl = () => {
     url.pathname = `${url.pathname.replace(/\/$/, "")}/`;
     return url;
   } catch (cause) {
-    throw new ContentApiConfigurationError(
-      "SITE_API_BASE_URL must be an absolute URL",
-      { cause },
-    );
+    throw new Error("SITE_API_BASE_URL must be an absolute URL", { cause });
   }
 };
 
@@ -109,57 +70,50 @@ const parsePosts = (value: unknown): Post[] => {
   return value.map((post, index) => parsePost(post, `response[${index}]`));
 };
 
-export class ContentApiClient {
-  constructor(
-    private readonly apiBaseUrl = getApiBaseUrl(),
-    private readonly fetchImplementation: Fetch = globalThis.fetch,
-  ) {}
+const request = async <T>(
+  path: string,
+  parse: (value: unknown) => T,
+  options: RequestOptions = {},
+): Promise<T> => {
+  const apiBaseUrl = options.apiBaseUrl ?? getApiBaseUrl();
+  const fetchImplementation = options.fetchImplementation ?? globalThis.fetch;
+  const url = new URL(path, apiBaseUrl).toString();
+  let response: Response;
 
-  getPosts(): Promise<Post[]> {
-    return this.get("posts", parsePosts);
+  try {
+    response = await fetchImplementation(url, {
+      headers: { Accept: "application/json" },
+      signal: AbortSignal.timeout(10_000),
+    });
+  } catch (cause) {
+    throw new Error(`Content API request failed: ${url}`, { cause });
   }
 
-  getPost(id: number): Promise<Post> {
-    return this.get(`posts/${id}`, (value) => parsePost(value, "response"));
+  if (!response.ok) {
+    throw new Error(`Content API returned HTTP ${response.status}: ${url}`);
   }
 
-  private async get<T>(path: string, parse: (value: unknown) => T): Promise<T> {
-    const url = new URL(path, this.apiBaseUrl).toString();
-    let response: Response;
-
-    try {
-      response = await this.fetchImplementation(url, {
-        headers: { Accept: "application/json" },
-        signal: AbortSignal.timeout(10_000),
-      });
-    } catch (cause) {
-      throw new ContentApiNetworkError(url, cause);
-    }
-
-    if (!response.ok) {
-      if (response.status === 404) {
-        throw new ContentApiNotFoundError(url, response.status);
-      }
-      throw new ContentApiHttpError(url, response.status);
-    }
-
-    let value: unknown;
-    try {
-      value = await response.json();
-    } catch (cause) {
-      throw new ContentApiInvalidResponseError(url, "body is not valid JSON", {
-        cause,
-      });
-    }
-
-    try {
-      return parse(value);
-    } catch (cause) {
-      throw new ContentApiInvalidResponseError(
-        url,
-        cause instanceof Error ? cause.message : "unexpected shape",
-        { cause },
-      );
-    }
+  let value: unknown;
+  try {
+    value = await response.json();
+  } catch (cause) {
+    throw new Error(`Invalid Content API response from ${url}: invalid JSON`, {
+      cause,
+    });
   }
-}
+
+  try {
+    return parse(value);
+  } catch (cause) {
+    const reason = cause instanceof Error ? cause.message : "unexpected shape";
+    throw new Error(`Invalid Content API response from ${url}: ${reason}`, {
+      cause,
+    });
+  }
+};
+
+export const fetchPosts = (options?: RequestOptions) =>
+  request("posts", parsePosts, options);
+
+export const fetchPost = (id: number, options?: RequestOptions) =>
+  request(`posts/${id}`, (value) => parsePost(value, "response"), options);

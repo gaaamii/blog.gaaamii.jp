@@ -61,3 +61,10 @@ yarn dev:site-astro
 
 production build と preview も同じ環境変数を指定し、
 `yarn build:site-astro`、`yarn preview:site-astro` を実行する。
+
+Astro site 用の root command:
+
+- `yarn dev:site-astro`: 開発サーバーを port 3100 で起動し、変更を監視する
+- `yarn check:site-astro`: Astro と TypeScript の型・構文を検査する
+- `yarn build:site-astro`: Content API を読み、静的ファイルを `dist` に生成する
+- `yarn preview:site-astro`: 生成済みの `dist` を port 3100 で確認する

@@ -31,6 +31,11 @@
 API client は Astro frontmatter からのみ呼び出し、`PUBLIC_` prefix を使わない。
 ブラウザへ API base URL、cookie、認証情報を渡さず、リクエスト時にも API を呼ばない。
 
+### Data access uses functions
+
+Content API client と記事 repository は状態を持つ class にせず、処理単位の関数として定義する。
+テスト時に差し替える API URL と `fetch` は関数の option で受け取る。
+
 ### Public repository filters drafts defensively
 
 公開 API は published のみを返す契約とし、ローカル mock も同じ契約へ変更した。
@@ -38,8 +43,8 @@ API client は Astro frontmatter からのみ呼び出し、`PUBLIC_` prefix を
 
 ### API failures remain distinguishable
 
-設定不備、通信失敗、404、その他の HTTP error、JSON 不正、レスポンス shape 不正を
-別の error class とした。空配列へ変換せず、そのまま build を失敗させる。
+設定不備、通信失敗、HTTP error、JSON 不正、レスポンス shape 不正は、判別可能な message を
+持つ標準 `Error` とする。独自 Error class は設けず、空配列へ変換せずに build を失敗させる。
 
 ### Shared UI renders as static HTML
 
