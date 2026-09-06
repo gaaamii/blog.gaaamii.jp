@@ -1,8 +1,8 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
-import { getPublishedPosts } from "../lib/posts";
+import { getPosts } from "../lib/posts";
 
-const posts = await getPublishedPosts();
+const posts = await getPosts();
 ---
 
 <MainLayout title="blog.gaaamii.jp (Astro PoC)">

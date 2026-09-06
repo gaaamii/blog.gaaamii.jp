@@ -37,10 +37,10 @@ Content API client と記事 repository は状態を持つ class にせず、処
 テスト時に差し替える API URL と `fetch` は関数の option で受け取る。
 モジュールスコープには再代入を伴う cache を持たず、data access の変数は原則 `const` とする。
 
-### Public repository filters drafts defensively
+### The public API returns only visible posts
 
-公開 API は published のみを返す契約とし、ローカル mock も同じ契約へ変更した。
-加えて repository でも status を検査し、一覧と詳細の双方で draft を公開生成対象から除外する。
+公開 API は site から閲覧可能な記事だけを返す契約とし、ローカル mock も同じ契約へ変更した。
+site の data access とページでは `published` status を判定せず、`getPosts` / `getPost` の結果をそのまま使う。
 
 ### API failures remain distinguishable
 
