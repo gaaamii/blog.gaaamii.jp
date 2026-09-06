@@ -9,13 +9,13 @@
     "preview": "vite preview --port 3200"
   },
   "dependencies": {
-    "react": "^19.2.3",
+    "react": "^19.2.8",
     "react-dom": "^19.2.3",
     "react-router-dom": "^7.0.0"
   },
   "devDependencies": {
     "@mswjs/http-middleware": "^0.10.3",
-    "@types/react": "^19.2.7",
+    "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.0.0",
     "msw": "^2.15.0",
