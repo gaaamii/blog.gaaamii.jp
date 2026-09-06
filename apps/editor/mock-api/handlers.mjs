@@ -48,6 +48,8 @@ const seedPosts = () =>
 
 let posts = seedPosts();
 
+const toPostSummary = ({ body: _body, ...post }) => post;
+
 const getNextId = () =>
   posts.reduce((maxId, post) => Math.max(maxId, post.id), 0) + 1;
 
@@ -66,7 +68,9 @@ export const handlers = [
   http.get("/api/mock/user_sessions/ping", () => HttpResponse.json({})),
 
   http.get("/api/mock/posts", () =>
-    HttpResponse.json(posts.filter((post) => post.status === "published")),
+    HttpResponse.json(
+      posts.filter((post) => post.status === "published").map(toPostSummary),
+    ),
   ),
 
   http.get("/api/mock/posts/:id", ({ params }) => {

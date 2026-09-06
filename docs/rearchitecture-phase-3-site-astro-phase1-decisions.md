@@ -42,6 +42,9 @@ Content API client と記事 repository は状態を持つ class にせず、処
 公開 API は site から閲覧可能な記事だけを返す契約とし、ローカル mock も同じ契約へ変更した。
 site の data access とページでは `published` status を判定せず、`getPosts` / `getPost` の結果をそのまま使う。
 
+`GET /posts` は本文を含まないため、`id`、`title`、`published_at` だけの `PostSummary` として扱う。
+`body` を含む `PostDetail` は `GET /posts/:id` から取得し、一覧と詳細を別々の response shape として検証する。
+
 ### API failures remain distinguishable
 
 設定不備、通信失敗、HTTP error、JSON 不正、レスポンス shape 不正は、判別可能な message を

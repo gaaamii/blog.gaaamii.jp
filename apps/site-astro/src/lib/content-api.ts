@@ -1,4 +1,7 @@
-import type { Post, PostStatus } from "@gaaamii/domain/post";
+import type { Post } from "@gaaamii/domain/post";
+
+export type PostSummary = Pick<Post, "id" | "title" | "published_at">;
+export type PostDetail = PostSummary & Pick<Post, "body">;
 
 type Fetch = typeof globalThis.fetch;
 
@@ -26,9 +29,7 @@ const getApiBaseUrl = () => {
 const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === "object" && value !== null && !Array.isArray(value);
 
-const postStatuses: readonly PostStatus[] = ["published", "draft"];
-
-const parsePost = (value: unknown, location: string): Post => {
+const parsePostSummary = (value: unknown, location: string): PostSummary => {
   if (!isRecord(value)) {
     throw new Error(`${location} must be an object`);
   }
@@ -41,10 +42,6 @@ const parsePost = (value: unknown, location: string): Post => {
     throw new Error(`${location}.title must be a string`);
   }
 
-  if (typeof value.body !== "string") {
-    throw new Error(`${location}.body must be a string`);
-  }
-
   if (
     typeof value.published_at !== "string" ||
     Number.isNaN(Date.parse(value.published_at))
@@ -52,22 +49,31 @@ const parsePost = (value: unknown, location: string): Post => {
     throw new Error(`${location}.published_at must be an ISO date string`);
   }
 
-  if (
-    typeof value.status !== "string" ||
-    !postStatuses.includes(value.status as PostStatus)
-  ) {
-    throw new Error(`${location}.status must be published or draft`);
-  }
-
-  return value as Post;
+  return {
+    id: value.id as number,
+    title: value.title,
+    published_at: value.published_at,
+  };
 };
 
-const parsePosts = (value: unknown): Post[] => {
+const parsePostDetail = (value: unknown, location: string): PostDetail => {
+  const summary = parsePostSummary(value, location);
+
+  if (!isRecord(value) || typeof value.body !== "string") {
+    throw new Error(`${location}.body must be a string`);
+  }
+
+  return { ...summary, body: value.body };
+};
+
+const parsePosts = (value: unknown): PostSummary[] => {
   if (!Array.isArray(value)) {
     throw new Error("response must be an array");
   }
 
-  return value.map((post, index) => parsePost(post, `response[${index}]`));
+  return value.map((post, index) =>
+    parsePostSummary(post, `response[${index}]`),
+  );
 };
 
 const request = async <T>(
@@ -116,4 +122,8 @@ export const fetchPosts = (options?: RequestOptions) =>
   request("posts", parsePosts, options);
 
 export const fetchPost = (id: number, options?: RequestOptions) =>
-  request(`posts/${id}`, (value) => parsePost(value, "response"), options);
+  request(
+    `posts/${id}`,
+    (value) => parsePostDetail(value, "response"),
+    options,
+  );

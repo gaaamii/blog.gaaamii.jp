@@ -1,6 +1,10 @@
-import type { Post } from "@gaaamii/domain/post";
-import { fetchPost, fetchPosts } from "./content-api";
+import {
+  fetchPost,
+  fetchPosts,
+  type PostDetail,
+  type PostSummary,
+} from "./content-api";
 
-export const getPosts = (): Promise<Post[]> => fetchPosts();
+export const getPosts = (): Promise<PostSummary[]> => fetchPosts();
 
-export const getPost = (id: number): Promise<Post> => fetchPost(id);
+export const getPost = (id: number): Promise<PostDetail> => fetchPost(id);
