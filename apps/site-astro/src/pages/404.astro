@@ -1,0 +1,25 @@
+---
+import { Center } from "@gaaamii/ui/Center";
+import { Cluster } from "@gaaamii/ui/Cluster";
+import { Stack } from "@gaaamii/ui/Stack";
+import Avatar from "../components/Avatar.astro";
+import { SITE_TITLE } from "../config/site";
+import MainLayout from "../layouts/MainLayout.astro";
+---
+
+<MainLayout title={`ページが見つかりませんでした - ${SITE_TITLE}`} pathname="/404">
+  <Center maxWidth="xl" className="py-16 sm:py-24">
+    <Stack space="10">
+      <div>
+        <Cluster align="center" space="3" className="flex-nowrap">
+          <h1 class="text-lg sm:text-2xl">ページが見つかりませんでした</h1>
+          <Avatar />
+        </Cluster>
+        <p class="w-full text-right text-base sm:text-lg">ステータスコード: 404</p>
+      </div>
+      <a class="block w-full rounded-md border border-neutral-300 py-4 text-center hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-700" href="/">
+        トップに戻る
+      </a>
+    </Stack>
+  </Center>
+</MainLayout>
