@@ -15,12 +15,11 @@
 
 ## Decisions
 
-### Versions follow the Astro 5 compatibility line
+### Versions use the latest Astro compatibility line
 
-Astro は既存 lockfile で検証済みの `5.18.2`、React integration は Astro 5 対応の
-`4.4.2` に固定した。React integration 6 は型チェックだけでは検出できない renderer
-互換エラーが production build で発生したため採用しない。Tailwind CSS と Vite integration
-は `4.3.3`、Vite は Astro が利用する `6.4.3` に揃えた。
+2026-09-06 時点の最新安定版である Astro `7.3.1` と React integration `6.0.5` に
+固定した。Astro 7 の実行条件に合わせて Node.js `>=22.12.0` を前提とし、Vite は
+`8.2.2`、Tailwind CSS と Vite integration は `4.3.3` に揃えた。
 
 ### Environment variables fail the build
 
