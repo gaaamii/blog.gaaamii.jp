@@ -35,6 +35,7 @@ API client は Astro frontmatter からのみ呼び出し、`PUBLIC_` prefix を
 
 Content API client と記事 repository は状態を持つ class にせず、処理単位の関数として定義する。
 テスト時に差し替える API URL と `fetch` は関数の option で受け取る。
+モジュールスコープには再代入を伴う cache を持たず、data access の変数は原則 `const` とする。
 
 ### Public repository filters drafts defensively
 

@@ -1,13 +1,9 @@
 import type { Post } from "@gaaamii/domain/post";
 import { fetchPost, fetchPosts } from "./content-api";
 
-let publishedPostsPromise: Promise<Post[]> | undefined;
-
-export const getPublishedPosts = () => {
-  publishedPostsPromise ??= fetchPosts().then((posts) =>
-    posts.filter((post) => post.status === "published"),
-  );
-  return publishedPostsPromise;
+export const getPublishedPosts = async (): Promise<Post[]> => {
+  const posts = await fetchPosts();
+  return posts.filter((post) => post.status === "published");
 };
 
 export const getPublishedPost = async (id: number): Promise<Post> => {
