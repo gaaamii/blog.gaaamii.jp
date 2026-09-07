@@ -21,13 +21,16 @@ const improveLinksAndImages: RehypePlugin = () => (tree) => {
       if (element.tagName === "a") {
         const href = properties.href;
         if (typeof href === "string" && /^https?:\/\//.test(href)) {
+          // 外部リンクを別タブで開き、リンク先から元ページを操作できないようにする。
           properties.target = "_blank";
           properties.rel = ["noopener", "noreferrer"];
         }
       }
 
       if (element.tagName === "img") {
+        // loading="lazy" で、画面に近づくまで画像の読み込みを遅らせる。
         properties.loading = "lazy";
+        // decoding="async" で、画像のデコードがページ描画を妨げないようにする。
         properties.decoding = "async";
       }
     }
@@ -57,6 +60,7 @@ export const renderMarkdown = async (source: string) => {
 };
 
 export const createPostDescription = (source: string) => {
+  // コードと画像を除外し、リンクは表示名だけ残して Markdown/HTML 記法と余分な空白を取り除く。
   const plainText = source
     .replace(/```[\s\S]*?```/g, " ")
     .replace(/!\[[^\]]*\]\([^)]*\)/g, " ")
