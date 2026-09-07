@@ -1,19 +1,91 @@
 ---
+import { Stack } from "@gaaamii/ui/Stack";
+import { getLocalizedDateString } from "@gaaamii/utils/datetime";
+import { SITE_TITLE } from "../config/site";
 import MainLayout from "../layouts/MainLayout.astro";
 import { getPosts } from "../lib/posts";
 
 const posts = await getPosts();
 ---
 
-<MainLayout title="blog.gaaamii.jp (Astro PoC)">
-  <h1>Astro Site PoC</h1>
-  <p>Content API から取得した公開記事を静的に生成しています。</p>
+<MainLayout title={SITE_TITLE} pathname="/">
+  <Stack space="4">
+    <form role="search" class="w-full px-2 sm:px-0" data-search-form>
+      <label for="search-input" class="text-sm">記事を検索する</label>
+      <input
+        id="search-input"
+        name="query"
+        type="search"
+        placeholder="Elm"
+        aria-label="記事を検索"
+        enterkeyhint="search"
+        class="mt-2 w-full rounded border-2 bg-white px-4 py-2 text-black placeholder:text-stone-400 focus:border-transparent dark:border-stone-400 dark:bg-neutral-800 dark:text-white"
+        data-search-input
+      />
+      <button type="submit" class="sr-only">検索</button>
+    </form>
 
-  <ul>
-    {posts.map((post) => (
-      <li><a href={`/posts/${post.id}`}>{post.title}</a></li>
-    ))}
-  </ul>
-
-  <p><a href="/about">About</a></p>
+    <section aria-label="記事一覧" data-post-list>
+      {posts.map((post) => (
+        <div class="relative mt-4 lg:flex lg:items-center lg:gap-2" data-post data-title={post.title.toLocaleLowerCase()}>
+          <time datetime={post.published_at} class="ml-4 block sm:min-w-32 lg:ml-0 lg:inline-block">
+            {getLocalizedDateString(post.published_at)}
+          </time>
+          <h2 class="grow text-lg font-bold">
+            <a
+              href={`/posts/${post.id}`}
+              class="block rounded-lg px-4 py-4 hover:bg-neutral-200 hover:text-sky-600 focus:text-sky-600 active:text-sky-700 dark:hover:bg-neutral-700 dark:hover:text-white dark:focus:text-white sm:py-2"
+            >
+              {post.title}
+            </a>
+          </h2>
+        </div>
+      ))}
+      <p class="mt-8 text-center text-neutral-600 dark:text-neutral-300" hidden data-empty-message>
+        該当する記事はありません。
+      </p>
+    </section>
+  </Stack>
 </MainLayout>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>("[data-search-form]");
+  const input = document.querySelector<HTMLInputElement>("[data-search-input]");
+  const postElements = Array.from(document.querySelectorAll<HTMLElement>("[data-post]"));
+  const emptyMessage = document.querySelector<HTMLElement>("[data-empty-message]");
+
+  const updateResults = (query: string) => {
+    const normalizedQuery = query.trim().toLocaleLowerCase();
+    let visibleCount = 0;
+
+    postElements.forEach((element) => {
+      const visible = !normalizedQuery || element.dataset.title?.includes(normalizedQuery);
+      element.hidden = !visible;
+      if (visible) visibleCount += 1;
+    });
+
+    if (emptyMessage) emptyMessage.hidden = visibleCount !== 0;
+  };
+
+  const readQuery = () => new URL(window.location.href).searchParams.get("query") ?? "";
+
+  const applyLocation = () => {
+    const query = readQuery();
+    if (input) input.value = query;
+    updateResults(query);
+  };
+
+  input?.addEventListener("input", () => updateResults(input.value));
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const url = new URL(window.location.href);
+    const query = input?.value.trim() ?? "";
+    if (query) url.searchParams.set("query", query);
+    else url.searchParams.delete("query");
+    history.pushState({}, "", url);
+    updateResults(query);
+    input?.blur();
+  });
+  window.addEventListener("popstate", applyLocation);
+  applyLocation();
+</script>

@@ -1,0 +1,23 @@
+---
+import { Cluster } from "@gaaamii/ui/Cluster";
+import { InformationCircleIcon } from "@gaaamii/ui/icons/InformationCircle";
+import { RSSIcon } from "@gaaamii/ui/icons/RSS";
+import { ArrowUpIcon } from "@gaaamii/ui/icons/ArrowUp";
+---
+
+<footer class="bg-black py-16 text-white">
+  <Cluster justify="center" space="10" className="flex-col px-4 sm:flex-row">
+    <a href="/about" class="flex items-center justify-center gap-1 py-2 underline">
+      <InformationCircleIcon />
+      <span>このブログについて</span>
+    </a>
+    <a href="/feed" class="flex items-center justify-center gap-1 py-2 underline">
+      <RSSIcon />
+      <span>RSS</span>
+    </a>
+    <a href="/" class="flex items-center justify-center gap-1 py-2 underline">
+      <ArrowUpIcon />
+      <span>トップに戻る</span>
+    </a>
+  </Cluster>
+</footer>

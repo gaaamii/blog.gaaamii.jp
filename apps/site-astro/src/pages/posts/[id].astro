@@ -1,6 +1,11 @@
 ---
+import { Cluster } from "@gaaamii/ui/Cluster";
+import { BackIcon } from "@gaaamii/ui/icons/Back";
+import { getLocalizedDateString } from "@gaaamii/utils/datetime";
+import { SITE_TITLE } from "../../config/site";
 import MainLayout from "../../layouts/MainLayout.astro";
 import { getPost, getPosts } from "../../lib/posts";
+import { createPostDescription, renderMarkdown } from "../../lib/markdown";
 
 export async function getStaticPaths() {
   const posts = await getPosts();
@@ -12,12 +17,30 @@ export async function getStaticPaths() {
 
 const id = Number(Astro.params.id);
 const post = await getPost(id);
+const body = await renderMarkdown(post.body);
+const description = createPostDescription(post.body);
+const pageTitle = `${post.title} - ${SITE_TITLE}`;
 ---
 
-<MainLayout title={`${post.title} | Astro PoC`}>
-  <article>
-    <h1>{post.title}</h1>
-    <p>{post.body}</p>
-    <p><a href="/">一覧へ戻る</a></p>
+<MainLayout
+  title={pageTitle}
+  description={description}
+  pathname={`/posts/${post.id}`}
+  type="article"
+>
+  <article class="px-2 pb-16 text-lg sm:px-6">
+    <time datetime={post.published_at}>{getLocalizedDateString(post.published_at)}</time>
+    <h1 class="mt-4 text-2xl font-bold">{post.title}</h1>
+    <div class="markdown mt-8">
+      <Fragment set:html={body} />
+    </div>
+    <div class="mt-20">
+      <a href="/" class="inline-block rounded-md border border-neutral-300 px-5 py-3 hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-700">
+        <Cluster as="span" align="center" space="2">
+          <BackIcon />
+          <span>一覧に戻る</span>
+        </Cluster>
+      </a>
+    </div>
   </article>
 </MainLayout>
