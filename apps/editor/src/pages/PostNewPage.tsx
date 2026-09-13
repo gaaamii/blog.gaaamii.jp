@@ -1,8 +1,12 @@
 import { PostForm } from "../components/PostForm";
 import { PostFormToolbar } from "../components/PostFormToolbar";
 import { useBlockNavigation } from "../hooks/useBlockNavigation";
-import { usePostFormState, type PostFormValue } from "../hooks/usePostFormState";
+import {
+  usePostFormState,
+  type PostFormValue,
+} from "../hooks/usePostFormState";
 import { api } from "../lib/api";
+import { requestSiteDeployment } from "../lib/siteDeployment";
 
 export const PostNewPage = () => {
   useBlockNavigation();
@@ -19,8 +23,16 @@ export const PostNewPage = () => {
       },
     });
 
+    if (!response.ok) {
+      return { isSuccess: false, deploymentStatus: "not-requested" as const };
+    }
+
     return {
-      isSuccess: response.ok,
+      isSuccess: true,
+      deploymentStatus:
+        value.status === "published"
+          ? await requestSiteDeployment()
+          : "not-requested",
     };
   };
 

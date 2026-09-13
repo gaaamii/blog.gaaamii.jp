@@ -67,6 +67,10 @@ const withTimestamp = (postPayload) => ({
 export const handlers = [
   http.get("/api/mock/user_sessions/ping", () => HttpResponse.json({})),
 
+  http.post("/api/mock/site_deployments", () =>
+    HttpResponse.json({ status: "queued" }, { status: 202 }),
+  ),
+
   http.get("/api/mock/posts", () =>
     HttpResponse.json(
       posts.filter((post) => post.status === "published").map(toPostSummary),
