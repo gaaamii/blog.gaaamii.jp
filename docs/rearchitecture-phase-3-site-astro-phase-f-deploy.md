@@ -1,5 +1,8 @@
 # Site Astro Phase F: Preview and redeploy
 
+> Phase Gの正式昇格後、Astro版のRoot Directoryは `apps/site`、確認コマンドは
+> `yarn check:site` / `yarn build:site` へ変更される。以下はPhase F時点のpreview構成を記録したもの。
+
 ## Vercel project
 
 正式切り替え前は、Astro版を既存のNext.js版とは別のVercel Projectへ接続する。

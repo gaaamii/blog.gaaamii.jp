@@ -1,19 +1,13 @@
 {
-  "extends": "../../packages/config/tsconfig.base.json",
+  "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "baseUrl": ".",
+    "jsx": "react-jsx",
     "paths": {
       "@gaaamii/domain/*": ["../../packages/domain/*"],
       "@gaaamii/utils/*": ["../../packages/utils/*"],
       "@gaaamii/ui/*": ["../../packages/ui/*"]
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "../../packages/**/*.ts",
-    "../../packages/**/*.tsx"
-  ],
-  "exclude": ["node_modules"]
+  "include": [".astro/types.d.ts", "**/*"]
 }

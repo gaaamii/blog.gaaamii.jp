@@ -2,9 +2,29 @@
   "name": "@gaaamii/site",
   "version": "0.0.0",
   "private": true,
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
-    "dev": "next dev --turbo -p 3000",
-    "build": "next build",
-    "start": "next start -p 3000"
+    "dev": "astro dev --port 3100",
+    "check": "SITE_URL=http://localhost:3100 astro check",
+    "build": "astro build",
+    "preview": "astro preview --port 3100"
+  },
+  "dependencies": {
+    "@astrojs/markdown-remark": "7.3.0",
+    "@astrojs/react": "6.0.5",
+    "@tailwindcss/vite": "4.3.3",
+    "astro": "7.3.1",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "tailwindcss": "4.3.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3",
+    "typescript": "5.9.3",
+    "vite": "8.2.2"
   }
 }
