@@ -3,7 +3,7 @@
 ## Repository layout
 
 - `apps/site`: 正式な公開サイトとして扱うAstroアプリ
-- `apps/site-legacy`: 切り戻し比較のため一時的に保持する旧Next.jsアプリ
+- 旧Next.jsアプリは安定稼働確認後のクリーンアップで削除済み
 
 通常の開発・検証には次のコマンドを使用する。
 
@@ -12,9 +12,6 @@ yarn check:site
 SITE_API_BASE_URL=https://api.gaaamii.jp SITE_URL=https://blog.gaaamii.jp yarn build:site
 yarn preview:site
 ```
-
-旧Next.jsアプリは通常のビルド対象にせず、比較が必要な場合に限り
-`yarn dev:site-legacy` または `yarn build:site-legacy` を使用する。
 
 ## Vercel project
 
@@ -48,7 +45,4 @@ Root Directoryの更新後に再デプロイし、`apps/site` からProduction D
 ## Rollback
 
 問題が見つかった場合は、Vercelで直前の正常なAstro Deploymentへ戻す。
-旧Next.jsへの切り戻しが必要な場合のみ、旧Projectへドメインを戻し、
-`apps/site-legacy` を比較・修復に使用する。
-
-安定稼働確認後、`apps/site-legacy` とNext.js専用依存を別変更で削除する。
+旧Next.js実装への切り戻しは行わず、Git履歴から必要な変更を調査する。

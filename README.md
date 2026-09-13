@@ -68,7 +68,3 @@ site 用の root command:
 - `yarn check:site`: Astro と TypeScript の型・構文を検査する
 - `yarn build:site`: Content API を読み、静的ファイルを `dist` に生成する
 - `yarn preview:site`: 生成済みの `dist` を port 3100 で確認する
-
-移行前のNext.js実装は、安定稼働確認が終わるまで `apps/site-legacy` に保持する。
-通常の開発・ビルドでは使用せず、比較が必要な場合に限り
-`yarn dev:site-legacy` または `yarn build:site-legacy` を実行する。
