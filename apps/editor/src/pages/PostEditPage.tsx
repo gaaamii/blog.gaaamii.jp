@@ -3,8 +3,13 @@ import { PostForm } from "../components/PostForm";
 import { PostFormToolbar } from "../components/PostFormToolbar";
 import { useAdminPost } from "../hooks/useAdminPost";
 import { useBlockNavigation } from "../hooks/useBlockNavigation";
-import { usePostFormState, type PostFormValue } from "../hooks/usePostFormState";
+import {
+  usePostFormState,
+  type PostFormValue,
+  type PostSubmitContext,
+} from "../hooks/usePostFormState";
 import { api } from "../lib/api";
+import { requestSiteDeployment } from "../lib/siteDeployment";
 import { useParams } from "react-router-dom";
 
 export const PostEditPage = () => {
@@ -14,9 +19,12 @@ export const PostEditPage = () => {
 
   useBlockNavigation();
 
-  const handleSubmit = async (value: PostFormValue) => {
+  const handleSubmit = async (
+    value: PostFormValue,
+    { previousStatus }: PostSubmitContext,
+  ) => {
     if (!post) {
-      return { isSuccess: false };
+      return { isSuccess: false, deploymentStatus: "not-requested" as const };
     }
 
     const response = await api.put(`/posts/${post.id}`, {
@@ -28,8 +36,18 @@ export const PostEditPage = () => {
       },
     });
 
+    if (!response.ok) {
+      return { isSuccess: false, deploymentStatus: "not-requested" as const };
+    }
+
+    const changesPublicSite =
+      previousStatus === "published" || value.status === "published";
+
     return {
-      isSuccess: response.ok,
+      isSuccess: true,
+      deploymentStatus: changesPublicSite
+        ? await requestSiteDeployment()
+        : "not-requested",
     };
   };
 
@@ -56,7 +74,10 @@ export const PostEditPage = () => {
     <>
       {isLoading ? <p>読込中...</p> : null}
       {!isLoading && error ? (
-        <p>記事の取得に失敗しました。`yarn dev:editor-mock-api` を確認してください。</p>
+        <p>
+          記事の取得に失敗しました。`yarn dev:editor-mock-api`
+          を確認してください。
+        </p>
       ) : null}
       {!isLoading && !error && initialValue && post ? (
         <>

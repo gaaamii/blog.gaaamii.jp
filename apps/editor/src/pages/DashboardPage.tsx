@@ -6,6 +6,7 @@ import { Stack } from "@gaaamii/ui/Stack";
 import { getLocalizedDateString } from "@gaaamii/utils/datetime";
 import { Link, useSearchParams } from "react-router-dom";
 import { api } from "../lib/api";
+import { requestSiteDeployment } from "../lib/siteDeployment";
 import { useAdminPosts } from "../hooks/useAdminPosts";
 
 export const DashboardPage = () => {
@@ -150,7 +151,18 @@ const PostListItem = ({
         return;
       }
 
-      alert("削除しました");
+      const deploymentStatus =
+        post.status === "published"
+          ? await requestSiteDeployment()
+          : "not-requested";
+
+      alert(
+        deploymentStatus === "failed"
+          ? "削除しましたが、サイトの再デプロイを開始できませんでした。Vercelから手動で再実行してください"
+          : deploymentStatus === "requested"
+            ? "削除しました。サイトの再デプロイを開始しました"
+            : "削除しました",
+      );
       await onDelete();
     } finally {
       setIsDeleting(false);

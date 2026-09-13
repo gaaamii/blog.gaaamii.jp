@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import type { PostStatus } from "@gaaamii/domain/post";
+import type { SiteDeploymentStatus } from "../lib/siteDeployment";
 
 export type PostFormValue = {
   title: string;
@@ -8,12 +9,24 @@ export type PostFormValue = {
   status: PostStatus;
 };
 
+export type PostSubmitContext = {
+  previousStatus: PostStatus;
+};
+
+export type PostSubmitResult = {
+  isSuccess: boolean;
+  deploymentStatus: SiteDeploymentStatus;
+};
+
 export const usePostFormState = ({
   onSubmit,
   initialValue,
   mode,
 }: {
-  onSubmit: (value: PostFormValue) => Promise<{ isSuccess: boolean }>;
+  onSubmit: (
+    value: PostFormValue,
+    context: PostSubmitContext,
+  ) => Promise<PostSubmitResult>;
   initialValue?: PostFormValue | null;
   mode: "create" | "edit";
 }) => {
@@ -83,16 +96,24 @@ export const usePostFormState = ({
     setIsSubmitting(true);
 
     try {
-      const result = await onSubmit({
-        title,
-        body,
-        publishedAt,
-        status: "draft",
-      });
+      const result = await onSubmit(
+        {
+          title,
+          body,
+          publishedAt,
+          status: "draft",
+        },
+        { previousStatus: status },
+      );
 
       if (result.isSuccess) {
         setStatus("draft");
-        alert(mode === "edit" ? "記事を更新しました" : "記事を保存しました");
+        alert(
+          getSuccessMessage(
+            mode === "edit" ? "記事を更新しました" : "記事を保存しました",
+            result.deploymentStatus,
+          ),
+        );
       } else {
         alert(
           mode === "edit"
@@ -110,16 +131,24 @@ export const usePostFormState = ({
     setIsSubmitting(true);
 
     try {
-      const result = await onSubmit({
-        title,
-        body,
-        publishedAt,
-        status: "published",
-      });
+      const result = await onSubmit(
+        {
+          title,
+          body,
+          publishedAt,
+          status: "published",
+        },
+        { previousStatus: status },
+      );
 
       if (result.isSuccess) {
         setStatus("published");
-        alert(mode === "edit" ? "記事を更新しました" : "記事を作成しました");
+        alert(
+          getSuccessMessage(
+            mode === "edit" ? "記事を更新しました" : "記事を作成しました",
+            result.deploymentStatus,
+          ),
+        );
         if (mode === "create") {
           resetForm();
         }
@@ -147,4 +176,19 @@ export const usePostFormState = ({
     handleDraftSave,
     handlePublish,
   };
+};
+
+const getSuccessMessage = (
+  message: string,
+  deploymentStatus: SiteDeploymentStatus,
+) => {
+  if (deploymentStatus === "requested") {
+    return `${message}。サイトの再デプロイを開始しました`;
+  }
+
+  if (deploymentStatus === "failed") {
+    return `${message}が、サイトの再デプロイを開始できませんでした。Vercelから手動で再実行してください`;
+  }
+
+  return message;
 };
