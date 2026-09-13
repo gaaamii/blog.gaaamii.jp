@@ -4,14 +4,26 @@ https://blog.gaaamii.jp のソースコード。
 
 ### Install dependencies
 
+```bash
+corepack enable
+pnpm install
 ```
-yarn
-```
+
+pnpm は `packageManager` で `10.34.5` に固定している。インストール時には
+`pnpm-workspace.yaml` のサプライチェーンポリシーが適用される。
+
+- 公開から24時間未満のパッケージは解決しない
+- 最近1年以内のリリースで公開時の信頼情報が低下した場合は失敗する
+- 推移依存からGit URLや直接tarballを導入できない
+- 依存パッケージのinstall scriptは、バージョン単位で明示許可する
+
+`ERR_PNPM_IGNORED_BUILDS` が発生した場合は自動承認せず、対象パッケージの
+依存元とscript内容を確認してから `allowBuilds` をバージョン付きで更新する。
 
 ### Start dev server
 
 ```
-yarn dev:site
+pnpm dev:site
 ```
 
 ### Start editor with mock API
@@ -21,19 +33,19 @@ yarn dev:site
 1. mock API を起動する
 
 ```bash
-yarn dev:editor-mock-api
+pnpm dev:editor-mock-api
 ```
 
 2. editor を起動する
 
 ```bash
-yarn dev:editor
+pnpm dev:editor
 ```
 
 3. 必要なら site 側も起動する
 
 ```bash
-yarn dev:site
+pnpm dev:site
 ```
 
 - `editor`: `http://localhost:3200`
@@ -48,7 +60,7 @@ yarn dev:site
 1. mock API を起動する
 
 ```bash
-yarn dev:editor-mock-api
+pnpm dev:editor-mock-api
 ```
 
 2. 別のターミナルで Astro site を起動する
@@ -56,15 +68,15 @@ yarn dev:editor-mock-api
 ```bash
 SITE_API_BASE_URL=http://127.0.0.1:3005/api/mock \
 SITE_URL=http://localhost:3100 \
-yarn dev:site
+pnpm dev:site
 ```
 
 production build と preview も同じ環境変数を指定し、
-`yarn build:site`、`yarn preview:site` を実行する。
+`pnpm build:site`、`pnpm preview:site` を実行する。
 
 site 用の root command:
 
-- `yarn dev:site`: 開発サーバーを port 3100 で起動し、変更を監視する
-- `yarn check:site`: Astro と TypeScript の型・構文を検査する
-- `yarn build:site`: Content API を読み、静的ファイルを `dist` に生成する
-- `yarn preview:site`: 生成済みの `dist` を port 3100 で確認する
+- `pnpm dev:site`: 開発サーバーを port 3100 で起動し、変更を監視する
+- `pnpm check:site`: Astro と TypeScript の型・構文を検査する
+- `pnpm build:site`: Content API を読み、静的ファイルを `dist` に生成する
+- `pnpm preview:site`: 生成済みの `dist` を port 3100 で確認する

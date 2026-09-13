@@ -8,9 +8,9 @@
 通常の開発・検証には次のコマンドを使用する。
 
 ```bash
-yarn check:site
-SITE_API_BASE_URL=https://api.gaaamii.jp SITE_URL=https://blog.gaaamii.jp yarn build:site
-yarn preview:site
+pnpm check:site
+SITE_API_BASE_URL=https://api.gaaamii.jp SITE_URL=https://blog.gaaamii.jp pnpm build:site
+pnpm preview:site
 ```
 
 ## Vercel project
@@ -19,7 +19,7 @@ Astro版のVercel Projectを次の設定へ更新する。
 
 - Root Directory: `apps/site`
 - Framework Preset: Astro
-- Build Command: `yarn build`
+- Build Command: `pnpm build`
 - Output Directory: `dist`
 - Include source files outside the Root Directory: enabled
 - Production Domain: `blog.gaaamii.jp`

@@ -2,20 +2,17 @@
   "name": "blog-server",
   "version": "0.1.0",
   "private": true,
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
+  "packageManager": "pnpm@10.34.5",
   "scripts": {
-    "dev:site": "yarn workspace @gaaamii/site dev",
-    "dev:editor": "yarn workspace @gaaamii/editor dev",
-    "dev:editor-mock-api": "yarn workspace @gaaamii/editor mock:api",
-    "build:site": "yarn workspace @gaaamii/site build",
-    "build:editor": "yarn workspace @gaaamii/editor build",
-    "preview:site": "yarn workspace @gaaamii/site preview",
-    "check:site": "yarn workspace @gaaamii/site run check",
-    "start:editor": "yarn workspace @gaaamii/editor preview",
-    "preview:editor": "yarn workspace @gaaamii/editor preview"
+    "dev:site": "pnpm --filter @gaaamii/site dev",
+    "dev:editor": "pnpm --filter @gaaamii/editor dev",
+    "dev:editor-mock-api": "pnpm --filter @gaaamii/editor mock:api",
+    "build:site": "pnpm --filter @gaaamii/site build",
+    "build:editor": "pnpm --filter @gaaamii/editor build",
+    "preview:site": "pnpm --filter @gaaamii/site preview",
+    "check:site": "pnpm --filter @gaaamii/site run check",
+    "start:editor": "pnpm --filter @gaaamii/editor preview",
+    "preview:editor": "pnpm --filter @gaaamii/editor preview"
   },
   "dependencies": {
     "@types/luxon": "^3.4.2",

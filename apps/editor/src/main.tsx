@@ -25,7 +25,7 @@ const AppLayout = () => {
     return (
       <AppShell>
         <p>Mock API is not reachable.</p>
-        <p>Start `yarn dev:editor-mock-api` and reload this page.</p>
+        <p>Start `pnpm dev:editor-mock-api` and reload this page.</p>
       </AppShell>
     );
   }

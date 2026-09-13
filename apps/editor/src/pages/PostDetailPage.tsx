@@ -34,7 +34,8 @@ export const PostDetailPage = () => {
           radius="2xl"
           className="border-red-200 bg-red-50 text-red-800"
         >
-          記事の取得に失敗しました。`yarn dev:editor-mock-api` を確認してください。
+          記事の取得に失敗しました。`pnpm dev:editor-mock-api`
+          を確認してください。
         </Box>
       ) : null}
       {!isLoading && !error && post ? (
