@@ -253,6 +253,19 @@ Astro 版には Content API の proxy、管理 API、認証 API、revalidate API
 - `blog.gaaamii.jp` が Astro 版から配信される
 - 通常の `dev:site` / `build:site` が Astro 版を対象にする
 
+### Phase H: 旧Next.js実装の削除
+
+- Astro版の安定稼働を確認する
+- `apps/site-legacy` を削除する
+- 旧Next.js専用のworkspace scriptsと依存を削除する
+- 旧実装だけが利用していた共通UIを削除する
+- production buildと依存監査を再実行する
+
+成果物:
+
+- 公開サイトの実装が `apps/site` のAstro版へ一本化される
+- 旧Next.js由来の既知脆弱性を依存ツリーから除去する
+
 ## Vercel 設定方針
 
 Astro 版を preview する段階では以下を基準にする。

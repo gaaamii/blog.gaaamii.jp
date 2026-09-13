@@ -8,35 +8,26 @@
   ],
   "scripts": {
     "dev:site": "yarn workspace @gaaamii/site dev",
-    "dev:site-legacy": "yarn workspace @gaaamii/site-legacy dev",
     "dev:editor": "yarn workspace @gaaamii/editor dev",
     "dev:editor-mock-api": "yarn workspace @gaaamii/editor mock:api",
     "build:site": "yarn workspace @gaaamii/site build",
-    "build:site-legacy": "yarn workspace @gaaamii/site-legacy build",
     "build:editor": "yarn workspace @gaaamii/editor build",
-    "start:site-legacy": "yarn workspace @gaaamii/site-legacy start",
     "preview:site": "yarn workspace @gaaamii/site preview",
     "check:site": "yarn workspace @gaaamii/site run check",
     "start:editor": "yarn workspace @gaaamii/editor preview",
     "preview:editor": "yarn workspace @gaaamii/editor preview"
   },
   "dependencies": {
-    "@types/classnames": "^2.3.4",
     "@types/luxon": "^3.4.2",
     "@types/react-syntax-highlighter": "^15.5.13",
-    "@tailwindcss/postcss": "^4.0.15",
-    "classnames": "^2.5.1",
-    "image-size": "^2.0.2",
+    "@tailwindcss/postcss": "4.3.3",
     "luxon": "^3.5.0",
-    "next": "16.1.2",
-    "next-mdx-remote": "^5.0.0",
-    "postcss": "^8.5.6",
+    "postcss": "^8.5.23",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-markdown": "^10.1.0",
     "react-syntax-highlighter": "^16.1.0",
-    "rss": "^1.2.2",
-    "tailwindcss": "^4.0.15"
+    "tailwindcss": "4.3.3"
   },
   "devDependencies": {
     "@types/node": "^25.0.3",
