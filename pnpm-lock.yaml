@@ -10,53 +10,40 @@ overrides:
 importers:
 
   .:
+    devDependencies:
+      prettier:
+        specifier: ^3.7.4
+        version: 3.9.6
+
+  apps/editor:
     dependencies:
-      '@types/luxon':
-        specifier: ^3.4.2
-        version: 3.7.5
-      '@types/react-syntax-highlighter':
-        specifier: ^15.5.13
-        version: 15.5.13
-      luxon:
-        specifier: ^3.5.0
-        version: 3.7.2
+      '@gaaamii/domain':
+        specifier: workspace:*
+        version: link:../../packages/domain
+      '@gaaamii/editor-shared':
+        specifier: workspace:*
+        version: link:../../packages/editor-shared
+      '@gaaamii/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
+      '@gaaamii/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
       react:
-        specifier: 19.2.3
+        specifier: ^19.2.3
         version: 19.2.3
       react-dom:
-        specifier: 19.2.3
+        specifier: ^19.2.3
         version: 19.2.3(react@19.2.3)
       react-markdown:
         specifier: ^10.1.0
         version: 10.1.0(@types/react@19.2.7)(react@19.2.3)
-      react-syntax-highlighter:
-        specifier: ^16.1.0
-        version: 16.1.1(react@19.2.3)
-    devDependencies:
-      '@types/node':
-        specifier: ^25.0.3
-        version: 25.9.6
-      '@types/react':
-        specifier: ^19.2.7
-        version: 19.2.7
-      prettier:
-        specifier: ^3.7.4
-        version: 3.9.6
-      typescript:
-        specifier: ^5.9.3
-        version: 5.9.3
-
-  apps/editor:
-    dependencies:
-      react:
-        specifier: ^19.2.3
-        version: 19.2.3
-      react-dom:
-        specifier: ^19.2.3
-        version: 19.2.3(react@19.2.3)
       react-router-dom:
         specifier: ^7.0.0
         version: 7.18.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      react-syntax-highlighter:
+        specifier: ^16.1.0
+        version: 16.1.1(react@19.2.3)
     devDependencies:
       '@mswjs/http-middleware':
         specifier: ^0.10.3
@@ -64,12 +51,18 @@ importers:
       '@tailwindcss/postcss':
         specifier: 4.3.3
         version: 4.3.3
+      '@types/node':
+        specifier: ^25.0.3
+        version: 25.9.6
       '@types/react':
         specifier: ^19.2.7
         version: 19.2.7
       '@types/react-dom':
         specifier: ^19.2.3
         version: 19.2.3(@types/react@19.2.7)
+      '@types/react-syntax-highlighter':
+        specifier: ^15.5.13
+        version: 15.5.13
       '@vitejs/plugin-react':
         specifier: ^6.1.1
         version: 6.1.1(vite@8.3.0(@types/node@25.9.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
@@ -94,6 +87,15 @@ importers:
       '@astrojs/react':
         specifier: 6.0.5
         version: 6.0.5(@types/node@25.9.6)(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(esbuild@0.28.2)(jiti@2.7.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(yaml@2.9.1)
+      '@gaaamii/domain':
+        specifier: workspace:*
+        version: link:../../packages/domain
+      '@gaaamii/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
+      '@gaaamii/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
       '@tailwindcss/vite':
         specifier: 4.3.3
         version: 4.3.3(vite@8.2.2(@types/node@25.9.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
@@ -113,6 +115,9 @@ importers:
       '@astrojs/check':
         specifier: 0.9.10
         version: 0.9.10(prettier@3.9.6)(typescript@5.9.3)
+      '@types/node':
+        specifier: ^25.0.3
+        version: 25.9.6
       '@types/react':
         specifier: 19.2.7
         version: 19.2.7
@@ -132,9 +137,28 @@ importers:
 
   packages/editor-shared: {}
 
-  packages/ui: {}
+  packages/ui:
+    dependencies:
+      react:
+        specifier: 19.2.3
+        version: 19.2.3
+    devDependencies:
+      '@types/react':
+        specifier: ^19.2.7
+        version: 19.2.7
 
-  packages/utils: {}
+  packages/utils:
+    dependencies:
+      luxon:
+        specifier: ^3.5.0
+        version: 3.7.2
+    devDependencies:
+      '@types/luxon':
+        specifier: ^3.4.2
+        version: 3.7.5
+      '@types/node':
+        specifier: ^25.0.3
+        version: 25.9.6
 
 packages:
 
