@@ -75,7 +75,7 @@ export const PostEditPage = () => {
       {isLoading ? <p>読込中...</p> : null}
       {!isLoading && error ? (
         <p>
-          記事の取得に失敗しました。`yarn dev:editor-mock-api`
+          記事の取得に失敗しました。`pnpm dev:editor-mock-api`
           を確認してください。
         </p>
       ) : null}

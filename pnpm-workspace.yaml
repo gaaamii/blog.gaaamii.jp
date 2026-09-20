@@ -1,0 +1,23 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+
+# Express 4.22.2 still pins vulnerable qs 6.15.x; use its compatible patched release.
+overrides:
+  "express@4.22.2>qs": "6.16.0"
+
+# Delay newly published packages so compromised releases have time to be detected.
+minimumReleaseAge: 1440
+
+# Reject trust downgrades and non-registry sources introduced by transitive deps.
+trustPolicy: no-downgrade
+# Older packages often predate registry provenance; keep the policy strict for
+# releases from the last year and for all future updates.
+trustPolicyIgnoreAfter: 525600
+blockExoticSubdeps: true
+
+# Dependency install scripts must be explicitly reviewed below.
+strictDepBuilds: true
+allowBuilds:
+  "esbuild@0.28.2": true
+  "msw@2.15.0": true

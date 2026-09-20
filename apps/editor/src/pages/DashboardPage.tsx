@@ -64,7 +64,7 @@ export const DashboardPage = () => {
       {isLoading ? <StatusPanel>読込中...</StatusPanel> : null}
       {!isLoading && error ? (
         <StatusPanel tone="error">
-          記事一覧の取得に失敗しました。`yarn dev:editor-mock-api`
+          記事一覧の取得に失敗しました。`pnpm dev:editor-mock-api`
           を確認してください。
         </StatusPanel>
       ) : null}
