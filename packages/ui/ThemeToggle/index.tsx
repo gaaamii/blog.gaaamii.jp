@@ -27,17 +27,10 @@ const applyThemeToDocument = (theme: Theme) => {
 
 export const ThemeToggle = ({ size = "sm" }: { size?: "sm" | "md" | "lg" }) => {
   const [theme, setTheme] = useState<Theme | null>(null);
-  const [isAnimationEnabled, setIsAnimationEnabled] = useState(false);
 
   useLayoutEffect(() => {
     const preferred = getPreferredTheme();
     setTheme((current) => current ?? preferred);
-
-    const frame = window.requestAnimationFrame(() => {
-      setIsAnimationEnabled(true);
-    });
-
-    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   useEffect(() => {
@@ -65,7 +58,6 @@ export const ThemeToggle = ({ size = "sm" }: { size?: "sm" | "md" | "lg" }) => {
         onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
         label={`テーマを${nextLabel}に切り替え`}
         size={size}
-        animated={isAnimationEnabled}
       />
 
       <span

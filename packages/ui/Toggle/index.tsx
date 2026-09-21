@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 type ToggleSize = "sm" | "md" | "lg";
 
 type Props = {
@@ -5,7 +7,6 @@ type Props = {
   onCheckedChange: (checked: boolean) => void;
   label: string;
   size?: ToggleSize;
-  animated?: boolean;
 };
 
 const sizes = {
@@ -34,9 +35,17 @@ export const Toggle = ({
   onCheckedChange,
   label,
   size = "sm",
-  animated = true,
 }: Props) => {
   const classes = sizes[size];
+  const [canAnimate, setCanAnimate] = useState(false);
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      setCanAnimate(true);
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
 
   return (
     <button
@@ -47,7 +56,7 @@ export const Toggle = ({
       onClick={() => onCheckedChange(!checked)}
       className={[
         "relative inline-flex items-center rounded-full bg-neutral-200 dark:bg-neutral-700",
-        animated ? "transition-colors" : undefined,
+        canAnimate ? "transition-colors" : undefined,
         "focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2",
         "focus:ring-offset-white dark:focus:ring-offset-neutral-900",
         classes.root,
@@ -57,7 +66,7 @@ export const Toggle = ({
         aria-hidden
         className={[
           "inline-block transform rounded-full bg-white shadow",
-          animated ? "transition-transform" : undefined,
+          canAnimate ? "transition-transform" : undefined,
           classes.thumb,
           checked ? classes.on : classes.off,
         ].join(" ")}
