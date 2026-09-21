@@ -25,6 +25,8 @@ const applyThemeToDocument = (theme: Theme) => {
   document.documentElement.classList.toggle("dark", theme === "dark");
 };
 
+const noop = () => {};
+
 export const ThemeToggle = ({ size = "sm" }: { size?: "sm" | "md" | "lg" }) => {
   const [theme, setTheme] = useState<Theme | null>(null);
 
@@ -42,17 +44,41 @@ export const ThemeToggle = ({ size = "sm" }: { size?: "sm" | "md" | "lg" }) => {
     window.localStorage.setItem(STORAGE_KEY, theme);
   }, [theme]);
 
-  const effectiveTheme: Theme = theme ?? "light";
-  const isDark = effectiveTheme === "dark";
+  if (theme === null) {
+    return (
+      <Cluster space="2" align="center">
+        <span className="dark:hidden">
+          <Toggle
+            checked={false}
+            onCheckedChange={noop}
+            label="テーマをダークに切り替え"
+            size={size}
+          />
+        </span>
+        <span className="hidden dark:inline-flex">
+          <Toggle
+            checked
+            onCheckedChange={noop}
+            label="テーマをライトに切り替え"
+            size={size}
+          />
+        </span>
+        <span className="rounded bg-neutral-200 px-2 py-1 text-xs font-medium text-neutral-700 dark:hidden">
+          ライト
+        </span>
+        <span className="hidden rounded bg-black px-2 py-1 text-xs font-medium text-neutral-300 dark:inline">
+          ダーク
+        </span>
+      </Cluster>
+    );
+  }
+
+  const isDark = theme === "dark";
   const currentLabel = isDark ? "ダーク" : "ライト";
   const nextLabel = isDark ? "ライト" : "ダーク";
 
   return (
-    <Cluster
-      space="2"
-      align="center"
-      className={theme === null ? "invisible" : undefined}
-    >
+    <Cluster space="2" align="center">
       <Toggle
         checked={isDark}
         onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
