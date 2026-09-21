@@ -25,10 +25,11 @@ const applyThemeToDocument = (theme: Theme) => {
   document.documentElement.classList.toggle("dark", theme === "dark");
 };
 
-const noop = () => {};
-
 export const ThemeToggle = ({ size = "sm" }: { size?: "sm" | "md" | "lg" }) => {
   const [theme, setTheme] = useState<Theme | null>(null);
+  const handleCheckedChange = (checked: boolean) => {
+    setTheme(checked ? "dark" : "light");
+  };
 
   useLayoutEffect(() => {
     const preferred = getPreferredTheme();
@@ -50,7 +51,7 @@ export const ThemeToggle = ({ size = "sm" }: { size?: "sm" | "md" | "lg" }) => {
         <span className="dark:hidden">
           <Toggle
             checked={false}
-            onCheckedChange={noop}
+            onCheckedChange={handleCheckedChange}
             label="テーマをダークに切り替え"
             size={size}
           />
@@ -58,7 +59,7 @@ export const ThemeToggle = ({ size = "sm" }: { size?: "sm" | "md" | "lg" }) => {
         <span className="hidden dark:inline-flex">
           <Toggle
             checked
-            onCheckedChange={noop}
+            onCheckedChange={handleCheckedChange}
             label="テーマをライトに切り替え"
             size={size}
           />
@@ -81,7 +82,7 @@ export const ThemeToggle = ({ size = "sm" }: { size?: "sm" | "md" | "lg" }) => {
     <Cluster space="2" align="center">
       <Toggle
         checked={isDark}
-        onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
+        onCheckedChange={handleCheckedChange}
         label={`テーマを${nextLabel}に切り替え`}
         size={size}
       />
