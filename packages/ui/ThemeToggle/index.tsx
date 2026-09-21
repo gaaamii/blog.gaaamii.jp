@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { Cluster } from "../Cluster";
+import { Toggle } from "../Toggle";
 
 type Theme = "light" | "dark";
 
@@ -26,13 +27,13 @@ const applyThemeToDocument = (theme: Theme) => {
 
 export const ThemeToggle = ({ size = "sm" }: { size?: "sm" | "md" | "lg" }) => {
   const [theme, setTheme] = useState<Theme | null>(null);
+  const handleCheckedChange = (checked: boolean) => {
+    setTheme(checked ? "dark" : "light");
+  };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const preferred = getPreferredTheme();
-    setTheme((current) => {
-      const next = current ?? preferred;
-      return next;
-    });
+    setTheme((current) => current ?? preferred);
   }, []);
 
   useEffect(() => {
@@ -44,59 +45,47 @@ export const ThemeToggle = ({ size = "sm" }: { size?: "sm" | "md" | "lg" }) => {
     window.localStorage.setItem(STORAGE_KEY, theme);
   }, [theme]);
 
-  const effectiveTheme: Theme = theme ?? "light";
-  const isDark = effectiveTheme === "dark";
+  if (theme === null) {
+    return (
+      <Cluster space="2" align="center">
+        <span className="dark:hidden">
+          <Toggle
+            checked={false}
+            onCheckedChange={handleCheckedChange}
+            label="テーマをダークに切り替え"
+            size={size}
+          />
+        </span>
+        <span className="hidden dark:inline-flex">
+          <Toggle
+            checked
+            onCheckedChange={handleCheckedChange}
+            label="テーマをライトに切り替え"
+            size={size}
+          />
+        </span>
+        <span className="rounded bg-neutral-200 px-2 py-1 text-xs font-medium text-neutral-700 dark:hidden">
+          ライト
+        </span>
+        <span className="hidden rounded bg-black px-2 py-1 text-xs font-medium text-neutral-300 dark:inline">
+          ダーク
+        </span>
+      </Cluster>
+    );
+  }
+
+  const isDark = theme === "dark";
   const currentLabel = isDark ? "ダーク" : "ライト";
   const nextLabel = isDark ? "ライト" : "ダーク";
 
-  const sizeClassNames =
-    size === "lg"
-      ? {
-          root: "h-8 w-16",
-          thumb: "h-6 w-6",
-          thumbOff: "translate-x-1",
-          thumbOn: "translate-x-9",
-        }
-      : size === "md"
-        ? {
-            root: "h-7 w-14",
-            thumb: "h-5 w-5",
-            thumbOff: "translate-x-1",
-            thumbOn: "translate-x-8",
-          }
-        : {
-            root: "h-6 w-11",
-            thumb: "h-4 w-4",
-            thumbOff: "translate-x-1",
-            thumbOn: "translate-x-6",
-          };
-
   return (
     <Cluster space="2" align="center">
-      <button
-        type="button"
-        role="switch"
-        aria-checked={isDark}
-        aria-label={`テーマを${nextLabel}に切り替え`}
-        onClick={() => setTheme(isDark ? "light" : "dark")}
-        className={[
-          "relative inline-flex items-center rounded-full transition-colors",
-          "bg-neutral-200 dark:bg-neutral-700",
-          "focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2",
-          "focus:ring-offset-white dark:focus:ring-offset-neutral-900",
-          sizeClassNames.root,
-        ].join(" ")}
-      >
-        <span className="sr-only">テーマ切り替え</span>
-        <span
-          aria-hidden
-          className={[
-            "inline-block transform rounded-full bg-white shadow transition-transform",
-            sizeClassNames.thumb,
-            isDark ? sizeClassNames.thumbOn : sizeClassNames.thumbOff,
-          ].join(" ")}
-        />
-      </button>
+      <Toggle
+        checked={isDark}
+        onCheckedChange={handleCheckedChange}
+        label={`テーマを${nextLabel}に切り替え`}
+        size={size}
+      />
 
       <span
         className={[
