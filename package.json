@@ -15,6 +15,6 @@
     "preview:editor": "pnpm --filter @gaaamii/editor preview"
   },
   "devDependencies": {
-    "prettier": "^3.7.4"
+    "prettier": "^3.9.8"
   }
 }
